@@ -27,6 +27,7 @@ public class SpringAluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		menu.menu();
+//		menu.menu();
+		System.out.println("CRIANDO TABELAS......");
 	}
 }

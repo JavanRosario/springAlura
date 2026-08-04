@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springAlura.springAlura.entity.DadosSerie;
+import com.springAlura.springAlura.model.DadosSerie;
 
 @Service
 public class Menu {
@@ -32,7 +32,8 @@ public class Menu {
 					=========================================
 					[ 1 ]  Buscar Série e Temporada
 					[ 2 ]  Buscar Série por Título
-					[ 3 ]  Sair
+					[ 3 ]  Buscar Séries Buscadas Recentemente
+					[ 4 ]  Sair
 					=========================================
 					Digite a opção desejada: """;
 
@@ -53,7 +54,11 @@ public class Menu {
 				System.out.println(serie);
 				break;
 			}
-			case 3 -> {
+
+//			case 3 -> {
+//				apiService.listarSeriesBuscadasRecentemente();
+//			}
+			case 4 -> {
 				System.out.println("Encerrando");
 				break;
 			}
@@ -61,7 +66,7 @@ public class Menu {
 			default -> throw new IllegalArgumentException("Unexpected value: " + escolhaUsuario);
 			}
 
-		} while (!(escolhaUsuario == 3));
+		} while (!(escolhaUsuario == 4));
 		log.info("SAINDO DO PROGRAMA");
 	}
 }

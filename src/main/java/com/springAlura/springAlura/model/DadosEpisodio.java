@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.entity;
+package com.springAlura.springAlura.model;
 
 import java.time.LocalDate;
 

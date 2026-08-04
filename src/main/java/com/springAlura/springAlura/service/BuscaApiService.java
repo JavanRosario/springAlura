@@ -12,12 +12,14 @@ import org.springframework.web.client.RestClient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springAlura.springAlura.entity.DadosSerie;
-import com.springAlura.springAlura.entity.DadosTemporada;
 import com.springAlura.springAlura.exception.SerieNaoEncontradaException;
+import com.springAlura.springAlura.model.DadosSerie;
+import com.springAlura.springAlura.model.DadosTemporada;
 
 @Service
 public class BuscaApiService {
+
+	private List<DadosSerie> dadosSerieList = new ArrayList<>();
 
 	@Autowired
 	ObjectMapper mapper;
@@ -33,13 +35,32 @@ public class BuscaApiService {
 		}
 	}
 
+	public static void imprimirSeason2(List<DadosTemporada> dadosTemporada) {
+
+		for (int i = 0; i < dadosTemporada.size(); i++) {
+			System.out.printf("Temporada: %d===========================\n".formatted(dadosTemporada.get(i).season()));
+			for (int j = 0; j < dadosTemporada.get(i).episodes().size(); j++) {
+				System.out.print("Episodios= %s========================\n"
+						.formatted(dadosTemporada.get(i).episodes().toString()));
+			}
+		}
+	}
+
 	public DadosSerie getDadosSerie(String serie) {
 		String json = getSerie(serie, false);
 		DadosSerie dadosSerie = converterDados(json, DadosSerie.class);
+		dadosSerieList.add(dadosSerie);
 		return dadosSerie;
 	}
 
+//	public void listarSeriesBuscadasRecentemente() {
+//		List<Serie> seriesBuscadas = new ArrayList();
+//		seriesBuscadas = dadosSerieList.stream().map(p -> new Serie(p)).toList();
+//		seriesBuscadas.stream().sorted(Comparator.comparing(Serie::getGenero)).forEach(System.out::println);
+//	}
+
 	public void getTemporada(String serie) {
+
 		DadosSerie dadosSerie = getDadosSerie(serie);
 		List<DadosTemporada> temporadas = new ArrayList<DadosTemporada>();
 
@@ -49,7 +70,7 @@ public class BuscaApiService {
 			temporadas.add(dadosTemporada);
 		}
 
-		DadosTemporada.imprimirSeason2(temporadas);
+		imprimirSeason2(temporadas);
 
 	}
 
@@ -75,35 +96,6 @@ public class BuscaApiService {
 				throw new SerieNaoEncontradaException("Serie não encontrada... Tente novamente..");
 			}
 
-			String formatado = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapper.readTree(json));
-
-			if (print) {
-				System.out.println(formatado);
-			}
-
-			return formatado;
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			log.error("Erro no processamento do Jackson");
-			return e.getMessage();
-		}
-
-	}
-
-	private String getEpisode(String serie, int temporada, String episodeo, boolean print) {
-		String tokenBase64 = proxySettings();
-		RestClient client = RestClient.builder().defaultHeader("Proxy-Authorization", "Basic " + tokenBase64)
-				.defaultHeader("User-Agent", "Mozilla/5.0").build();
-
-		try {
-
-			String json = client.get().uri("http://www.omdbapi.com/?t=%s&season=%s&episode=%s&apikey=ead87646"
-					.formatted(serie, temporada, episodeo)).retrieve().body(String.class);
-
-			if (json != null && json.contains("False")) {
-				throw new SerieNaoEncontradaException("Serie não encontrada... Tente novamente..");
-			}
 			String formatado = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapper.readTree(json));
 
 			if (print) {

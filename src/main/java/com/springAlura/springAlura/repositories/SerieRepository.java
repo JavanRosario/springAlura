@@ -1,5 +1,9 @@
 package com.springAlura.springAlura.repositories;
 
-public interface SerieRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springAlura.springAlura.model.Serie;
+
+public interface SerieRepository extends JpaRepository<Serie, Long> {
 
 }

@@ -13,16 +13,26 @@ import org.springframework.web.client.RestClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springAlura.springAlura.exception.SerieNaoEncontradaException;
-import com.springAlura.springAlura.model.DadosSerie;
-import com.springAlura.springAlura.model.DadosTemporada;
+import com.springAlura.springAlura.model.Episodio;
+import com.springAlura.springAlura.model.Serie;
+import com.springAlura.springAlura.model.Temporada;
+import com.springAlura.springAlura.repositories.EpisodioRepository;
+import com.springAlura.springAlura.repositories.SerieRepository;
 
 @Service
 public class BuscaApiService {
 
-	private List<DadosSerie> dadosSerieList = new ArrayList<>();
-
 	@Autowired
 	ObjectMapper mapper;
+
+	@Autowired
+	SerieService serieService;
+
+	@Autowired
+	SerieRepository repository;
+
+	@Autowired
+	EpisodioRepository episodioRepository;
 
 	private static final Logger log = LoggerFactory.getLogger(BuscaApiService.class);
 
@@ -35,53 +45,54 @@ public class BuscaApiService {
 		}
 	}
 
-	public static void imprimirSeason2(List<DadosTemporada> dadosTemporada) {
+	public static void imprimirSeason2(List<Temporada> temporada) {
 
-		for (int i = 0; i < dadosTemporada.size(); i++) {
-			System.out.printf("Temporada: %d===========================\n".formatted(dadosTemporada.get(i).season()));
-			for (int j = 0; j < dadosTemporada.get(i).episodes().size(); j++) {
-				System.out.print("Episodios= %s========================\n"
-						.formatted(dadosTemporada.get(i).episodes().toString()));
+		for (int i = 0; i < temporada.size(); i++) {
+			System.out.printf("Temporada: %d===========================\n".formatted(temporada.get(i).season()));
+			for (int j = 0; j < temporada.get(i).episodes().size(); j++) {
+				System.out.print(
+						"Episodios= %s========================\n".formatted(temporada.get(i).episodes().toString()));
 			}
 		}
 	}
 
-	public DadosSerie getDadosSerie(String serie) {
-		String json = getSerie(serie, false);
-		DadosSerie dadosSerie = converterDados(json, DadosSerie.class);
-		dadosSerieList.add(dadosSerie);
-		return dadosSerie;
+	public Serie getSerie(String stringSerie, boolean salvar) {
+		String json = getJsonSerie(stringSerie, false);
+		Serie serie = converterDados(json, Serie.class);
+		System.out.println(serie);
+
+		if (salvar) {
+			serieService.salvar(serie);
+		}
+		return serie;
 	}
 
-//	public void listarSeriesBuscadasRecentemente() {
-//		List<Serie> seriesBuscadas = new ArrayList();
-//		seriesBuscadas = dadosSerieList.stream().map(p -> new Serie(p)).toList();
-//		seriesBuscadas.stream().sorted(Comparator.comparing(Serie::getGenero)).forEach(System.out::println);
-//	}
-
-	public void getTemporada(String serie) {
-
-		DadosSerie dadosSerie = getDadosSerie(serie);
-		List<DadosTemporada> temporadas = new ArrayList<DadosTemporada>();
-
-		for (int i = 0; i < dadosSerie.totalSeasons(); i++) {
-			String json = getSeason(serie, i + 1, false);
-			DadosTemporada dadosTemporada = converterDados(json, DadosTemporada.class);
-			temporadas.add(dadosTemporada);
+	public void getTemporada(String serieUsuario) {
+		Serie serie = getSerie(serieUsuario, false);
+		List<Temporada> temporadas = new ArrayList<Temporada>();
+		for (int i = 0; i < serie.getTotalSeasons(); i++) {
+			String json = getSeason(serieUsuario, i + 1, false);
+			Temporada temporada = converterDados(json, Temporada.class);
+			Episodio episodio = new Episodio(temporadas.get(i - 1).episodes().get(i - 1).id,
+					temporadas.get(i - 1).episodes().get(i - 1).getTitle(),
+					temporadas.get(i - 1).episodes().get(i - 1).getReleased(),
+					temporadas.get(i - 1).episodes().get(i - 1).getEpisode(),
+					temporadas.get(i - 1).episodes().get(i - 1).getImdbRating(), serie);
+			episodioRepository.save(episodio);
+			temporadas.add(temporada);
 		}
 
-		imprimirSeason2(temporadas);
+		try {
+			System.out.println(mapper.writeValueAsString(temporadas));
 
-	}
-
-	public void imprimirTemporadas(List<DadosTemporada> temporadas) {
-		for (int i = 0; i < temporadas.size(); i++) {
-			System.out.println("Temporada: %d\nEpisódios:\n===================================\n%s"
-					.formatted(temporadas.get(i).season(), temporadas.get(1).episodes().toString()));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 	}
 
-	private String getSerie(String serie, boolean print) {
+	private String getJsonSerie(String serie, boolean print) {
 		String tokenBase64 = proxySettings();
 
 		RestClient client = RestClient.builder().defaultHeader("Proxy-Authorization", "Basic " + tokenBase64)

@@ -5,18 +5,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.springAlura.springAlura.service.BuscaApiService;
+import com.springAlura.springAlura.service.OmdbService;
 import com.springAlura.springAlura.service.ConverterDadosService;
-import com.springAlura.springAlura.service.Menu;
+import com.springAlura.springAlura.service.MenuService;
 
 @SpringBootApplication
 public class SpringAluraApplication implements CommandLineRunner {
 
 	@Autowired
-	Menu menu;
+	MenuService menuService;
 
 	@Autowired
-	BuscaApiService api;
+	OmdbService api;
 
 	@Autowired
 	ConverterDadosService dados;
@@ -27,7 +27,7 @@ public class SpringAluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		menu.menu();
+		menuService.menu();
 		System.out.println("CRIANDO TABELAS......");
 	}
 }

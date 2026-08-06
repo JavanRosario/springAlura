@@ -20,7 +20,7 @@ import com.springAlura.springAlura.repositories.EpisodioRepository;
 import com.springAlura.springAlura.repositories.SerieRepository;
 
 @Service
-public class BuscaApiService {
+public class OmdbService {
 
 	@Autowired
 	ObjectMapper mapper;
@@ -34,62 +34,58 @@ public class BuscaApiService {
 	@Autowired
 	EpisodioRepository episodioRepository;
 
-	private static final Logger log = LoggerFactory.getLogger(BuscaApiService.class);
+	private static final Logger log = LoggerFactory.getLogger(OmdbService.class);
 
-	public <T> T converterDados(String json, Class<T> objeto) {
+	public Serie getSerie(String stringSerie, boolean salvar) {
+		String json = getJsonSerie(stringSerie, false);
+		Serie serie = converterDados(json, Serie.class);
+
+		if (salvar) {
+			serieService.salvar(serie);
+		}
+
+		return serie;
+	}
+
+	private List<Temporada> getTemporada(String serieUsuario) {
+		Serie serieBuscada = getSerie(serieUsuario, false);
+		List<Temporada> temporadas = new ArrayList<Temporada>();
+		int i = 0;
+
+		for (Temporada t : temporadas) {
+			String json = getSeason(serieUsuario, i + 1, false);
+			Temporada temporada = converterDados(json, Temporada.class);
+			temporadas.add(temporada);
+			i++;
+		}
+
+//		for (int i = 0; i < serie.getTotalSeasons(); i++) {
+//			String json = getSeason(serieUsuario, i + 1, false);
+//			Temporada temporada = converterDados(json, Temporada.class);
+//			temporadas.add(temporada);
+//		}
+
+		return temporadas;
+	}
+
+	public void salvarEpisodios(String serieUsuario, Serie serie) {
+		List<Temporada> temporadaSerie = getTemporada(serieUsuario);
+
+		List<Episodio> episodios = temporadaSerie.stream().flatMap(s -> s.getEpisodes().stream()
+				.map(p -> new Episodio(p.id, p.getTitle(), p.getReleased(), p.getEpisode(), p.getImdbRating(), serie)))
+				.toList();
+
+		episodioRepository.saveAll(episodios);
+
+	}
+
+	private <T> T converterDados(String json, Class<T> objeto) {
 		try {
 			return mapper.readValue(json, objeto);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException();
 		}
-	}
-
-	public static void imprimirSeason2(List<Temporada> temporada) {
-
-		for (int i = 0; i < temporada.size(); i++) {
-			System.out.printf("Temporada: %d===========================\n".formatted(temporada.get(i).season()));
-			for (int j = 0; j < temporada.get(i).episodes().size(); j++) {
-				System.out.print(
-						"Episodios= %s========================\n".formatted(temporada.get(i).episodes().toString()));
-			}
-		}
-	}
-
-	public Serie getSerie(String stringSerie, boolean salvar) {
-		String json = getJsonSerie(stringSerie, false);
-		Serie serie = converterDados(json, Serie.class);
-		System.out.println(serie);
-
-		if (salvar) {
-			serieService.salvar(serie);
-		}
-		return serie;
-	}
-
-	public void getTemporada(String serieUsuario) {
-		Serie serie = getSerie(serieUsuario, false);
-		List<Temporada> temporadas = new ArrayList<Temporada>();
-		for (int i = 0; i < serie.getTotalSeasons(); i++) {
-			String json = getSeason(serieUsuario, i + 1, false);
-			Temporada temporada = converterDados(json, Temporada.class);
-			Episodio episodio = new Episodio(temporadas.get(i - 1).episodes().get(i - 1).id,
-					temporadas.get(i - 1).episodes().get(i - 1).getTitle(),
-					temporadas.get(i - 1).episodes().get(i - 1).getReleased(),
-					temporadas.get(i - 1).episodes().get(i - 1).getEpisode(),
-					temporadas.get(i - 1).episodes().get(i - 1).getImdbRating(), serie);
-			episodioRepository.save(episodio);
-			temporadas.add(temporada);
-		}
-
-		try {
-			System.out.println(mapper.writeValueAsString(temporadas));
-
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	private String getJsonSerie(String serie, boolean print) {

@@ -30,4 +30,27 @@ public class SerieService {
 		return repository.findAll();
 	}
 
+	public void imprimirListaSerie(List<Serie> series) {
+		for (Serie s : series) {
+			System.out.println("\n------------------------------------------------");
+			System.out.println("🎬 SÉRIE: " + s.getTitle() + " | ⭐ NOTA: " + s.getImdbRating());
+			System.out.println("👥 ATORES: " + s.getActors());
+			System.out.println("🖼️ POSTER: " + s.getPoster());
+			System.out.println("📖 SINOPSE: " + s.getPlot());
+			System.out.println("📖 ID: " + s.getId());
+			System.out.println("------------------------------------------------");
+		}
+	}
+
+	public void imprimirSerie(Serie serie) {
+		System.out.println("\n------------------------------------------------");
+		System.out.println("🎬 SÉRIE: " + serie.getTitle() + " | ⭐ NOTA: " + serie.getImdbRating());
+		System.out.println("👥 ATORES: " + serie.getActors());
+		System.out.println("🖼️ POSTER: " + serie.getPoster());
+		System.out.println("📖 SINOPSE: " + serie.getPlot());
+		System.out.println("📖 ID: " + serie.getId());
+		System.out.println("------------------------------------------------");
+
+	}
+
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -42,6 +43,7 @@ public class Episodio {
 
 	@ManyToOne()
 	@JoinColumn(name = "serie_id")
+	@ToString.Exclude
 	private Serie serie;
 
 }

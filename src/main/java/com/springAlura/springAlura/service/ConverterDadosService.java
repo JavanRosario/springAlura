@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springAlura.springAlura.repositories.ConverterDados;
 
 @Service
 public class ConverterDadosService implements ConverterDados {

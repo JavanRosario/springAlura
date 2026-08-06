@@ -14,15 +14,12 @@ import com.springAlura.springAlura.model.Serie;
 import com.springAlura.springAlura.repositories.SerieRepository;
 
 @Service
-public class Menu {
-	private static final Logger log = LoggerFactory.getLogger(BuscaApiService.class);
+public class MenuService {
+	private static final Logger log = LoggerFactory.getLogger(OmdbService.class);
 
 	Scanner sc = new Scanner(System.in);
 	@Autowired
-	BuscaApiService apiService;
-
-	@Autowired
-	ConverterDados converterDados;
+	OmdbService apiService;
 
 	@Autowired
 	SerieService serieService;
@@ -37,8 +34,8 @@ public class Menu {
 		int escolhaUsuario = 0;
 		do {
 			String escolhaTexto = null;
-			String temporada;
 			int escolhaId;
+			Double nota;
 
 			String menuText = """
 					=========================================
@@ -47,7 +44,10 @@ public class Menu {
 					[ 1 ]  Buscar Série e Temporada
 					[ 2 ]  Buscar Série por Título
 					[ 3 ]  Buscar Séries no Banco
-					[ 4 ]  Sair
+					[ 4 ]  Buscar Sérios por Ator
+					[ 5 ]  Top 5 Séries
+					[ 6 ]  Buscar Episodio por Trecho
+					[ 0 ]  Sair
 					=========================================
 					Digite a opção desejada: """;
 
@@ -56,33 +56,55 @@ public class Menu {
 			sc.nextLine();
 			switch (escolhaUsuario) {
 			case 1 -> {
-				try {
-					System.out.println(mapper.writeValueAsString(repository.findAll()));
-				} catch (JsonProcessingException e) {
 
-					e.printStackTrace();
-				}
+				serieService.imprimirListaSerie(repository.findAll());
+
 				System.out.println("Qual série? Escolha um id para listar a temporada");
 				escolhaId = sc.nextInt();
+
 				Optional<Serie> serie = repository.findById((long) escolhaId);
 				String nomeSerieEncontradaPorId = serie.get().getTitle();
-				apiService.getTemporada(nomeSerieEncontradaPorId);
-//				System.out.println(serie.get());
+
+				apiService.salvarEpisodios(nomeSerieEncontradaPorId, serie.get());
 				break;
 			}
 			case 2 -> {
 				System.out.println("Qual Série deseja buscar?");
 				escolhaTexto = sc.nextLine().replace(" ", "+");
 				Serie serie = apiService.getSerie(escolhaTexto, true);
-				System.out.println(serie);
+				serieService.imprimirSerie(serie);
 				break;
 			}
 
 			case 3 -> {
-				System.out.println(serieService.listar());
+				System.out.println("Qual serie deseja buscar?");
+				escolhaTexto = sc.nextLine();
+				try {
+					System.out.println(
+							mapper.writeValueAsString(repository.findByTitleContainingIgnoreCase(escolhaTexto)));
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 			case 4 -> {
+				System.out.println("Qual ator deseja buscar?");
+				escolhaTexto = sc.nextLine();
+				System.out.println(repository.findByActorsContainingIgnoreCase(escolhaTexto));
+			}
+
+			case 5 -> {
+				serieService.imprimirListaSerie(repository.topCincoSeries());
+			}
+
+			case 6 -> {
+				System.out.println("Qual episodio?");
+				escolhaTexto = sc.nextLine();
+				System.out.println(repository.trechosEpisodios(escolhaTexto));
+			}
+
+			case 0 -> {
 				System.out.println("Encerrando");
 				break;
 			}
@@ -90,7 +112,7 @@ public class Menu {
 			default -> throw new IllegalArgumentException("Unexpected value: " + escolhaUsuario);
 			}
 
-		} while (!(escolhaUsuario == 4));
+		} while (!(escolhaUsuario == 0));
 		log.info("SAINDO DO PROGRAMA");
 	}
 }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,12 +18,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
-@ToString
 @JsonPropertyOrder({ "id", "title", "totalSeasons", "imdbRating", "actors", "poster", "plot", "episodios" })
 public class Serie {
 
@@ -62,8 +62,9 @@ public class Serie {
 
 	private String plot;
 
-	@OneToMany(mappedBy = "serie", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "serie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Column(nullable = false)
+	@JsonIgnore
 	private List<Episodio> episodios = new ArrayList<>();
 
 }

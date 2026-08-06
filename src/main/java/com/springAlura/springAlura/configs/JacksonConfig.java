@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
@@ -18,6 +19,7 @@ public class JacksonConfig {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);
 		mapper.registerModule(new JavaTimeModule());
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		return mapper;
 	}
 }

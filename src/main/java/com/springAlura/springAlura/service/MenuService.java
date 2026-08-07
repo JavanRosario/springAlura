@@ -30,6 +30,9 @@ public class MenuService {
 	@Autowired
 	ObjectMapper mapper;
 
+	@Autowired
+	EpisodioService episodioService;
+
 	public void menu() {
 		int escolhaUsuario = 0;
 		do {
@@ -101,7 +104,9 @@ public class MenuService {
 			case 6 -> {
 				System.out.println("Qual episodio?");
 				escolhaTexto = sc.nextLine();
-				System.out.println(repository.trechosEpisodios(escolhaTexto));
+				episodioService.imprimirEpisodio(repository.maiorData(escolhaTexto, 2011));
+				System.out.println(repository.maiorData(escolhaTexto, 2019));
+
 			}
 
 			case 0 -> {

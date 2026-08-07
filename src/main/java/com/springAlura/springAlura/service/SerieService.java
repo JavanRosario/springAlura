@@ -26,6 +26,26 @@ public class SerieService {
 		return repository.save(serie);
 	}
 
+	@Transactional
+	public void deletar(Long serieId) {
+		repository.deleteById(serieId);
+	}
+
+	@Transactional
+	public Serie atualizar(Long serieId, Serie serie) {
+		Serie serieAtual = buscaOuFalha(serieId);
+
+		serieAtual.setActors(serie.getActors());
+		serieAtual.setPlot(serie.getPlot());
+		serieAtual.setTitle(serie.getTitle());
+		serieAtual.setImdbRating(serie.getImdbRating());
+		serieAtual.setTotalSeasons(serie.getTotalSeasons());
+		serieAtual.setPoster(serie.getPoster());
+
+		serieAtual = salvar(serieAtual);
+		return serieAtual;
+	}
+
 	public List<Serie> listar() {
 		return repository.findAll();
 	}

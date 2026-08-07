@@ -49,21 +49,15 @@ public class OmdbService {
 
 	private List<Temporada> getTemporada(String serieUsuario) {
 		Serie serieBuscada = getSerie(serieUsuario, false);
-		List<Temporada> temporadas = new ArrayList<Temporada>();
-		int i = 0;
 
-		for (Temporada t : temporadas) {
+		List<Temporada> temporadas = new ArrayList<Temporada>();
+		
+		for (int i = 0; i < serieBuscada.getTotalSeasons(); i++) {
 			String json = getSeason(serieUsuario, i + 1, false);
 			Temporada temporada = converterDados(json, Temporada.class);
 			temporadas.add(temporada);
-			i++;
 		}
-
-//		for (int i = 0; i < serie.getTotalSeasons(); i++) {
-//			String json = getSeason(serieUsuario, i + 1, false);
-//			Temporada temporada = converterDados(json, Temporada.class);
-//			temporadas.add(temporada);
-//		}
+		
 
 		return temporadas;
 	}

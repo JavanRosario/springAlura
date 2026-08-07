@@ -29,4 +29,13 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
 	@Query("SELECT e FROM Serie s JOIN s.episodios e WHERE e.title ILIKE CONCAT('%', :nomeEpisodio, '%')")
 	List<Episodio> trechosEpisodios(String nomeEpisodio);
 
+	@Query("select s from Serie s join s.episodios e where lower(s.title) like lower (concat ('%', :nome, '%'))")
+	List<Serie> melhorEpisodio(String nome);
+
+	@Query("select e from Serie s join s.episodios e where lower(s.title) like lower (concat ('%', :nome, '%')) order by e.imdbRating asc limit 5")
+	List<Episodio> top5EPisodiosDaSerie(String nome);
+
+	@Query("select e from Serie s join s.episodios e where lower(s.title) like lower (concat ('%', :nome, '%')) and Year(e.released) >= :data order by e.released asc")
+	List<Episodio> maiorData(String nome, int data);
+
 }

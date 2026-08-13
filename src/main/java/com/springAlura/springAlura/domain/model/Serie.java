@@ -51,6 +51,8 @@ public class Serie {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataLancamento;
 
+	private Boolean ativo;
+
 	@OneToMany(mappedBy = "serie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Column(nullable = false)
 	private List<Episodio> episodios = new ArrayList<>();

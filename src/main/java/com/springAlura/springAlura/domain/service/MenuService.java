@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.service;
+package com.springAlura.springAlura.domain.service;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springAlura.springAlura.model.Serie;
-import com.springAlura.springAlura.repositories.SerieRepository;
+import com.springAlura.springAlura.domain.model.Serie;
+import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 @Service
 public class MenuService {
@@ -66,8 +66,7 @@ public class MenuService {
 				escolhaId = sc.nextInt();
 
 				Optional<Serie> serie = repository.findById((long) escolhaId);
-				String nomeSerieEncontradaPorId = serie.get().getTitle();
-
+				String nomeSerieEncontradaPorId = serie.get().getTitulo();
 				apiService.salvarEpisodios(nomeSerieEncontradaPorId, serie.get());
 				break;
 			}
@@ -84,7 +83,7 @@ public class MenuService {
 				escolhaTexto = sc.nextLine();
 				try {
 					System.out.println(
-							mapper.writeValueAsString(repository.findByTitleContainingIgnoreCase(escolhaTexto)));
+							mapper.writeValueAsString(repository.findByTituloContainingIgnoreCase(escolhaTexto)));
 				} catch (JsonProcessingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -94,20 +93,20 @@ public class MenuService {
 			case 4 -> {
 				System.out.println("Qual ator deseja buscar?");
 				escolhaTexto = sc.nextLine();
-				System.out.println(repository.findByActorsContainingIgnoreCase(escolhaTexto));
+				System.out.println(repository.findByAtoresContainingIgnoreCase(escolhaTexto));
 			}
 
 			case 5 -> {
 				serieService.imprimirListaSerie(repository.topCincoSeries());
 			}
 
-			case 6 -> {
-				System.out.println("Qual episodio?");
-				escolhaTexto = sc.nextLine();
-				episodioService.imprimirEpisodio(repository.maiorData(escolhaTexto, 2011));
-				System.out.println(repository.maiorData(escolhaTexto, 2019));
-
-			}
+//			case 6 -> {
+//				System.out.println("Qual episodio?");
+//				escolhaTexto = sc.nextLine();
+//				episodioService.imprimirEpisodio(repository.maiorData(escolhaTexto, 2011));
+//				System.out.println(repository.maiorData(escolhaTexto, 2019));
+//
+//			}
 
 			case 0 -> {
 				System.out.println("Encerrando");

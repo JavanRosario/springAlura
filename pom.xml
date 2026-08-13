@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0</version> <!-- Versão altamente compatível com o seu Eclipse -->
+		<version>3.3.3</version> <!-- Versão altamente compatível com o seu Eclipse -->
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springAlura</groupId>
@@ -48,6 +48,15 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -62,6 +71,31 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.4.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<!-- A TAG CORRETA É CONFIGOPTIONS PARA PODER PASSAR OS PARÂMETROS DO GERADOR -->
+							<configOptions>
+								<useSpringBoot3>true</useSpringBoot3>
+								<openApiNullable>false</openApiNullable>
+								<useRecordsForModels>true</useRecordsForModels>
+								<interfaceOnly>true</interfaceOnly>
+							</configOptions>
+							<modelPackage>com.springAlura.springAlura.api.dto2</modelPackage>
+							<apiPackage>com.springAlura.springAlura.api.controller2</apiPackage>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

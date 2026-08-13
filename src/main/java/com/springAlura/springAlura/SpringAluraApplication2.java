@@ -5,9 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.springAlura.springAlura.service.OmdbService;
-import com.springAlura.springAlura.service.ConverterDadosService;
-import com.springAlura.springAlura.service.MenuService;
+import com.springAlura.springAlura.domain.service.ConverterDadosService;
+import com.springAlura.springAlura.domain.service.MenuService;
+import com.springAlura.springAlura.domain.service.OmdbService;
 
 @SpringBootApplication
 public class SpringAluraApplication2 implements CommandLineRunner {

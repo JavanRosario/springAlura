@@ -1,0 +1,321 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+tags:
+- name: Séries
+  description: Endpoints para gerenciamento do catálogo de séries
+paths:
+  /series/{serieId}:
+    put:
+      tags:
+      - Séries
+      summary: Atualiza os campos de uma série baseado no ID
+      description: Informe o ID na URL e o novo corpo da série no JSON para realizar
+        a atualização completa.
+      operationId: atualizar
+      parameters:
+      - name: serieId
+        in: path
+        description: ID numérico da série a ser atualizada
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      requestBody:
+        description: Novos dados da série
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SerieRequestDto"
+        required: true
+      responses:
+        "404":
+          description: Série não encontrada com o ID fornecido
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/SerieResponseDto"
+        "200":
+          description: Série atualizada com sucesso!
+          content:
+            application/json:
+              examples:
+                Sucesso!:
+                  summary: Exemplo de quando o PUT é feito com sucesso
+                  description: Sucesso!
+                  value:
+                    id: 1
+                    titulo: TESTE PUT
+                    totalTemporada: 800
+                    avaliacao: 800.0
+                    atores: TESTE PUT
+                    poster: TESTE PUT
+                    sinopse: TESTE PUT
+                    dataLancamento: 20/01/2008
+        "400":
+          description: Dados de entrada inválidos! Verifique os campos!
+          content:
+            application/json:
+              examples:
+                Campos Inválidos:
+                  summary: Exemplo de erro quando os dados enviados no JSON falham
+                    na validação
+                  description: Campos Inválidos
+                  value:
+                    type: https://serieApi.com.br
+                    title: Dados inválidos
+                    status: 400
+                    detail: Um ou mais campos estão incorretos. Faça o preenchimento
+                      certo
+                    instance: /series
+                    properties:
+                      fields:
+                      - fieldName: totalTemporada
+                        detail: Total de Temporada da Série deve ser maior ou igual
+                          a zero.
+                      - fieldName: titulo
+                        detail: Titulo da Série é obrigatório.
+                      - fieldName: avaliacao
+                        detail: Avaliação da Série deve ser maior ou igual a zero.
+    delete:
+      tags:
+      - Séries
+      summary: Deleta uma série baseada no ID
+      description: Informe o ID da série para apagá-la da base de dados
+      operationId: excluir
+      parameters:
+      - name: serieId
+        in: path
+        description: ID numérico da série a ser excluída
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      responses:
+        "204":
+          description: Série deletada com sucesso
+        "404":
+          description: Série não encontrada para exclusão
+        "400":
+          description: "Erro ao deletar a Série, verifique o ID"
+          content:
+            application/json:
+              examples:
+                Falha:
+                  summary: Exemplo quando há um erro no deletar
+                  description: Falha
+                  value:
+                    type: https://seusite.com
+                    title: Séri não encontrada
+                    status: 400
+                    detail: "Não existe um cadastro de Serie com código: SEU_CODIGO_ERRADO"
+                    instance: /series/SEU_CODIGO_ERRADO
+                    properties:
+                      timestamp: 1786623273703
+  /series:
+    get:
+      tags:
+      - Séries
+      summary: Lista todas as séries.
+      description: Lista todas as séries cadastradas no banco de dados
+      operationId: listar
+      responses:
+        "200":
+          description: Séries encontradas com sucesso!
+          content:
+            application/json:
+              examples:
+                Sucesso!:
+                  summary: Exemplo quando o GET é retornado com sucesso
+                  description: Sucesso!
+                  value:
+                  - id: 1
+                    titulo: Breaking Bad
+                    totalTemporada: 5
+                    avaliacao: 9.5
+                    atores: "Bryan Cranston, Aaron Paul"
+                    poster: poster001.jpg
+                    sinopse: Um professor de quimica se volta para o crime.
+                    dataLancamento: 20/01/2008
+                  - id: 2
+                    titulo: Stranger Things
+                    totalTemporada: 4
+                    avaliacao: 8.7
+                    atores: "Winona Ryder, David Harbour"
+                    poster: poster002.jpg
+                    sinopse: Criancas enfrentam forcas sobrenaturais.
+                    dataLancamento: 15/07/2016
+        "500":
+          description: Erro interno no servidor ao processar a consulta
+          content:
+            application/json:
+              examples:
+                Erro Interno:
+                  summary: Exemplo de erro inesperado no sistema
+                  description: Erro Interno
+                  value:
+                    type: https://serieApi.com.br
+                    title: "O recurso não foi encontrado, garanta que a URI está escrita\
+                      \ corretamente!"
+                    status: 404
+                    detail: "Endereço não encontrado: Verifique se há erros de digitaç\
+                      ão, letras maiúsculas incorretas ou caracteres extras na URI.\
+                      \ Se o erro persistir, limpe o cache com Ctrl + F5 e tente novamente."
+                    instance: /seriess
+                    properties:
+                      timestamp: 1786619160432
+    post:
+      tags:
+      - Séries
+      summary: Cria uma nova série
+      description: Informe os dados para salvar uma nova série
+      operationId: salvar
+      requestBody:
+        description: Dados necessários para a criação da série
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SerieRequestDto"
+        required: true
+      responses:
+        "201":
+          description: Série criada com sucesso
+          content:
+            application/json:
+              examples:
+                Sucesso:
+                  summary: Exemplo de quando o POST é feito com sucesso
+                  description: Sucesso
+                  value:
+                    id: 1
+                    titulo: TESTE POST
+                    totalTemporada: 800
+                    avaliacao: 800.0
+                    atores: TESTE POST
+                    poster: TESTE POST
+                    sinopse: TESTE POST
+                    dataLancamento: 20/01/2008
+        "400":
+          description: Dados de entrada inválidos! Verifique os campos!
+          content:
+            application/json:
+              examples:
+                Campos Inválidos:
+                  summary: Exemplo de erro quando os dados enviados no JSON falham
+                    na validação
+                  description: Campos Inválidos
+                  value:
+                    type: https://serieApi.com.br
+                    title: Dados inválidos
+                    status: 400
+                    detail: Um ou mais campos estão incorretos. Faça o preenchimento
+                      certo
+                    instance: /series
+                    properties:
+                      fields:
+                      - fieldName: totalTemporada
+                        detail: Total de Temporada da Série deve ser maior ou igual
+                          a zero.
+                      - fieldName: titulo
+                        detail: Titulo da Série é obrigatório.
+                      - fieldName: avaliacao
+                        detail: Avaliação da Série deve ser maior ou igual a zero.
+components:
+  schemas:
+    SerieRequestDto:
+      required:
+      - atores
+      - avaliacao
+      - dataLancamento
+      - poster
+      - sinopse
+      - titulo
+      - totalTemporada
+      type: object
+      properties:
+        titulo:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Título oficial da série
+          example: Breaking Bad
+        totalTemporada:
+          type: integer
+          description: Quantidade total de temporadas lançadas
+          format: int32
+          example: 5
+        avaliacao:
+          type: number
+          description: Nota de avaliação da série
+          format: double
+          example: 9.5
+        atores:
+          type: string
+          description: Nomes dos principais atores do elenco
+          example: "Bryan Cranston, Aaron Paul"
+        poster:
+          type: string
+          description: URL do poster ou imagem de capa da série
+          example: https://link-da-imagem.com
+        sinopse:
+          type: string
+          description: Sinopse ou resumo do enredo
+          example: Um professor de química se volta para o crime...
+        dataLancamento:
+          type: string
+          description: Data do lançamento original no formato DD/MM/AAAA
+          example: 20/01/2008
+      description: Modelo de dados para criar ou atualizar uma série
+    SerieResponseDto:
+      required:
+      - atores
+      - avaliacao
+      - dataLancamento
+      - id
+      - poster
+      - sinopse
+      - titulo
+      - totalTemporada
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        titulo:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Título oficial da série
+          example: Breaking Bad
+        totalTemporada:
+          type: integer
+          description: Quantidade total de temporadas lançadas
+          format: int32
+          example: 5
+        avaliacao:
+          type: number
+          description: Nota de avaliação da série
+          format: double
+          example: 9.5
+        atores:
+          type: string
+          description: Nomes dos principais atores do elenco
+          example: "Bryan Cranston, Aaron Paul"
+        poster:
+          type: string
+          description: URL do poster ou imagem de capa da série
+          example: https://link-da-imagem.com
+        sinopse:
+          type: string
+          description: Sinopse ou resumo do enredo
+          example: Um professor de química se volta para o crime...
+        dataLancamento:
+          type: string
+          description: Data do lançamento original no formato DD/MM/AAAA
+          example: 20/01/2008

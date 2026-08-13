@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.model;
+package com.springAlura.springAlura.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

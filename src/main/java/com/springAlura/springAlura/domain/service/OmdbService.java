@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.service;
+package com.springAlura.springAlura.domain.service;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -12,12 +12,12 @@ import org.springframework.web.client.RestClient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springAlura.springAlura.exception.SerieNaoEncontradaException;
-import com.springAlura.springAlura.model.Episodio;
-import com.springAlura.springAlura.model.Serie;
-import com.springAlura.springAlura.model.Temporada;
-import com.springAlura.springAlura.repositories.EpisodioRepository;
-import com.springAlura.springAlura.repositories.SerieRepository;
+import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
+import com.springAlura.springAlura.domain.model.Episodio;
+import com.springAlura.springAlura.domain.model.Serie;
+import com.springAlura.springAlura.domain.model.Temporada;
+import com.springAlura.springAlura.domain.repositories.EpisodioRepositoryy;
+import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 @Service
 public class OmdbService {
@@ -32,7 +32,7 @@ public class OmdbService {
 	SerieRepository repository;
 
 	@Autowired
-	EpisodioRepository episodioRepository;
+	EpisodioRepositoryy episodioRepositoryy;
 
 	private static final Logger log = LoggerFactory.getLogger(OmdbService.class);
 
@@ -47,29 +47,28 @@ public class OmdbService {
 		return serie;
 	}
 
-	private List<Temporada> getTemporada(String serieUsuario) {
+	public List<Temporada> getTemporada(String serieUsuario) {
 		Serie serieBuscada = getSerie(serieUsuario, false);
 
 		List<Temporada> temporadas = new ArrayList<Temporada>();
-		
-		for (int i = 0; i < serieBuscada.getTotalSeasons(); i++) {
+
+		for (int i = 0; i < serieBuscada.getTotalTemporada(); i++) {
 			String json = getSeason(serieUsuario, i + 1, false);
 			Temporada temporada = converterDados(json, Temporada.class);
 			temporadas.add(temporada);
 		}
-		
 
 		return temporadas;
 	}
 
 	public void salvarEpisodios(String serieUsuario, Serie serie) {
 		List<Temporada> temporadaSerie = getTemporada(serieUsuario);
-
-		List<Episodio> episodios = temporadaSerie.stream().flatMap(s -> s.getEpisodes().stream()
-				.map(p -> new Episodio(p.id, p.getTitle(), p.getReleased(), p.getEpisode(), p.getImdbRating(), serie)))
+		List<Episodio> episodios = temporadaSerie
+				.stream().flatMap(s -> s.getEpisodios().stream().map(p -> new Episodio(p.id, p.getTitulo(),
+						s.getTemporada(), p.getDataLancamento(), p.getNumeroEpisodio(), p.getAvaliacao(), serie)))
 				.toList();
 
-		episodioRepository.saveAll(episodios);
+		episodioRepositoryy.saveAll(episodios);
 
 	}
 

@@ -1,6 +1,8 @@
-package com.springAlura.springAlura.model;
+package com.springAlura.springAlura.domain.model;
 
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,27 +21,36 @@ import lombok.ToString;
 @Table(name = "episodios")
 public class Episodio {
 
-	public Episodio(Long id, String title, LocalDate released, Integer episode, String imdbRating, Serie serie) {
+	public Episodio(Long id, String titulo, Integer temporada, LocalDate released, Integer numeroEpisodio,
+			String avaliacao, Serie serie) {
 		super();
 		this.id = id;
-		this.title = title;
-		this.released = released;
-		this.episode = episode;
-		this.imdbRating = imdbRating;
+		this.titulo = titulo;
+		this.dataLancamento = released;
+		this.numeroEpisodio = numeroEpisodio;
+		this.avaliacao = avaliacao;
 		this.serie = serie;
+		this.temporada = temporada;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
-	private String title;
+	@JsonAlias("Title")
+	private String titulo;
 
-	private LocalDate released;
+	@JsonAlias("Season")
+	private Integer temporada;
 
-	private Integer episode;
+	@JsonAlias("Released")
+	private LocalDate dataLancamento;
 
-	private String imdbRating;
+	@JsonAlias("Episode")
+	private Integer numeroEpisodio;
+
+	@JsonAlias("ImdbRating")
+	private String avaliacao;
 
 	@ManyToOne()
 	@JoinColumn(name = "serie_id")

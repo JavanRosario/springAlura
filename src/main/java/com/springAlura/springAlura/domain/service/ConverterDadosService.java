@@ -1,11 +1,11 @@
-package com.springAlura.springAlura.service;
+package com.springAlura.springAlura.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springAlura.springAlura.repositories.ConverterDados;
+import com.springAlura.springAlura.domain.repositories.ConverterDados;
 
 @Service
 public class ConverterDadosService implements ConverterDados {

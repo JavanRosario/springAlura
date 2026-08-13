@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.repositories;
+package com.springAlura.springAlura.domain.repositories;
 
 public interface ConverterDados {
 

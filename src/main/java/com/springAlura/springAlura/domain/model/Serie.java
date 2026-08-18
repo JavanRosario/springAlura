@@ -51,6 +51,7 @@ public class Serie {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataLancamento;
 
+	@Column(columnDefinition = "boolean default true")
 	private Boolean ativo;
 
 	@OneToMany(mappedBy = "serie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

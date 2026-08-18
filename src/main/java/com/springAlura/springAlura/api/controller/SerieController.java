@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springAlura.springAlura.api.docs.PathsApi;
 import com.springAlura.springAlura.api.docs.SwaggerDocControllers;
-import com.springAlura.springAlura.api.dto.request.SerieRequestDto;
-import com.springAlura.springAlura.api.dto.response.EpisodioResponseDto;
-import com.springAlura.springAlura.api.dto.response.SerieResponseDto;
+import com.springAlura.springAlura.api.dto2.SerieRequestDto;
+import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.domain.model.Serie;
 import com.springAlura.springAlura.domain.repositories.EpisodioRepositoryy;
 import com.springAlura.springAlura.domain.service.EpisodioService;
@@ -31,7 +31,7 @@ import lombok.Data;
 
 @RestController
 @Data
-@RequestMapping("/series")
+@RequestMapping(PathsApi.MAIN_PATH)
 public class SerieController implements SwaggerDocControllers {
 
 	@Autowired
@@ -48,15 +48,14 @@ public class SerieController implements SwaggerDocControllers {
 
 	@GetMapping()
 	@Override()
-	@ResponseStatus(code = HttpStatus.OK)
 	public List<SerieResponseDto> listar() {
 		return serieService.toDtoList(serieService.listar());
 	}
 
 	@Hidden
-	@GetMapping("/{serieId}")
-	public SerieResponseDto listarId(@PathVariable Long serieId) {
-		return serieService.toDto(serieService.buscaOuFalha(serieId));
+	@GetMapping(PathsApi.ID_SERIE)
+	public com.springAlura.springAlura.api.dto2.SerieResponseDto listarId(@PathVariable Long serieId) {
+		return serieService.toDto2(serieService.buscaOuFalha(serieId));
 	}
 
 	@Hidden
@@ -71,26 +70,26 @@ public class SerieController implements SwaggerDocControllers {
 		return serieService.toDtoList(serieService.listarLancamentos());
 	}
 
-	@Hidden
-	@GetMapping("/{id}/temporadas/todas")
-	public List<EpisodioResponseDto> temporadas(@PathVariable Long id) {
-		Serie serieEncontrada = serieService.buscaOuFalha(id);
+//	@Hidden
+//	@GetMapping("/{id}/temporadas/todas")
+//	public List<EpisodioResponseDto> temporadas(@PathVariable Long id) {
+//		Serie serieEncontrada = serieService.buscaOuFalha(id);
+//
+//		return serieEncontrada.getEpisodios().stream()
+//				.map(e -> new EpisodioResponseDto(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo())).toList();
+//
+//	}
 
-		return serieEncontrada.getEpisodios().stream()
-				.map(e -> new EpisodioResponseDto(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo())).toList();
-
-	}
-
-	@Hidden
-	@GetMapping("/{serieId}/temporadas/{temporadaId}")
-	public List<EpisodioResponseDto> temporadaUnica(@PathVariable Long serieId, @PathVariable Long temporadaId) {
-		return episodioService.toDtoList(episodioRepositoryy.temporadaUnica(serieId, temporadaId));
-
-	}
+//	@Hidden
+//	@GetMapping("/{serieId}/temporadas/{temporadaId}")
+//	public List<EpisodioResponseDto> temporadaUnica(@PathVariable Long serieId, @PathVariable Long temporadaId) {
+//		return episodioService.toDtoList(episodioRepositoryy.temporadaUnica(serieId, temporadaId));
+//
+//	}
 
 	@Override
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public SerieResponseDto salvar(@RequestBody @Valid SerieRequestDto serieRequestDto) {
 		Serie serieAtual = serieService.toDomain(serieRequestDto);
 		serieAtual = serieService.salvar(serieAtual);
@@ -108,9 +107,21 @@ public class SerieController implements SwaggerDocControllers {
 	}
 
 	@Override
-	@DeleteMapping("/{serieId}")
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	@DeleteMapping(PathsApi.ID_SERIE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long serieId) {
 		serieService.deletar(serieId);
+	}
+
+	@PutMapping("/{serieId}/ativar")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void ativarSerie(@PathVariable Long serieId) {
+		serieService.ativarSerie(serieId);
+	}
+
+	@DeleteMapping("/{serieId}/desativar")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void desativarSerie(@PathVariable Long serieId) {
+		serieService.desativarSerie(serieId);
 	}
 }

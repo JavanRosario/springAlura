@@ -6,8 +6,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springAlura.springAlura.api.dto.request.SerieRequestDto;
-import com.springAlura.springAlura.api.dto.response.SerieResponseDto;
+import com.springAlura.springAlura.api.dto2.SerieRequestDto;
+import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.Serie;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
@@ -16,6 +16,20 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class SerieService {
+
+	@Transactional
+	public void ativarSerie(Long serieId) {
+		Serie serie = buscaOuFalha(serieId);
+		serie.setAtivo(true);
+		salvar(serie);
+	}
+
+	@Transactional
+	public void desativarSerie(Long serieId) {
+		Serie serie = buscaOuFalha(serieId);
+		serie.setAtivo(false);
+		salvar(serie);
+	}
 
 	@Transactional
 	public Serie buscaOuFalha(Long sereId) {
@@ -55,6 +69,19 @@ public class SerieService {
 	@Transactional
 	public SerieResponseDto toDto(Serie serie) {
 		SerieResponseDto dto = new SerieResponseDto();
+		// forma manual
+//		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
+//				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
+//				serieAtual.getPoster(), serieAtual.getPlot());
+
+		BeanUtils.copyProperties(serie, dto, "series");
+
+		return dto;
+	}
+
+	@Transactional
+	public com.springAlura.springAlura.api.dto2.SerieResponseDto toDto2(Serie serie) {
+		com.springAlura.springAlura.api.dto2.SerieResponseDto dto = new com.springAlura.springAlura.api.dto2.SerieResponseDto();
 		// forma manual
 //		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
 //				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),

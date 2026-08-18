@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -21,6 +22,9 @@ import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 @Service
 public class OmdbService {
+
+	@Value("${urlOmdbApi}")
+	private String urlOmdb;
 
 	@Autowired
 	ObjectMapper mapper;
@@ -89,8 +93,7 @@ public class OmdbService {
 
 		try {
 
-			String json = client.get().uri("http://www.omdbapi.com/?t=%s&apikey=ead87646".formatted(serie)).retrieve()
-					.body(String.class);
+			String json = client.get().uri(urlOmdb.formatted(serie)).retrieve().body(String.class);
 
 			if (json != null && json.contains("False")) {
 				throw new SerieNaoEncontradaException("Serie não encontrada... Tente novamente..");

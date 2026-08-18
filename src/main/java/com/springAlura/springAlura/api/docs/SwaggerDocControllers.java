@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.springAlura.springAlura.api.dto.request.SerieRequestDto;
-import com.springAlura.springAlura.api.dto.response.SerieResponseDto;
+import com.springAlura.springAlura.api.dto2.SerieRequestDto;
+import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

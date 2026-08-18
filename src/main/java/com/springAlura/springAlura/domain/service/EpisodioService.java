@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springAlura.springAlura.api.dto.response.EpisodioResponseDto;
 import com.springAlura.springAlura.domain.model.Episodio;
 import com.springAlura.springAlura.domain.repositories.EpisodioRepositoryy;
 
@@ -22,24 +21,24 @@ public class EpisodioService {
 		return episodioRepositoryy.save(episodio);
 	}
 
-	@Transactional
-	public EpisodioResponseDto toDto(Episodio episodio) {
-		EpisodioResponseDto dto = new EpisodioResponseDto(episodio.getTemporada(), episodio.getNumeroEpisodio(),
-				episodio.getTitulo());
-		return dto;
-	}
-
-	@Transactional
-	public List<EpisodioResponseDto> toDtoList(List<Episodio> episodios) {
-		// forma manual
-		List<EpisodioResponseDto> listDto = episodios.stream()
-				.map(s -> new EpisodioResponseDto(s.getTemporada(), s.getNumeroEpisodio(), s.getTitulo())).toList();
-
-		List<Integer> episodiosNovos = episodios.stream().filter(s -> s.getTemporada() > 2).map(Episodio::getTemporada)
-				.toList();
-
-		return listDto;
-	}
+//	@Transactional
+//	public EpisodioResponseDto toDto(Episodio episodio) {
+//		EpisodioResponseDto dto = new EpisodioResponseDto(episodio.getTemporada(), episodio.getNumeroEpisodio(),
+//				episodio.getTitulo());
+//		return dto;
+//	}
+//
+//	@Transactional
+//	public List<EpisodioResponseDto> toDtoList(List<Episodio> episodios) {
+//		// forma manual
+//		List<EpisodioResponseDto> listDto = episodios.stream()
+//				.map(s -> new EpisodioResponseDto(s.getTemporada(), s.getNumeroEpisodio(), s.getTitulo())).toList();
+//
+//		List<Integer> episodiosNovos = episodios.stream().filter(s -> s.getTemporada() > 2).map(Episodio::getTemporada)
+//				.toList();
+//
+//		return listDto;
+//	}
 
 	public void imprimirEpisodio(List<Episodio> list) {
 

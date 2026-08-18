@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
+  title: Série Api
   version: v0
 servers:
 - url: http://localhost:8080
@@ -240,8 +240,9 @@ components:
       type: object
       properties:
         titulo:
-          maxLength: 100
-          minLength: 0
+          minLength: 1
+          maxLength: 20
+          x-field-extra-annotation:
           type: string
           description: Título oficial da série
           example: Breaking Bad
@@ -253,11 +254,13 @@ components:
         avaliacao:
           type: number
           description: Nota de avaliação da série
+          minimum: 0
           format: double
           example: 9.5
         atores:
           type: string
           description: Nomes dos principais atores do elenco
+          minLength: 1
           example: "Bryan Cranston, Aaron Paul"
         poster:
           type: string
@@ -267,10 +270,15 @@ components:
           type: string
           description: Sinopse ou resumo do enredo
           example: Um professor de química se volta para o crime...
+          minLength: 1
         dataLancamento:
           type: string
           description: Data do lançamento original no formato DD/MM/AAAA
           example: 20/01/2008
+        ativo:
+          type: boolean
+          description: true para dizer que ainda recebe episódios e false para dizer que não recebe mais episodios.
+          example: true / false
       description: Modelo de dados para criar ou atualizar uma série
     SerieResponseDto:
       required:
@@ -302,6 +310,7 @@ components:
           type: number
           description: Nota de avaliação da série
           format: double
+          minimum: 0
           example: 9.5
         atores:
           type: string
@@ -319,3 +328,7 @@ components:
           type: string
           description: Data do lançamento original no formato DD/MM/AAAA
           example: 20/01/2008
+        ativo:
+          type: boolean
+          description: true para dizer que ainda recebe episódios e false para dizer que não recebe mais episodios.
+          example: true / false

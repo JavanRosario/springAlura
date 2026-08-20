@@ -3,27 +3,28 @@ package com.springAlura.springAlura.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 @Entity
-@Getter
-@Setter
-public class Categoria {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 
-	@Column(nullable = false, unique = true)
-	private String categoria;
+	private String nome;
 
-	@OneToMany(mappedBy = "categoria")
-	private List<Serie> serie = new ArrayList<>();
+	private String email;
+
+	private String senha;
+
+	@OneToMany(mappedBy = "usuario")
+	private List<Streaming> streamings = new ArrayList<>();
+
 }

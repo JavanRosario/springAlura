@@ -1,47 +1,42 @@
 openapi: 3.0.1
 info:
-  title: Série Api
+  title: OpenAPI definition
   version: v0
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:8080
+    description: Generated server url
 tags:
-- name: Séries
-  description: Endpoints para gerenciamento do catálogo de séries
+  - name: Séries
+    description: Endpoints para gerenciamento do catálogo de séries
 paths:
   /series/{serieId}:
     put:
       tags:
-      - Séries
+        - Séries
       summary: Atualiza os campos de uma série baseado no ID
-      description: Informe o ID na URL e o novo corpo da série no JSON para realizar
-        a atualização completa.
+      description: >-
+        Informe o ID na URL e o novo corpo da série no JSON para realizar a
+        atualização completa.
       operationId: atualizar
       parameters:
-      - name: serieId
-        in: path
-        description: ID numérico da série a ser atualizada
-        required: true
-        schema:
-          type: integer
-          format: int64
-        example: 1
+        - name: serieId
+          in: path
+          description: ID numérico da série a ser atualizada
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
       requestBody:
         description: Novos dados da série
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SerieRequestDto"
+              $ref: '#/components/schemas/SerieRequestDto'
         required: true
       responses:
-        "404":
-          description: Série não encontrada com o ID fornecido
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/SerieResponseDto"
-        "200":
-          description: Série atualizada com sucesso!
+        '200':
+          description: Série updated com sucesso!
           content:
             application/json:
               examples:
@@ -52,58 +47,65 @@ paths:
                     id: 1
                     titulo: TESTE PUT
                     totalTemporada: 800
-                    avaliacao: 800.0
+                    avaliacao: 800
                     atores: TESTE PUT
                     poster: TESTE PUT
                     sinopse: TESTE PUT
                     dataLancamento: 20/01/2008
-        "400":
+        '400':
           description: Dados de entrada inválidos! Verifique os campos!
           content:
             application/json:
               examples:
                 Campos Inválidos:
-                  summary: Exemplo de erro quando os dados enviados no JSON falham
-                    na validação
+                  summary: >-
+                    Exemplo de erro quando os dados enviados no JSON falham na
+                    validação
                   description: Campos Inválidos
                   value:
                     type: https://serieApi.com.br
                     title: Dados inválidos
                     status: 400
-                    detail: Um ou mais campos estão incorretos. Faça o preenchimento
+                    detail: >-
+                      Um ou mais campos estão incorretos. Faça o preenchimento
                       certo
                     instance: /series
                     properties:
                       fields:
-                      - fieldName: totalTemporada
-                        detail: Total de Temporada da Série deve ser maior ou igual
-                          a zero.
-                      - fieldName: titulo
-                        detail: Titulo da Série é obrigatório.
-                      - fieldName: avaliacao
-                        detail: Avaliação da Série deve ser maior ou igual a zero.
+                        - fieldName: totalTemporada
+                          detail: >-
+                            Total de Temporada da Série deve ser maior ou igual
+                            a zero.
+                        - fieldName: titulo
+                          detail: Titulo da Série é obrigatório.
+                        - fieldName: avaliacao
+                          detail: Avaliação da Série deve ser maior ou igual a zero.
+        '404':
+          description: Série não encontrada com o ID fornecido
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SerieResponseDto'
     delete:
       tags:
-      - Séries
+        - Séries
       summary: Deleta uma série baseada no ID
       description: Informe o ID da série para apagá-la da base de dados
       operationId: excluir
       parameters:
-      - name: serieId
-        in: path
-        description: ID numérico da série a ser excluída
-        required: true
-        schema:
-          type: integer
-          format: int64
-        example: 1
+        - name: serieId
+          in: path
+          description: ID numérico da série a ser excluída
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
       responses:
-        "204":
+        '204':
           description: Série deletada com sucesso
-        "404":
-          description: Série não encontrada para exclusão
-        "400":
-          description: "Erro ao deletar a Série, verifique o ID"
+        '400':
+          description: Erro ao deletar a Série, verifique o ID
           content:
             application/json:
               examples:
@@ -114,19 +116,38 @@ paths:
                     type: https://seusite.com
                     title: Séri não encontrada
                     status: 400
-                    detail: "Não existe um cadastro de Serie com código: SEU_CODIGO_ERRADO"
+                    detail: >-
+                      Não existe um cadastro de Serie com código:
+                      SEU_CODIGO_ERRADO
                     instance: /series/SEU_CODIGO_ERRADO
                     properties:
                       timestamp: 1786623273703
+        '404':
+          description: Série não encontrada para exclusão
+  /series/{serieId}/ativar:
+    put:
+      tags:
+        - Séries
+      operationId: ativarSerie
+      parameters:
+        - name: serieId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
   /series:
     get:
       tags:
-      - Séries
-      summary: Lista todas as séries.
-      description: Lista todas as séries cadastradas no banco de dados
+        - Séries
+      summary: Lista todas as séries
+      description: Lista todas as séries cadastradas no banco de dados de forma irrestrita
       operationId: listar
       responses:
-        "200":
+        '200':
           description: Séries encontradas com sucesso!
           content:
             application/json:
@@ -135,23 +156,23 @@ paths:
                   summary: Exemplo quando o GET é retornado com sucesso
                   description: Sucesso!
                   value:
-                  - id: 1
-                    titulo: Breaking Bad
-                    totalTemporada: 5
-                    avaliacao: 9.5
-                    atores: "Bryan Cranston, Aaron Paul"
-                    poster: poster001.jpg
-                    sinopse: Um professor de quimica se volta para o crime.
-                    dataLancamento: 20/01/2008
-                  - id: 2
-                    titulo: Stranger Things
-                    totalTemporada: 4
-                    avaliacao: 8.7
-                    atores: "Winona Ryder, David Harbour"
-                    poster: poster002.jpg
-                    sinopse: Criancas enfrentam forcas sobrenaturais.
-                    dataLancamento: 15/07/2016
-        "500":
+                    - id: 1
+                      titulo: Breaking Bad
+                      totalTemporada: 5
+                      avaliacao: 9.5
+                      atores: Bryan Cranston, Aaron Paul
+                      poster: poster001.jpg
+                      sinopse: Um professor de quimica se volta para o crime.
+                      dataLancamento: 20/01/2008
+                    - id: 2
+                      titulo: Stranger Things
+                      totalTemporada: 4
+                      avaliacao: 8.7
+                      atores: Winona Ryder, David Harbour
+                      poster: poster002.jpg
+                      sinopse: Criancas enfrentam forcas sobrenaturais.
+                      dataLancamento: 15/07/2016
+        '500':
           description: Erro interno no servidor ao processar a consulta
           content:
             application/json:
@@ -161,18 +182,21 @@ paths:
                   description: Erro Interno
                   value:
                     type: https://serieApi.com.br
-                    title: "O recurso não foi encontrado, garanta que a URI está escrita\
-                      \ corretamente!"
+                    title: >-
+                      O recurso não foi encontrado, garanta que a URI está
+                      escrita corretamente!
                     status: 404
-                    detail: "Endereço não encontrado: Verifique se há erros de digitaç\
-                      ão, letras maiúsculas incorretas ou caracteres extras na URI.\
-                      \ Se o erro persistir, limpe o cache com Ctrl + F5 e tente novamente."
+                    detail: >-
+                      Endereço não encontrado: Verifique se há erros de
+                      digitação, letras maiúsculas incorretas ou caracteres
+                      extras na URI. Se o erro persistir, limpe o cache com Ctrl
+                      + F5 e tente novamente.
                     instance: /seriess
                     properties:
                       timestamp: 1786619160432
     post:
       tags:
-      - Séries
+        - Séries
       summary: Cria uma nova série
       description: Informe os dados para salvar uma nova série
       operationId: salvar
@@ -181,10 +205,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SerieRequestDto"
+              $ref: '#/components/schemas/SerieRequestDto'
         required: true
       responses:
-        "201":
+        '201':
           description: Série criada com sucesso
           content:
             application/json:
@@ -196,53 +220,134 @@ paths:
                     id: 1
                     titulo: TESTE POST
                     totalTemporada: 800
-                    avaliacao: 800.0
+                    avaliacao: 800
                     atores: TESTE POST
                     poster: TESTE POST
                     sinopse: TESTE POST
                     dataLancamento: 20/01/2008
-        "400":
+        '400':
           description: Dados de entrada inválidos! Verifique os campos!
           content:
             application/json:
               examples:
                 Campos Inválidos:
-                  summary: Exemplo de erro quando os dados enviados no JSON falham
-                    na validação
+                  summary: >-
+                    Exemplo de erro quando os dados enviados no JSON falham na
+                    validação
                   description: Campos Inválidos
                   value:
                     type: https://serieApi.com.br
                     title: Dados inválidos
                     status: 400
-                    detail: Um ou mais campos estão incorretos. Faça o preenchimento
+                    detail: >-
+                      Um ou mais campos estão incorretos. Faça o preenchimento
                       certo
                     instance: /series
                     properties:
                       fields:
-                      - fieldName: totalTemporada
-                        detail: Total de Temporada da Série deve ser maior ou igual
-                          a zero.
-                      - fieldName: titulo
-                        detail: Titulo da Série é obrigatório.
-                      - fieldName: avaliacao
-                        detail: Avaliação da Série deve ser maior ou igual a zero.
+                        - fieldName: totalTemporada
+                          detail: >-
+                            Total de Temporada da Série deve ser maior ou igual
+                            a zero.
+                        - fieldName: titulo
+                          detail: Titulo da Série é obrigatório.
+                        - fieldName: avaliacao
+                          detail: Avaliação da Série deve ser maior ou igual a zero.
+  /series/filtros:
+    get:
+      tags:
+        - Séries
+      summary: Filtra séries dinamicamente
+      description: Busca séries aplicando filtros opcionais combinados no banco de dados
+      operationId: listarComFiltros
+      parameters:
+        - name: filtros
+          in: query
+          description: >-
+            Objeto contendo os filtros dinâmicos de busca (Título e Preço
+            Máximo)
+          required: true
+          schema:
+            $ref: '#/components/schemas/SerieFiltroDto'
+      responses:
+        '200':
+          description: Filtro processado com sucesso!
+          content:
+            application/json:
+              examples:
+                Sucesso!:
+                  summary: Exemplo quando o GET filtrado retorna dados
+                  description: Sucesso!
+                  value:
+                    - id: 1
+                      titulo: Breaking Bad
+                      totalTemporada: 5
+                      avaliacao: 9.5
+                      atores: Bryan Cranston, Aaron Paul
+                      poster: poster001.jpg
+                      sinopse: Um professor de quimica se volta para o crime.
+                      dataLancamento: 20/01/2008
+                    - id: 2
+                      titulo: Stranger Things
+                      totalTemporada: 4
+                      avaliacao: 8.7
+                      atores: Winona Ryder, David Harbour
+                      poster: poster002.jpg
+                      sinopse: Criancas enfrentam forcas sobrenaturais.
+                      dataLancamento: 15/07/2016
+        '500':
+          description: Erro interno no servidor ao processar os filtros
+          content:
+            application/json:
+              examples:
+                Erro Interno:
+                  summary: Exemplo de erro inesperado no sistema
+                  description: Erro Interno
+                  value:
+                    type: https://serieApi.com.br
+                    title: >-
+                      O recurso não foi encontrado, garanta que a URI está
+                      escrita corretamente!
+                    status: 404
+                    detail: >-
+                      Endereço não encontrado: Verifique se há erros de
+                      digitação, letras maiúsculas incorretas ou caracteres
+                      extras na URI. Se o erro persistir, limpe o cache com Ctrl
+                      + F5 e tente novamente.
+                    instance: /seriess
+                    properties:
+                      timestamp: 1786619160432
+  /series/{serieId}/desativar:
+    delete:
+      tags:
+        - Séries
+      operationId: desativarSerie
+      parameters:
+        - name: serieId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
 components:
   schemas:
     SerieRequestDto:
       required:
-      - atores
-      - avaliacao
-      - dataLancamento
-      - poster
-      - sinopse
-      - titulo
-      - totalTemporada
+        - atores
+        - avaliacao
+        - dataLancamento
+        - poster
+        - sinopse
+        - titulo
+        - totalTemporada
       type: object
       properties:
         titulo:
-          minLength: 1
           maxLength: 20
-          x-field-extra-annotation:
+          minLength: 1
           type: string
           description: Título oficial da série
           example: Breaking Bad
@@ -252,44 +357,62 @@ components:
           format: int32
           example: 5
         avaliacao:
+          minimum: 0
+          exclusiveMinimum: false
           type: number
           description: Nota de avaliação da série
-          minimum: 0
           format: double
           example: 9.5
         atores:
+          maxLength: 2147483647
+          minLength: 1
           type: string
           description: Nomes dos principais atores do elenco
-          minLength: 1
-          example: "Bryan Cranston, Aaron Paul"
+          example: Bryan Cranston, Aaron Paul
         poster:
           type: string
           description: URL do poster ou imagem de capa da série
           example: https://link-da-imagem.com
         sinopse:
+          maxLength: 2147483647
+          minLength: 1
           type: string
           description: Sinopse ou resumo do enredo
           example: Um professor de química se volta para o crime...
-          minLength: 1
         dataLancamento:
           type: string
           description: Data do lançamento original no formato DD/MM/AAAA
-          example: 20/01/2008
+          format: date
         ativo:
           type: boolean
-          description: true para dizer que ainda recebe episódios e false para dizer que não recebe mais episodios.
-          example: true / false
+          description: >-
+            true para dizer que ainda recebe episódios e false para dizer que
+            não recebe mais episodios.
+          example: false
+        CategoriaIdRequest:
+          type: integer
+          description: ID numérico da categoria já cadastrada no banco de dados
+          format: int64
+          example: 1
       description: Modelo de dados para criar ou atualizar uma série
+    CategoriaResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        categoria:
+          type: string
     SerieResponseDto:
       required:
-      - atores
-      - avaliacao
-      - dataLancamento
-      - id
-      - poster
-      - sinopse
-      - titulo
-      - totalTemporada
+        - atores
+        - avaliacao
+        - dataLancamento
+        - id
+        - poster
+        - sinopse
+        - titulo
+        - totalTemporada
       type: object
       properties:
         id:
@@ -307,15 +430,16 @@ components:
           format: int32
           example: 5
         avaliacao:
+          minimum: 0
+          exclusiveMinimum: false
           type: number
           description: Nota de avaliação da série
           format: double
-          minimum: 0
           example: 9.5
         atores:
           type: string
           description: Nomes dos principais atores do elenco
-          example: "Bryan Cranston, Aaron Paul"
+          example: Bryan Cranston, Aaron Paul
         poster:
           type: string
           description: URL do poster ou imagem de capa da série
@@ -326,9 +450,48 @@ components:
           example: Um professor de química se volta para o crime...
         dataLancamento:
           type: string
-          description: Data do lançamento original no formato DD/MM/AAAA
-          example: 20/01/2008
+          description: Data do lançamento original
+          format: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"        
         ativo:
           type: boolean
-          description: true para dizer que ainda recebe episódios e false para dizer que não recebe mais episodios.
-          example: true / false
+          description: >-
+            true para dizer que ainda recebe episódios e false para dizer que
+            não recebe mais episodios.
+          example: false
+        categoria:
+          $ref: '#/components/schemas/CategoriaResponseDto'
+        streaming:
+          type: array
+          items: 
+            $ref: '#/components/schemas/StreamingDto'
+    SerieFiltroDto:
+      type: object
+      properties:
+        titulo:
+          type: string
+        notaMax:
+          type: number
+          format: double
+        limite:
+          type: integer
+          format: int32
+    UsuarioDto:
+      type: object
+      properties: 
+        nome:
+          type: string
+        email:
+          type: string
+    StreamingDto:
+      type: object
+      properties: 
+        UsuarioDto:
+          $ref: '#/components/schemas/UsuarioDto'
+        usuarioAtivo:
+          type: boolean
+        estaNaPlataforma:
+          type: boolean
+        dataNaPlataforma:
+          type: boolean
+        

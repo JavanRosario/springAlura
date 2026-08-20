@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,9 +21,8 @@ import com.springAlura.springAlura.api.docs.SwaggerDocControllers;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.domain.model.Serie;
-import com.springAlura.springAlura.domain.repositories.EpisodioRepositoryy;
-import com.springAlura.springAlura.domain.service.EpisodioService;
-import com.springAlura.springAlura.domain.service.OmdbService;
+import com.springAlura.springAlura.domain.model.SerieFiltroDto;
+import com.springAlura.springAlura.domain.repositories.SerieRepository;
 import com.springAlura.springAlura.domain.service.SerieService;
 
 import io.swagger.v3.oas.annotations.Hidden;
@@ -38,13 +38,14 @@ public class SerieController implements SwaggerDocControllers {
 	SerieService serieService;
 
 	@Autowired
-	OmdbService omdbService;
+	SerieRepository repository;
 
-	@Autowired
-	EpisodioRepositoryy episodioRepositoryy;
-
-	@Autowired
-	EpisodioService episodioService;
+	@Override()
+	@GetMapping("/filtros")
+	public List<SerieResponseDto> listarComFiltros(@ModelAttribute SerieFiltroDto filtros) {
+		return serieService
+				.toDtoList(serieService.buscaComFiltros(filtros.titulo(), filtros.notaMax(), filtros.limite()));
+	}
 
 	@GetMapping()
 	@Override()
@@ -52,10 +53,9 @@ public class SerieController implements SwaggerDocControllers {
 		return serieService.toDtoList(serieService.listar());
 	}
 
-	@Hidden
-	@GetMapping(PathsApi.ID_SERIE)
-	public com.springAlura.springAlura.api.dto2.SerieResponseDto listarId(@PathVariable Long serieId) {
-		return serieService.toDto2(serieService.buscaOuFalha(serieId));
+	@GetMapping("/teste")
+	public List<Serie> listarTeste() {
+		return repository.findAll();
 	}
 
 	@Hidden

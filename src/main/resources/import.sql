@@ -1,3 +1,29 @@
+
+INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('JAVAN','JAVAN@GMAIL.COM',  'D1SA23');
+INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('RODRIGO','RODRIGO@GMAIL.COM',  'D1A2W3');
+INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('LUCAS','LUCAS@GMAIL.COM',  'D1SA23');
+INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('ELIAS','ELIAS@GMAIL.COM',  'WD1Q263');
+
+INSERT INTO spring_alura.streaming(data_na_plataforma,esta_na_plataforma,usuario_id,usuario_ativo) VALUES('2005-05-05',true,  1,true);
+
+
+
+INSERT INTO spring_alura.categoria(categoria) VALUES('DRAMA');
+INSERT INTO spring_alura.categoria(categoria) VALUES('TERROR');
+INSERT INTO spring_alura.categoria(categoria) VALUES('AÇÃO');
+INSERT INTO spring_alura.categoria(categoria) VALUES('SI-FI');
+INSERT INTO spring_alura.categoria(categoria) VALUES('COMÉDIA');
+INSERT INTO spring_alura.categoria(categoria) VALUES('AVENTURA');
+INSERT INTO spring_alura.categoria(categoria) VALUES('FICÇÃO');
+INSERT INTO spring_alura.categoria(categoria) VALUES('GUERRA');
+
+
+
+
+
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Breaking Bad', 5, 9.5, 'Bryan Cranston, Aaron Paul', 'poster001.jpg', 'Um professor de quimica se volta para o crime.', '2008-01-20', 1);
+--INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Twin Peaks', 3, 8.8, 'Kyle MacLachlan, Michael Ontkean', 'poster037.jpg', 'Investigacao do assassinato de Laura Palmer.', '1990-04-08 00:00:00', 2);
+
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Breaking Bad', 5, 9.5, 'Bryan Cranston, Aaron Paul', 'poster001.jpg', 'Um professor de quimica se volta para o crime.', '2008-01-20 00:00:00');
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Stranger Things', 4, 8.7, 'Winona Ryder, David Harbour', 'poster002.jpg', 'Criancas enfrentam forcas sobrenaturais.', '2016-07-15 00:00:00');
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Game of Thrones', 8, 9.2, 'Emilia Clarke, Kit Harington', 'poster003.jpg', 'Familias nobres disputam o Trono de Ferro.', '2011-04-17 00:00:00');
@@ -27,11 +53,13 @@ INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, post
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Narcos', 3, 8.8, 'Wagner Moura, Boyd Holbrook', 'poster027.jpg', 'A ascensão dos carteis de droga na Colombia.', '2015-08-28 00:00:00');
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Fleabag', 2, 8.7, 'Phoebe Waller-Bridge, Sian Clifford', 'poster028.jpg', 'Uma mulher tenta lidar com o luto em Londres.', '2016-07-21 00:00:00');
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Ted Lasso', 3, 8.8, 'Jason Sudeikis, Hannah Waddingham', 'poster029.jpg', 'Treinador americano gerencia time de futebol ingles.', '2020-08-14 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Mindhunter', 2, 8.6, 'Jonathan Groff, Holt McCallany', 'poster030.jpg', 'Agentes do FBI entrevistam serial killers.', '2017-10-13 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('The Queen s Gambit', 1, 8.6, 'Anya Taylor-Joy, Bill Camp', 'poster031.jpg', 'Orfa prodígio do xadrez luta contra vicios.', '2020-10-23 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('The Bear', 3, 8.6, 'Jeremy Allen White, Ebon Moss-Bachrach', 'poster032.jpg', 'Chef de alta gastronomia assume lanchonete falida.', '2022-06-23 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Rome', 2, 8.7, 'Kevin McKidd, Ray Stevenson', 'poster033.jpg', 'A transição de Roma de Republica para Imperio.', '2005-08-28 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Mad Men', 7, 8.7, 'Jon Hamm, Elisabeth Moss', 'poster034.jpg', 'Agencias de publicidade em Nova York nos anos 60.', '2007-07-19 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Six Feet Under', 5, 8.7, 'Peter Krause, Michael C. Hall', 'poster035.jpg', 'O cotidiano de uma família dona de funeraria.', '2001-06-03 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Arrested Development', 5, 8.7, 'Jason Bateman, Michael Cera', 'poster036.jpg', 'Uma família rica perde tudo e tenta se reestruturar.', '2003-11-02 00:00:00');
-INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento) VALUES ('Twin Peaks', 3, 8.8, 'Kyle MacLachlan, Michael Ontkean', 'poster037.jpg', 'Investigacao do assassinato de Laura Palmer.', '1990-04-08 00:00:00');
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Mindhunter', 2, 8.6, 'Jonathan Groff, Holt McCallany', 'poster030.jpg', 'Agentes do FBI entrevistam serial killers.', '2017-10-13 00:00:00',8);
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('The Queen s Gambit', 1, 8.6, 'Anya Taylor-Joy, Bill Camp', 'poster031.jpg', 'Orfa prodígio do xadrez luta contra vicios.', '2020-10-23 00:00:00',7);
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('The Bear', 3, 8.6, 'Jeremy Allen White, Ebon Moss-Bachrach', 'poster032.jpg', 'Chef de alta gastronomia assume lanchonete falida.', '2022-06-23 00:00:00', 6);
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Rome', 2, 8.7, 'Kevin McKidd, Ray Stevenson', 'poster033.jpg', 'A transição de Roma de Republica para Imperio.', '2005-08-28 00:00:00', 5);
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Mad Men', 7, 8.7, 'Jon Hamm, Elisabeth Moss', 'poster034.jpg', 'Agencias de publicidade em Nova York nos anos 60.', '2007-07-19 00:00:00', 4);
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Six Feet Under', 5, 8.7, 'Peter Krause, Michael C. Hall', 'poster035.jpg', 'O cotidiano de uma família dona de funeraria.', '2001-06-03 00:00:00', 3);
+INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Arrested Development', 5, 8.7, 'Jason Bateman, Michael Cera', 'poster036.jpg', 'Uma família rica perde tudo e tenta se reestruturar.', '2003-11-02 00:00:00', 2);
+
+
+INSERT INTO spring_alura.series_streamings(serie_id, streaming_Id) VALUES(1,1);

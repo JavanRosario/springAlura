@@ -6,8 +6,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version> <!-- Versão altamente compatível com o seu Eclipse -->
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>3.3.3</version>
+		<relativePath />
 	</parent>
 	<groupId>com.springAlura</groupId>
 	<artifactId>springAlura</artifactId>
@@ -18,7 +18,6 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		<!-- O Spring Boot Starter já traz o Jackson correto internamente. Removidos os Jacksons manuais obsoletos. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -84,15 +83,28 @@
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
 							<generatorName>spring</generatorName>
-							<!-- A TAG CORRETA É CONFIGOPTIONS PARA PODER PASSAR OS PARÂMETROS DO GERADOR -->
+							<modelPackage>com.springAlura.springAlura.api.dto2</modelPackage>
+							<apiPackage>com.springAlura.springAlura.api.controller2</apiPackage>
+							<typeMappings>
+								<date>LocalDate</date>
+								<int64>Long</int64> <!-- Adicione esta linha -->
+							</typeMappings>
+							<!-- 1. Força o gerador a converter o tipo técnico "date" para a palavra "LocalDate" -->
+							<typeMappings>
+								<typeMapping>date=LocalDate</typeMapping>
+							</typeMappings>
+							<!-- 2. Adiciona o import correto do Java moderno no arquivo final -->
+							<importMappings>
+								<importMapping>LocalDate=java.time.LocalDate</importMapping>
+							</importMappings>
+							<!-- 3. Opções globais de configuração corrigidas e sem duplicações -->
 							<configOptions>
 								<useSpringBoot3>true</useSpringBoot3>
 								<openApiNullable>false</openApiNullable>
 								<useRecordsForModels>true</useRecordsForModels>
 								<interfaceOnly>true</interfaceOnly>
+								<dateLibrary>java8</dateLibrary> <!-- Alinhado na hierarquia certa -->
 							</configOptions>
-							<modelPackage>com.springAlura.springAlura.api.dto2</modelPackage>
-							<apiPackage>com.springAlura.springAlura.api.controller2</apiPackage>
 						</configuration>
 					</execution>
 				</executions>

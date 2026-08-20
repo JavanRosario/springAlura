@@ -1,27 +1,26 @@
 package com.springAlura.springAlura.domain.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import lombok.Data;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Serie {
 
@@ -29,33 +28,31 @@ public class Serie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@NotNull
 	private String titulo;
 
-	@NotNull
-	@PositiveOrZero
 	private Integer totalTemporada;
 
-	@NotNull
-	@PositiveOrZero
 	private Double avaliacao;
 
 	private String atores;
 
 	private String poster;
 
+	@Column(columnDefinition = "TEXT")
 	private String sinopse;
 
-	@Column(nullable = false)
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private LocalDate dataLancamento;
 
 	@Column(columnDefinition = "boolean default true")
-	private Boolean ativo;
+	private Boolean ativo = true;
 
-	@OneToMany(mappedBy = "serie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(nullable = false)
-	private List<Episodio> episodios = new ArrayList<>();
+	@ManyToOne()
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
+
+	@ManyToMany
+	@JoinTable(name = "series_streamings", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "streaming_id"))
+	private List<Streaming> streaming;
 
 }

@@ -1,0 +1,9 @@
+package com.springAlura.springAlura.domain.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springAlura.springAlura.domain.model.Plataforma;
+
+public interface PlataformaRepository extends JpaRepository<Plataforma, Long> {
+
+}

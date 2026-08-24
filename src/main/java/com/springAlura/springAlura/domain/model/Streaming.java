@@ -22,6 +22,10 @@ public class Streaming {
 	private Long id;
 
 	@ManyToOne
+	@JoinColumn(name = "plataforma_id")
+	private Plataforma plataforma;
+
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 

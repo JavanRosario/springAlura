@@ -4,7 +4,10 @@ INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('RODRIGO','RODRIGO@GMA
 INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('LUCAS','LUCAS@GMAIL.COM',  'D1SA23');
 INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('ELIAS','ELIAS@GMAIL.COM',  'WD1Q263');
 
-INSERT INTO spring_alura.streaming(data_na_plataforma,esta_na_plataforma,usuario_id,usuario_ativo) VALUES('2005-05-05',true,  1,true);
+INSERT INTO spring_alura.plataforma(nome, dominio, total_catalogo, mensalidade) values ('netflix', 'www.netflix.com',8000, 20.90);
+INSERT INTO spring_alura.plataforma(nome, dominio, total_catalogo, mensalidade) values ('hbo max', 'www.hbo.com',5948, 35.90);
+
+INSERT INTO spring_alura.streaming(plataforma_id,data_na_plataforma,esta_na_plataforma,usuario_id,usuario_ativo) VALUES(1, '2005-05-05',true,  1,true);
 
 
 
@@ -62,4 +65,4 @@ INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, post
 INSERT INTO spring_alura.serie (titulo, total_temporada, avaliacao, atores, poster, sinopse, data_lancamento, categoria_id) VALUES ('Arrested Development', 5, 8.7, 'Jason Bateman, Michael Cera', 'poster036.jpg', 'Uma família rica perde tudo e tenta se reestruturar.', '2003-11-02 00:00:00', 2);
 
 
-INSERT INTO spring_alura.series_streamings(serie_id, streaming_Id) VALUES(1,1);
+INSERT INTO spring_alura.series_streamings(serie_id, streaming_id) VALUES(1,1);

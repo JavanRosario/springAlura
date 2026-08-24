@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
-import com.springAlura.springAlura.api.dto2.StreamingDto;
+import com.springAlura.springAlura.api.dto2.StreamingResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.Categoria;
@@ -32,6 +32,7 @@ public class SerieService {
 	StreamingService streamingService;
 
 	public List<Serie> buscaComFiltros(String nome, Double notaMax, Integer limite) {
+
 		Specification<Serie> filtros = Specification.where(SerieEspecification.porNome(nome))
 				.and(SerieEspecification.porNota(notaMax));
 
@@ -97,8 +98,12 @@ public class SerieService {
 
 	public SerieResponseDto toDto(Serie serie) {
 		SerieResponseDto dto = new SerieResponseDto();
+
 		Categoria categoria = serie.getCategoria();
 		CategoriaResponseDto categoriaResponseDto = categoriaService.toDto(categoria);
+
+		List<Streaming> streamings = serie.getStreaming();
+		List<StreamingResponseDto> streamingDtos = streamingService.toDtoList(streamings);
 
 		// forma manual
 //		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
@@ -107,6 +112,7 @@ public class SerieService {
 
 		BeanUtils.copyProperties(serie, dto, "series");
 		dto.setCategoria(categoriaResponseDto);
+		dto.setStreaming(streamingDtos);
 		return dto;
 	}
 
@@ -131,6 +137,7 @@ public class SerieService {
 //				s.getTotalSeasons(), s.getImdbRating(), s.getActors(), s.getPoster(), s.getPlot())).toList();
 
 		List<SerieResponseDto> listDto = series.stream().map(s -> {
+
 			SerieResponseDto dto = new SerieResponseDto();
 			Categoria categoria = s.getCategoria();
 			List<Streaming> streamings = s.getStreaming();
@@ -141,7 +148,8 @@ public class SerieService {
 			}
 
 			if (s.getStreaming() != null) {
-				List<StreamingDto> streamingDtos = streamingService.toDtoList(streamings);
+
+				List<StreamingResponseDto> streamingDtos = streamingService.toDtoList(streamings);
 				dto.setStreaming(streamingDtos);
 			}
 

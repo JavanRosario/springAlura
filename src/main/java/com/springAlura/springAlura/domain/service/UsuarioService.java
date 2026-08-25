@@ -30,4 +30,16 @@ public class UsuarioService {
 		BeanUtils.copyProperties(usuario, dto);
 		return dto;
 	}
+
+	public Usuario toDomain(UsuarioResponseDto usuarioResponseDto) {
+		Usuario usuario = new Usuario();
+
+		// forma manual
+//		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
+//				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
+//				serieAtual.getPoster(), serieAtual.getPlot());
+
+		BeanUtils.copyProperties(usuarioResponseDto, usuario);
+		return usuario;
+	}
 }

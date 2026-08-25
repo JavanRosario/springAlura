@@ -7,9 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springAlura.springAlura.api.dto2.PlataformaResponseDto;
+import com.springAlura.springAlura.api.dto2.StreamingRequestDto;
 import com.springAlura.springAlura.api.dto2.StreamingResponseDto;
 import com.springAlura.springAlura.api.dto2.UsuarioResponseDto;
+import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
+import com.springAlura.springAlura.domain.model.Plataforma;
 import com.springAlura.springAlura.domain.model.Streaming;
+import com.springAlura.springAlura.domain.model.Usuario;
+import com.springAlura.springAlura.domain.repositories.StreamingRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -17,10 +22,54 @@ import jakarta.transaction.Transactional;
 public class StreamingService {
 
 	@Autowired
+	StreamingRepository repository;
+
+	@Autowired
 	private UsuarioService usuarioService;
 
 	@Autowired
 	private PlataformaService plataformaService;
+
+	@Transactional
+	public Streaming salvar(Streaming streaming) {
+		Long usuarioId = streaming.getUsuario().getId();
+		Usuario usuario = usuarioService.buscaOuFalha(usuarioId);
+		streaming.setUsuario(usuario);
+		return repository.save(streaming);
+	}
+
+	public Streaming buscaOuFalha(Long streamingId) {
+		return repository.findById(streamingId).orElseThrow(() -> new SerieNaoEncontradaException(streamingId));
+	}
+
+	public List<Streaming> listar() {
+		return repository.findAll();
+	}
+
+	public StreamingResponseDto toDto(Streaming streaming) {
+		StreamingResponseDto streamingResponseDto = new StreamingResponseDto();
+
+		Long usuarioId = streaming.getUsuario().getId();
+		Usuario usuario = usuarioService.buscaOuFalha(usuarioId);
+
+		Long plataformaId = streaming.getPlataforma().getId();
+		Plataforma plataforma = plataformaService.buscaOuFalha(plataformaId);
+
+		BeanUtils.copyProperties(streaming, streamingResponseDto);
+		streamingResponseDto.setUsuario(usuarioService.toDto(usuario));
+		streamingResponseDto.setPlataforma(plataformaService.toDto(plataforma));
+		return streamingResponseDto;
+
+	}
+
+	public Streaming toDomain(StreamingRequestDto streamingRequestDto) {
+		Streaming streaming = new Streaming();
+
+		BeanUtils.copyProperties(streamingRequestDto, streaming);
+
+		return streaming;
+
+	}
 
 	@Transactional
 	public List<StreamingResponseDto> toDtoList(List<Streaming> streamings) {
@@ -40,5 +89,34 @@ public class StreamingService {
 		}).toList();
 
 		return listDto;
+	}
+
+	public List<Streaming> toDomainList(List<StreamingRequestDto> requestDto) {
+
+		List<Streaming> streamings = requestDto.stream().map(s -> {
+			Streaming streaming = new Streaming();
+
+			Usuario usuario = usuarioService.buscaOuFalha(s.getUsuarioId().getId());
+			Plataforma plataforma = plataformaService.buscaOuFalha(s.getPlataformaId().getId());
+
+			streaming.setUsuario(usuario);
+			streaming.setPlataforma(plataforma);
+			BeanUtils.copyProperties(s, streaming);
+
+			return streaming;
+
+		}).toList();
+
+		return streamings;
+	}
+
+	public Streaming atualizar(Long streamingId, StreamingRequestDto streamingRequestDto) {
+		Streaming objetoAtual = buscaOuFalha(streamingId);
+		BeanUtils.copyProperties(streamingRequestDto, objetoAtual);
+		return salvar(objetoAtual);
+	}
+
+	public void apagar(Long streamingId) {
+		repository.deleteById(streamingId);
 	}
 }

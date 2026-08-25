@@ -12,12 +12,10 @@ import org.springframework.stereotype.Service;
 import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
-import com.springAlura.springAlura.api.dto2.StreamingResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.Categoria;
 import com.springAlura.springAlura.domain.model.Serie;
-import com.springAlura.springAlura.domain.model.Streaming;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 import jakarta.transaction.Transactional;
@@ -27,9 +25,6 @@ public class SerieService {
 
 	@Autowired
 	CategoriaService categoriaService;
-
-	@Autowired
-	StreamingService streamingService;
 
 	public List<Serie> buscaComFiltros(String nome, Double notaMax, Integer limite) {
 
@@ -91,6 +86,8 @@ public class SerieService {
 		serieAtual.setAvaliacao(serie.getAvaliacao());
 		serieAtual.setTotalTemporada(serie.getTotalTemporada());
 		serieAtual.setPoster(serie.getPoster());
+		serieAtual.setCategoria(serie.getCategoria());
+		serieAtual.setStreaming(serie.getStreaming());
 
 		serieAtual = salvar(serieAtual);
 		return serieAtual;
@@ -102,31 +99,27 @@ public class SerieService {
 		Categoria categoria = serie.getCategoria();
 		CategoriaResponseDto categoriaResponseDto = categoriaService.toDto(categoria);
 
-		List<Streaming> streamings = serie.getStreaming();
-		List<StreamingResponseDto> streamingDtos = streamingService.toDtoList(streamings);
-
 		// forma manual
 //		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
 //				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
 //				serieAtual.getPoster(), serieAtual.getPlot());
 
 		BeanUtils.copyProperties(serie, dto, "series");
-		dto.setCategoria(categoriaResponseDto);
-		dto.setStreaming(streamingDtos);
+		dto.setCategoriaResponseDto(categoriaResponseDto);
 		return dto;
 	}
 
-	public Serie toDomain(SerieRequestDto SerieRequestDto) {
+	public Serie toDomain(SerieRequestDto serieRequestDto) {
 		Serie serie = new Serie();
-		Categoria categoria = categoriaService.buscaOuFalha(SerieRequestDto.getCategoriaIdRequest());
+		Categoria categoria = categoriaService.buscaOuFalha(serieRequestDto.getCategoriaId().getId());
 
 		// forma manual
 //		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
 //				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
 //				serieAtual.getPoster(), serieAtual.getPlot());
-
-		BeanUtils.copyProperties(SerieRequestDto, serie);
 		serie.setCategoria(categoria);
+		BeanUtils.copyProperties(serieRequestDto, serie);
+
 		return serie;
 	}
 
@@ -140,17 +133,10 @@ public class SerieService {
 
 			SerieResponseDto dto = new SerieResponseDto();
 			Categoria categoria = s.getCategoria();
-			List<Streaming> streamings = s.getStreaming();
 
 			if (s.getCategoria() != null) {
 				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
-				dto.setCategoria(categoriaDto);
-			}
-
-			if (s.getStreaming() != null) {
-
-				List<StreamingResponseDto> streamingDtos = streamingService.toDtoList(streamings);
-				dto.setStreaming(streamingDtos);
+				dto.setCategoriaResponseDto(categoriaDto);
 			}
 
 			BeanUtils.copyProperties(s, dto);

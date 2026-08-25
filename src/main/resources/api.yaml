@@ -334,6 +334,45 @@ paths:
           description: No Content
 components:
   schemas:
+    categoriaIdRequestDto:
+        type: object 
+        properties:
+          id:
+            type: integer
+            description: ID numérico da categoria já cadastrada no banco de dados
+            format: int64
+            example: 1
+    UsuarioIdRequest:
+        type: object 
+        properties:
+          id:
+            type: integer
+            description: ID numérico da categoria já cadastrada no banco de dados
+            format: int64
+            example: 1
+    PlataformaIdRequest:
+        type: object 
+        properties:
+          id:
+            type: integer
+            description: ID numérico da categoria já cadastrada no banco de dados
+            format: int64
+            example: 1
+    StreamingRequestDto:
+      type: object
+      properties:
+        usuarioId:
+         $ref: '#/components/schemas/UsuarioIdRequest'
+        plataformaId:
+         $ref: '#/components/schemas/PlataformaIdRequest'
+        usuarioAtivo:
+          type: boolean 
+        estaNaPlataforma:
+          type: boolean 
+        dataNaPlataforma:
+          type: string
+          format: date 
+          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")" 
     SerieRequestDto:
       required:
         - atores
@@ -343,6 +382,7 @@ components:
         - sinopse
         - titulo
         - totalTemporada
+        - categoriaId 
       type: object
       properties:
         titulo:
@@ -381,19 +421,16 @@ components:
           example: Um professor de química se volta para o crime...
         dataLancamento:
           type: string
-          description: Data do lançamento original no formato DD/MM/AAAA
           format: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"
         ativo:
           type: boolean
           description: >-
             true para dizer que ainda recebe episódios e false para dizer que
             não recebe mais episodios.
           example: false
-        CategoriaIdRequest:
-          type: integer
-          description: ID numérico da categoria já cadastrada no banco de dados
-          format: int64
-          example: 1
+        categoriaId:
+          $ref: '#/components/schemas/categoriaIdRequestDto'
       description: Modelo de dados para criar ou atualizar uma série
     CategoriaResponseDto:
       type: object
@@ -459,12 +496,8 @@ components:
             true para dizer que ainda recebe episódios e false para dizer que
             não recebe mais episodios.
           example: false
-        categoria:
+        categoriaResponseDto:
           $ref: '#/components/schemas/CategoriaResponseDto'
-        streaming:
-          type: array
-          items: 
-            $ref: '#/components/schemas/StreamingResponseDto'
     SerieFiltroDto:
       type: object
       properties:
@@ -491,6 +524,9 @@ components:
     StreamingResponseDto:
       type: object
       properties: 
+        id:
+          type: integer 
+          format: int64
         usuario:
           $ref: '#/components/schemas/UsuarioResponseDto'
         plataforma:
@@ -503,8 +539,6 @@ components:
           type: string
           format: date
           x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"
-       
-
     PlataformaResponseDto:
       type: object
       properties:

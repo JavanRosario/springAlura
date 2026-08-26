@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -37,6 +38,19 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 
 		problemDetail.setType(URI.create("https://seusite.com"));
 		problemDetail.setTitle("Séri não encontrada");
+		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+
+		return problemDetail;
+	}
+
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ProblemDetail handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+
+		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setTitle("Recurso não pode ser excluído.");
+		problemDetail.setDetail(
+				"Recurso não pode ser excluído. O recurso está sendo usado por outras relações, exclua essas relações primeiro");
 		problemDetail.setProperty("timestamp", System.currentTimeMillis());
 
 		return problemDetail;

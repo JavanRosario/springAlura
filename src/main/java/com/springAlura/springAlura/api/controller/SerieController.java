@@ -53,6 +53,11 @@ public class SerieController implements SwaggerDocControllers {
 		return serieService.toDtoList(serieService.listar());
 	}
 
+	@GetMapping("/{serieId}")
+	public SerieResponseDto listar(@PathVariable Long serieId) {
+		return serieService.toDto(serieService.buscaOuFalha(serieId));
+	}
+
 	@GetMapping("/teste")
 	public List<Serie> listarTeste() {
 		return repository.findAll();

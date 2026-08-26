@@ -65,8 +65,15 @@ public class StreamingService {
 	public Streaming toDomain(StreamingRequestDto streamingRequestDto) {
 		Streaming streaming = new Streaming();
 
-		BeanUtils.copyProperties(streamingRequestDto, streaming);
+		Long usuarioId = streamingRequestDto.getUsuarioId().getId();
+		Usuario usuario = usuarioService.buscaOuFalha(usuarioId);
 
+		Long plataformaId = streamingRequestDto.getPlataformaId().getId();
+		Plataforma plataforma = plataformaService.buscaOuFalha(plataformaId);
+
+		BeanUtils.copyProperties(streamingRequestDto, streaming);
+		streaming.setUsuario(usuario);
+		streaming.setPlataforma(plataforma);
 		return streaming;
 
 	}
@@ -112,11 +119,22 @@ public class StreamingService {
 
 	public Streaming atualizar(Long streamingId, StreamingRequestDto streamingRequestDto) {
 		Streaming objetoAtual = buscaOuFalha(streamingId);
+
+		Long usuarioId = streamingRequestDto.getUsuarioId().getId();
+		Usuario usuario = usuarioService.buscaOuFalha(usuarioId);
+
+		Long plataformaId = streamingRequestDto.getPlataformaId().getId();
+		Plataforma plataforma = plataformaService.buscaOuFalha(plataformaId);
+
 		BeanUtils.copyProperties(streamingRequestDto, objetoAtual);
+		objetoAtual.setUsuario(usuario);
+		objetoAtual.setPlataforma(plataforma);
 		return salvar(objetoAtual);
 	}
 
 	public void apagar(Long streamingId) {
-		repository.deleteById(streamingId);
+		Streaming streaming = buscaOuFalha(streamingId);
+		repository.delete(streaming);
 	}
+
 }

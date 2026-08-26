@@ -342,7 +342,16 @@ components:
             description: ID numérico da categoria já cadastrada no banco de dados
             format: int64
             example: 1
-    UsuarioIdRequest:
+    usuarioCriacaoRequestDto:
+      type: object
+      properties:
+        nome: 
+          type: string
+        email:
+          type: string
+        senha: 
+          type: string
+    usuarioIdRequestDto:
         type: object 
         properties:
           id:
@@ -350,7 +359,7 @@ components:
             description: ID numérico da categoria já cadastrada no banco de dados
             format: int64
             example: 1
-    PlataformaIdRequest:
+    plataformaIdRequestDto:
         type: object 
         properties:
           id:
@@ -359,12 +368,11 @@ components:
             format: int64
             example: 1
     StreamingRequestDto:
+      required: 
+        - usuarioId 
+        - plataformaId
       type: object
       properties:
-        usuarioId:
-         $ref: '#/components/schemas/UsuarioIdRequest'
-        plataformaId:
-         $ref: '#/components/schemas/PlataformaIdRequest'
         usuarioAtivo:
           type: boolean 
         estaNaPlataforma:
@@ -373,6 +381,10 @@ components:
           type: string
           format: date 
           x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")" 
+        usuarioId:
+         $ref: '#/components/schemas/usuarioIdRequestDto'
+        plataformaId:
+         $ref: '#/components/schemas/plataformaIdRequestDto'
     SerieRequestDto:
       required:
         - atores

@@ -21,6 +21,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import com.springAlura.springAlura.domain.exception.EntidadeNulaNoPayloadException;
+import com.springAlura.springAlura.domain.exception.SenhaNaoConcideComAtualException;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 
 import lombok.AllArgsConstructor;
@@ -32,12 +34,37 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 	@Autowired
 	private MessageSource messageSource;
 
+	@ExceptionHandler(EntidadeNulaNoPayloadException.class)
+	public ProblemDetail handleSerieNaoEncontradaException(EntidadeNulaNoPayloadException e) {
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+
+		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setTitle("No seu recurso contém uma entidade nula.. ");
+		problemDetail
+				.setDetail("No objeto do recurso que você está trabalhando, contém um campo nulo, por favor, confira.");
+		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+
+		return problemDetail;
+	}
+
 	@ExceptionHandler(SerieNaoEncontradaException.class)
 	public ProblemDetail handleSerieNaoEncontradaException(SerieNaoEncontradaException e) {
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
 
 		problemDetail.setType(URI.create("https://seusite.com"));
 		problemDetail.setTitle("Séri não encontrada");
+		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+
+		return problemDetail;
+	}
+
+	@ExceptionHandler(SenhaNaoConcideComAtualException.class)
+	public ProblemDetail handleSerieNaoEncontradaException(SenhaNaoConcideComAtualException e) {
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+
+		problemDetail.setType(URI.create("https://seriaApi.com"));
+		problemDetail.setTitle("Senha não coincide com a atual");
+		problemDetail.setDetail("A senha fornecida não coincide com a senha atual. Por favor, verifique!");
 		problemDetail.setProperty("timestamp", System.currentTimeMillis());
 
 		return problemDetail;

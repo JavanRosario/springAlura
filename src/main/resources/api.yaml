@@ -335,43 +335,131 @@ paths:
 components:
   schemas:
     categoriaIdRequestDto:
-        type: object 
-        properties:
-          id:
-            type: integer
-            description: ID numérico da categoria já cadastrada no banco de dados
-            format: int64
-            example: 1
+      type: object 
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: ID numérico da categoria já cadastrada no banco de dados
+          format: int64
+          minimum: 0  # O plugin gera o @Min(0) ou @PositiveOrZero no Java
+          example: 1
+
     usuarioCriacaoRequestDto:
       type: object
+      required:
+        - nome 
+        - email 
+        - senha 
       properties:
         nome: 
           type: string
+          minLength: 1 # O plugin gera o @Size(min=1) e @NotNull no Java
+          example: João Silva
         email:
           type: string
+          format: email
+          minLength: 1
+          example: joao@marinha.mil.br
         senha: 
           type: string
+          format: password
+          minLength: 6  # O plugin gera o @Size(min=6) automaticamente
+          maxLength: 20 # O plugin gera o @Size(max=20) automaticamente
+          description: Senha de acesso
+          example: "M@rinha2026"
+
+    usuarioAtualizacaoRequestDto:
+      type: object
+      required: 
+        - nome
+        - email
+      properties:
+        nome: 
+          type: string
+          minLength: 1
+          example: João Silva
+        email:
+          type: string
+          format: email
+          minLength: 1
+          example: joao@marinha.mil.br
+
+    usuarioAtualizarSenhaDto:
+      type: object
+      required: 
+        - senhaAtual
+        - senhaNova
+      properties:
+        senhaAtual:
+          type: string
+          format: password
+          minLength: 1
+        senhaNova:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 20
+          description: Nova senha a ser cadastrada no sistema
+          example: "NovaSenha123"
+
     usuarioIdRequestDto:
-        type: object 
-        properties:
-          id:
-            type: integer
-            description: ID numérico da categoria já cadastrada no banco de dados
-            format: int64
-            example: 1
+      type: object
+      required:
+        - id 
+      properties:
+        id:
+          type: integer
+          description: ID numérico do usuário já cadastrado no banco de dados
+          format: int64
+          minimum: 0
+          example: 1
+
     plataformaIdRequestDto:
-        type: object 
-        properties:
-          id:
-            type: integer
-            description: ID numérico da categoria já cadastrada no banco de dados
-            format: int64
-            example: 1
+      type: object
+      required:
+        - id 
+      properties:
+        id:
+          type: integer
+          description: ID numérico da plataforma já cadastrada no banco de dados
+          format: int64
+          minimum: 0
+          example: 1
+
+    plataformaRequestDto:
+      type: object
+      required: 
+        - nome
+        - dominio
+        - totalCatalogo
+        - mensalidade
+      properties:
+        nome:
+          type: string
+          minLength: 1
+          example: Netflix
+        dominio:
+          type: string
+          minLength: 1
+          example: netflix.com
+        totalCatalogo:
+          type: integer 
+          format: int64
+          minimum: 0
+          example: 5000
+        mensalidade:
+          type: number 
+          format: double 
+          minimum: 0
+          example: 39.90
+
     StreamingRequestDto:
+      type: object
       required: 
         - usuarioId 
         - plataformaId
-      type: object
       properties:
         usuarioAtivo:
           type: boolean 
@@ -379,13 +467,14 @@ components:
           type: boolean 
         dataNaPlataforma:
           type: string
-          format: date 
-          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")" 
+          format: date # Mantido o date puro. Se o Jackson reclamar do formato no POST, tratamos via @JsonFormat global.
         usuarioId:
-         $ref: '#/components/schemas/usuarioIdRequestDto'
+          $ref: '#/components/schemas/usuarioIdRequestDto'
         plataformaId:
-         $ref: '#/components/schemas/plataformaIdRequestDto'
+          $ref: '#/components/schemas/plataformaIdRequestDto'
+
     SerieRequestDto:
+      type: object
       required:
         - atores
         - avaliacao
@@ -394,56 +483,53 @@ components:
         - sinopse
         - titulo
         - totalTemporada
-        - categoriaId 
-      type: object
       properties:
         titulo:
-          maxLength: 20
-          minLength: 1
           type: string
+          minLength: 1
+          maxLength: 20
           description: Título oficial da série
           example: Breaking Bad
         totalTemporada:
           type: integer
-          description: Quantidade total de temporadas lançadas
           format: int32
+          minimum: 0
+          description: Quantidade total de temporadas lançadas
           example: 5
         avaliacao:
-          minimum: 0
-          exclusiveMinimum: false
           type: number
-          description: Nota de avaliação da série
           format: double
+          minimum: 0
+          description: Nota de avaliação da série
           example: 9.5
         atores:
-          maxLength: 2147483647
-          minLength: 1
           type: string
+          minLength: 1
+          maxLength: 2147483647
           description: Nomes dos principais atores do elenco
           example: Bryan Cranston, Aaron Paul
         poster:
           type: string
+          minLength: 1
           description: URL do poster ou imagem de capa da série
           example: https://link-da-imagem.com
         sinopse:
-          maxLength: 2147483647
-          minLength: 1
           type: string
+          minLength: 1
+          maxLength: 2147483647
           description: Sinopse ou resumo do enredo
           example: Um professor de química se volta para o crime...
         dataLancamento:
           type: string
           format: date
-          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"
         ativo:
           type: boolean
-          description: >-
-            true para dizer que ainda recebe episódios e false para dizer que
-            não recebe mais episodios.
+          description: Status da série.
           example: false
         categoriaId:
           $ref: '#/components/schemas/categoriaIdRequestDto'
       description: Modelo de dados para criar ou atualizar uma série
+
     CategoriaResponseDto:
       type: object
       properties:
@@ -462,6 +548,7 @@ components:
         - sinopse
         - titulo
         - totalTemporada
+        - categoriaId
       type: object
       properties:
         id:
@@ -508,7 +595,7 @@ components:
             true para dizer que ainda recebe episódios e false para dizer que
             não recebe mais episodios.
           example: false
-        categoriaResponseDto:
+        categoriaId:
           $ref: '#/components/schemas/CategoriaResponseDto'
     SerieFiltroDto:
       type: object

@@ -1,6 +1,7 @@
 package com.springAlura.springAlura.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
+import com.springAlura.springAlura.domain.exception.EntidadeNulaNoPayloadException;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.Categoria;
 import com.springAlura.springAlura.domain.model.Serie;
+import com.springAlura.springAlura.domain.model.Streaming;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 import jakarta.transaction.Transactional;
@@ -25,6 +28,17 @@ public class SerieService {
 
 	@Autowired
 	CategoriaService categoriaService;
+
+	@Autowired
+	StreamingService streamingService;
+
+	public void associarStreaming(Long serieId, Long streamingId) {
+		Serie serie = buscaOuFalha(serieId);
+
+		Streaming streaming = streamingService.buscaOuFalha(streamingId);
+		serie.getStreaming().add(streaming);
+		salvar(serie);
+	}
 
 	public List<Serie> buscaComFiltros(String nome, Double notaMax, Integer limite) {
 
@@ -63,7 +77,9 @@ public class SerieService {
 
 	@Transactional
 	public Serie salvar(Serie serie) {
-		Long categoriaId = serie.getCategoria().getId();
+		Long categoriaId = Optional.ofNullable(serie).map(Serie::getCategoria).map(Categoria::getId)
+				.orElseThrow(() -> new EntidadeNulaNoPayloadException(serie.getId()));
+		
 		Categoria categoria = categoriaService.buscaOuFalha(categoriaId);
 		serie.setCategoria(categoria);
 		return repository.save(serie);
@@ -105,7 +121,7 @@ public class SerieService {
 //				serieAtual.getPoster(), serieAtual.getPlot());
 
 		BeanUtils.copyProperties(serie, dto, "series");
-		dto.setCategoriaResponseDto(categoriaResponseDto);
+		dto.setCategoriaId(categoriaResponseDto);
 		return dto;
 	}
 
@@ -136,7 +152,7 @@ public class SerieService {
 
 			if (s.getCategoria() != null) {
 				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
-				dto.setCategoriaResponseDto(categoriaDto);
+				dto.setCategoriaId(categoriaDto);
 			}
 
 			BeanUtils.copyProperties(s, dto);

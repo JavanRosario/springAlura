@@ -22,8 +22,10 @@ import com.springAlura.springAlura.domain.model.Streaming;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class SerieService {
 
 	@Autowired
@@ -55,6 +57,7 @@ public class SerieService {
 
 	@Transactional
 	public void ativarSerie(Long serieId) {
+		log.debug("Iniciando o processo de ativação da Série de ID: {}", serieId);
 		Serie serie = buscaOuFalha(serieId);
 		serie.setAtivo(true);
 		salvar(serie);
@@ -62,14 +65,21 @@ public class SerieService {
 
 	@Transactional
 	public void desativarSerie(Long serieId) {
+		log.debug("Iniciando o processo de desativação da Série de ID: {}", serieId);
 		Serie serie = buscaOuFalha(serieId);
 		serie.setAtivo(false);
 		salvar(serie);
 	}
 
 	@Transactional
-	public Serie buscaOuFalha(Long sereId) {
-		return repository.findById(sereId).orElseThrow(() -> new SerieNaoEncontradaException(sereId));
+	public Serie buscaOuFalha(Long serieId) {
+		log.debug("Iniciando a busca para o ID:{}", serieId);
+
+		Serie serie = repository.findById(serieId).orElseThrow(() -> new SerieNaoEncontradaException(serieId));
+
+		log.info("Série com ID {} encontrada com sucesso!", serieId);
+
+		return serie;
 	}
 
 	@Autowired
@@ -77,12 +87,18 @@ public class SerieService {
 
 	@Transactional
 	public Serie salvar(Serie serie) {
+		log.debug("Iniciando processo para salvar a serie: '{}'", serie.getTitulo());
 		Long categoriaId = Optional.ofNullable(serie).map(Serie::getCategoria).map(Categoria::getId)
 				.orElseThrow(() -> new EntidadeNulaNoPayloadException(serie.getId()));
-		
+
+		log.debug("Validando a existência da categoria com ID: {}", categoriaId);
 		Categoria categoria = categoriaService.buscaOuFalha(categoriaId);
+
 		serie.setCategoria(categoria);
-		return repository.save(serie);
+
+		Serie serieSalva = repository.save(serie);
+		log.info("Série '{}' salva com sucesso! ID gerado no banco: {}", serieSalva.getTitulo(), serieSalva.getId());
+		return serieSalva;
 	}
 
 	@Transactional
@@ -94,16 +110,12 @@ public class SerieService {
 
 	@Transactional
 	public Serie atualizar(Long serieId, Serie serie) {
+		log.debug("Iniciando processo para atualização do recurso da Série '{}' de ID: {}", serie.getTitulo(), serieId);
 		Serie serieAtual = buscaOuFalha(serieId);
 
-		serieAtual.setAtores(serie.getAtores());
-		serieAtual.setSinopse(serie.getSinopse());
-		serieAtual.setTitulo(serie.getTitulo());
-		serieAtual.setAvaliacao(serie.getAvaliacao());
-		serieAtual.setTotalTemporada(serie.getTotalTemporada());
-		serieAtual.setPoster(serie.getPoster());
-		serieAtual.setCategoria(serie.getCategoria());
-		serieAtual.setStreaming(serie.getStreaming());
+		BeanUtils.copyProperties(serie, serieAtual, "id");
+
+		log.info("Série '{}' atualizada com sucesso!", serieAtual.getTitulo());
 
 		serieAtual = salvar(serieAtual);
 		return serieAtual;
@@ -164,7 +176,10 @@ public class SerieService {
 	}
 
 	public List<Serie> listar() {
-		return repository.findAllByOrderByIdAsc();
+		log.debug("Acessando o repositório para buscar as séries ordenadas por ID.");
+		List<Serie> series = repository.findAllByOrderByIdAsc();
+		log.info("Busca de séries finalizada. Total de registros encontrados: {}", series.size());
+		return series;
 	}
 
 	public List<Serie> listarTop5() {

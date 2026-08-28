@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://apache.org"
+	xmlns:xsi="http://w3.org"
+	xsi:schemaLocation="http://apache.org https://apache.org">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -81,29 +81,26 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<inputSpec>${project.basedir}/src/main/resources/static/api.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<modelPackage>com.springAlura.springAlura.api.dto2</modelPackage>
 							<apiPackage>com.springAlura.springAlura.api.controller2</apiPackage>
 							<typeMappings>
 								<date>LocalDate</date>
-								<int64>Long</int64> <!-- Adicione esta linha -->
+								<int64>Long</int64>
 							</typeMappings>
-							<!-- 1. Força o gerador a converter o tipo técnico "date" para a palavra "LocalDate" -->
 							<typeMappings>
 								<typeMapping>date=LocalDate</typeMapping>
 							</typeMappings>
-							<!-- 2. Adiciona o import correto do Java moderno no arquivo final -->
 							<importMappings>
 								<importMapping>LocalDate=java.time.LocalDate</importMapping>
 							</importMappings>
-							<!-- 3. Opções globais de configuração corrigidas e sem duplicações -->
 							<configOptions>
 								<useSpringBoot3>true</useSpringBoot3>
 								<openApiNullable>false</openApiNullable>
 								<useRecordsForModels>true</useRecordsForModels>
 								<interfaceOnly>true</interfaceOnly>
-								<dateLibrary>java8</dateLibrary> <!-- Alinhado na hierarquia certa -->
+								<dateLibrary>java8</dateLibrary>
 							</configOptions>
 						</configuration>
 					</execution>

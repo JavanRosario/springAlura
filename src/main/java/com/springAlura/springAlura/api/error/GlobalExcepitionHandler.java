@@ -1,6 +1,7 @@
 package com.springAlura.springAlura.api.error;
 
 import java.net.URI;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -21,37 +22,69 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import com.springAlura.springAlura.domain.exception.EntidadeNulaNoPayloadException;
+import com.springAlura.springAlura.domain.exception.SenhaNaoConcideComAtualException;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @RestControllerAdvice
+@Slf4j
 public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 
 	@Autowired
 	private MessageSource messageSource;
 
-	@ExceptionHandler(SerieNaoEncontradaException.class)
-	public ProblemDetail handleSerieNaoEncontradaException(SerieNaoEncontradaException e) {
+	@ExceptionHandler(EntidadeNulaNoPayloadException.class)
+	public ProblemDetail handleSerieNaoEncontradaException(EntidadeNulaNoPayloadException e) {
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
 
 		problemDetail.setType(URI.create("https://seusite.com"));
-		problemDetail.setTitle("Séri não encontrada");
+		problemDetail.setTitle("No seu recurso contém uma entidade nula.. ");
+		problemDetail
+				.setDetail("No objeto do recurso que você está trabalhando, contém um campo nulo, por favor, confira.");
 		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+
+		return problemDetail;
+	}
+
+	@ExceptionHandler(SerieNaoEncontradaException.class)
+	public ProblemDetail handleSerieNaoEncontradaException(SerieNaoEncontradaException e) {
+		log.warn("Falha na requisição {]", e.getMessage());
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+
+		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setTitle("Série não encontrada");
+		problemDetail.setProperty("timestamp", Instant.now());
+
+		return problemDetail;
+	}
+
+	@ExceptionHandler(SenhaNaoConcideComAtualException.class)
+	public ProblemDetail handleSerieNaoEncontradaException(SenhaNaoConcideComAtualException e) {
+		log.warn("Falha na requisição {]", e.getMessage());
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+
+		problemDetail.setType(URI.create("https://seriaApi.com"));
+		problemDetail.setTitle("Senha não coincide com a atual");
+		problemDetail.setDetail("A senha fornecida não coincide com a senha atual. Por favor, verifique!");
+		problemDetail.setProperty("timestamp", Instant.now());
 
 		return problemDetail;
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ProblemDetail handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+		log.warn("Falha na requisição {]", e.getMessage());
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
 
 		problemDetail.setType(URI.create("https://seusite.com"));
 		problemDetail.setTitle("Recurso não pode ser excluído.");
 		problemDetail.setDetail(
 				"Recurso não pode ser excluído. O recurso está sendo usado por outras relações, exclua essas relações primeiro");
-		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+		problemDetail.setProperty("timestamp", Instant.now());
 
 		return problemDetail;
 	}
@@ -74,8 +107,11 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 					menssagemTraduzida != null ? menssagemTraduzida : "Campo Inválido");
 
 		}).toList();
+		List<String> fieldNames = invalidFiels.stream().map(f -> f.get("fieldName")).toList();
+		log.warn("Falha de validação na requisição. Campos incorretos: {}", fieldNames);
 
 		detail.setProperty("fields", invalidFiels);
+		detail.setProperty("timestamp", Instant.now());
 
 		return ResponseEntity.status(status).body(detail);
 	}

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springAlura.springAlura.api.docs.PathsApi;
-import com.springAlura.springAlura.api.docs.SwaggerDocControllers;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.domain.model.Serie;
@@ -25,14 +24,15 @@ import com.springAlura.springAlura.domain.model.SerieFiltroDto;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
 import com.springAlura.springAlura.domain.service.SerieService;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Data
 @RequestMapping(PathsApi.MAIN_PATH)
-public class SerieController implements SwaggerDocControllers {
+@Slf4j
+public class SerieController {
 
 	@Autowired
 	SerieService serieService;
@@ -40,78 +40,44 @@ public class SerieController implements SwaggerDocControllers {
 	@Autowired
 	SerieRepository repository;
 
-	@Override()
 	@GetMapping("/filtros")
 	public List<SerieResponseDto> listarComFiltros(@ModelAttribute SerieFiltroDto filtros) {
+
 		return serieService
 				.toDtoList(serieService.buscaComFiltros(filtros.titulo(), filtros.notaMax(), filtros.limite()));
 	}
 
 	@GetMapping()
-	@Override()
 	public List<SerieResponseDto> listar() {
+		log.info("Recebida a requisição GET para listar Séries");
 		return serieService.toDtoList(serieService.listar());
 	}
 
 	@GetMapping("/{serieId}")
-	public SerieResponseDto listar(@PathVariable Long serieId) {
+	public SerieResponseDto listarPorId(@PathVariable Long serieId) {
+		log.info("Recebida a requsição GET para mostrar uma série");
 		return serieService.toDto(serieService.buscaOuFalha(serieId));
 	}
 
-	@GetMapping("/teste")
-	public List<Serie> listarTeste() {
-		return repository.findAll();
-	}
-
-	@Hidden
-	@GetMapping("/top5")
-	public List<SerieResponseDto> listarTop5() {
-		return serieService.toDtoList(serieService.listarTop5());
-	}
-
-	@Hidden
-	@GetMapping("/lancamentos")
-	public List<SerieResponseDto> listarLancamentos() {
-		return serieService.toDtoList(serieService.listarLancamentos());
-	}
-
-//	@Hidden
-//	@GetMapping("/{id}/temporadas/todas")
-//	public List<EpisodioResponseDto> temporadas(@PathVariable Long id) {
-//		Serie serieEncontrada = serieService.buscaOuFalha(id);
-//
-//		return serieEncontrada.getEpisodios().stream()
-//				.map(e -> new EpisodioResponseDto(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo())).toList();
-//
-//	}
-
-//	@Hidden
-//	@GetMapping("/{serieId}/temporadas/{temporadaId}")
-//	public List<EpisodioResponseDto> temporadaUnica(@PathVariable Long serieId, @PathVariable Long temporadaId) {
-//		return episodioService.toDtoList(episodioRepositoryy.temporadaUnica(serieId, temporadaId));
-//
-//	}
-
-	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public SerieResponseDto salvar(@RequestBody @Valid SerieRequestDto serieRequestDto) {
+		log.info("Recebida a requsição POST para cadastrar uma série");
 		Serie serieAtual = serieService.toDomain(serieRequestDto);
 		serieAtual = serieService.salvar(serieAtual);
 		return serieService.toDto(serieAtual);
 	}
 
-	@Override
 	@PutMapping("/{serieId}")
 	public ResponseEntity<SerieResponseDto> atualizar(@PathVariable Long serieId,
 			@RequestBody @Valid SerieRequestDto serieRequestDto) {
+		log.info("Recebida a requsição PUT para atualizar uma série");
 		Serie serieAtual = serieService.toDomain(serieRequestDto);
 		serieAtual = serieService.atualizar(serieId, serieAtual);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(serieService.toDto(serieAtual));
 	}
 
-	@Override
 	@DeleteMapping(PathsApi.ID_SERIE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long serieId) {

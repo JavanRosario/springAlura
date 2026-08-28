@@ -1,6 +1,7 @@
 package com.springAlura.springAlura.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +14,33 @@ import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
+import com.springAlura.springAlura.domain.exception.EntidadeNulaNoPayloadException;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.Categoria;
 import com.springAlura.springAlura.domain.model.Serie;
+import com.springAlura.springAlura.domain.model.Streaming;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class SerieService {
 
 	@Autowired
 	CategoriaService categoriaService;
+
+	@Autowired
+	StreamingService streamingService;
+
+	public void associarStreaming(Long serieId, Long streamingId) {
+		Serie serie = buscaOuFalha(serieId);
+
+		Streaming streaming = streamingService.buscaOuFalha(streamingId);
+		serie.getStreaming().add(streaming);
+		salvar(serie);
+	}
 
 	public List<Serie> buscaComFiltros(String nome, Double notaMax, Integer limite) {
 
@@ -41,6 +57,7 @@ public class SerieService {
 
 	@Transactional
 	public void ativarSerie(Long serieId) {
+		log.debug("Iniciando o processo de ativação da Série de ID: {}", serieId);
 		Serie serie = buscaOuFalha(serieId);
 		serie.setAtivo(true);
 		salvar(serie);
@@ -48,14 +65,20 @@ public class SerieService {
 
 	@Transactional
 	public void desativarSerie(Long serieId) {
+		log.debug("Iniciando o processo de desativação da Série de ID: {}", serieId);
 		Serie serie = buscaOuFalha(serieId);
 		serie.setAtivo(false);
 		salvar(serie);
 	}
 
 	@Transactional
-	public Serie buscaOuFalha(Long sereId) {
-		return repository.findById(sereId).orElseThrow(() -> new SerieNaoEncontradaException(sereId));
+	public Serie buscaOuFalha(Long serieId) {
+		log.debug("Iniciando a busca para o ID:{}", serieId);
+
+		return repository.findById(serieId).orElseThrow(() -> {
+			log.warn("Falha na consulta: Série com ID {} não existe no seu sistema", serieId);
+			return new SerieNaoEncontradaException(serieId);
+		});
 	}
 
 	@Autowired
@@ -63,10 +86,18 @@ public class SerieService {
 
 	@Transactional
 	public Serie salvar(Serie serie) {
-		Long categoriaId = serie.getCategoria().getId();
+		log.debug("Iniciando processo para salvar a serie: '{}'", serie.getTitulo());
+		Long categoriaId = Optional.ofNullable(serie).map(Serie::getCategoria).map(Categoria::getId)
+				.orElseThrow(() -> new EntidadeNulaNoPayloadException(serie.getId()));
+
+		log.debug("Validando a existência da categoria com ID: {}", categoriaId);
 		Categoria categoria = categoriaService.buscaOuFalha(categoriaId);
+
 		serie.setCategoria(categoria);
-		return repository.save(serie);
+
+		Serie serieSalva = repository.save(serie);
+		log.info("Série '{}' salva com sucesso! ID gerado no banco: {}", serieSalva.getTitulo(), serieSalva.getId());
+		return serieSalva;
 	}
 
 	@Transactional
@@ -78,16 +109,12 @@ public class SerieService {
 
 	@Transactional
 	public Serie atualizar(Long serieId, Serie serie) {
+		log.debug("Iniciando processo para atualização do recurso da Série '{}' de ID: {}", serie.getTitulo(), serieId);
 		Serie serieAtual = buscaOuFalha(serieId);
 
-		serieAtual.setAtores(serie.getAtores());
-		serieAtual.setSinopse(serie.getSinopse());
-		serieAtual.setTitulo(serie.getTitulo());
-		serieAtual.setAvaliacao(serie.getAvaliacao());
-		serieAtual.setTotalTemporada(serie.getTotalTemporada());
-		serieAtual.setPoster(serie.getPoster());
-		serieAtual.setCategoria(serie.getCategoria());
-		serieAtual.setStreaming(serie.getStreaming());
+		BeanUtils.copyProperties(serie, serieAtual, "id");
+
+		log.info("Série '{}' atualizada com sucesso!", serieAtual.getTitulo());
 
 		serieAtual = salvar(serieAtual);
 		return serieAtual;
@@ -105,7 +132,7 @@ public class SerieService {
 //				serieAtual.getPoster(), serieAtual.getPlot());
 
 		BeanUtils.copyProperties(serie, dto, "series");
-		dto.setCategoriaResponseDto(categoriaResponseDto);
+		dto.setCategoriaId(categoriaResponseDto);
 		return dto;
 	}
 
@@ -136,7 +163,7 @@ public class SerieService {
 
 			if (s.getCategoria() != null) {
 				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
-				dto.setCategoriaResponseDto(categoriaDto);
+				dto.setCategoriaId(categoriaDto);
 			}
 
 			BeanUtils.copyProperties(s, dto);
@@ -148,7 +175,10 @@ public class SerieService {
 	}
 
 	public List<Serie> listar() {
-		return repository.findAllByOrderByIdAsc();
+		log.debug("Acessando o repositório para buscar as séries ordenadas por ID.");
+		List<Serie> series = repository.findAllByOrderByIdAsc();
+		log.info("Busca de séries finalizada. Total de registros encontrados: {}", series.size());
+		return series;
 	}
 
 	public List<Serie> listarTop5() {

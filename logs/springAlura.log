@@ -13286,3 +13286,45 @@ Caused by: java.lang.Error: Unresolved compilation problems:
                 Running with Spring Boot v3.3.3, Spring v6.1.12
 2026-08-28 14:46:59.993 [restartedMain] INFO  c.s.s.SpringAluraApplication -
                 No active profile set, falling back to 1 default profile: "default"
+2026-08-28 14:47:00.171 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-28 14:47:00.189 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 17 ms. Found 5 JPA repository interfaces.
+2026-08-28 14:47:00.255 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-08-28 14:47:00.256 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-08-28 14:47:00.256 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-08-28 14:47:00.285 [restartedMain] INFO  o.a.c.c.C.[Tomcat-2].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-08-28 14:47:00.285 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 290 ms
+2026-08-28 14:47:00.309 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-28 14:47:00.312 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-08-28 14:47:00.321 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-28 14:47:00.322 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-6 - Starting...
+2026-08-28 14:47:00.369 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@1f39398c
+2026-08-28 14:47:00.369 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-6 - Start completed.
+2026-08-28 14:47:00.376 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-28 14:47:00.457 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-28 14:47:00.527 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:47:00.650 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-28 14:47:00.722 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-08-28 14:47:00.730 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-08-28 14:47:00.733 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 0.767 seconds (process running for 454.72)
+2026-08-28 14:47:00.735 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation unchanged

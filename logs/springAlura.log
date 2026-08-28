@@ -12926,3 +12926,363 @@ org.hibernate.HibernateException: identifier of an instance of com.springAlura.s
                 Tomcat started on port 8080 (http) with context path '/'
 2026-08-28 14:39:31.653 [restartedMain] INFO  c.s.s.SpringAluraApplication -
                 Started SpringAluraApplication in 5.218 seconds (process running for 5.638)
+2026-08-28 14:44:01.892 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-08-28 14:44:02.092 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:44:02.095 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown initiated...
+2026-08-28 14:44:02.099 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown completed.
+2026-08-28 14:44:02.185 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.12 with PID 19932 (C:\Users\19032388709\eclipse-workspace\springAlura\target\classes started by 19032388703 in C:\Users\19032388709\eclipse-workspace\springAlura)
+2026-08-28 14:44:02.186 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-08-28 14:44:02.186 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-08-28 14:44:02.429 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-28 14:44:02.450 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 21 ms. Found 5 JPA repository interfaces.
+2026-08-28 14:44:02.533 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-08-28 14:44:02.534 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-08-28 14:44:02.534 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-08-28 14:44:02.561 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-08-28 14:44:02.561 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 373 ms
+2026-08-28 14:44:02.584 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-28 14:44:02.588 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-08-28 14:44:02.600 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-28 14:44:02.602 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Starting...
+2026-08-28 14:44:02.644 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@562a959f
+2026-08-28 14:44:02.644 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Start completed.
+2026-08-28 14:44:02.651 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-28 14:44:02.745 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-28 14:44:02.803 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:44:02.941 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-28 14:44:03.022 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-08-28 14:44:03.030 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-08-28 14:44:03.034 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 0.885 seconds (process running for 277.021)
+2026-08-28 14:44:03.037 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation unchanged
+2026-08-28 14:44:57.214 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-08-28 14:44:57.408 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:44:57.409 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Shutdown initiated...
+2026-08-28 14:44:57.411 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Shutdown completed.
+2026-08-28 14:44:57.491 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.12 with PID 19932 (C:\Users\19032388709\eclipse-workspace\springAlura\target\classes started by 19032388703 in C:\Users\19032388709\eclipse-workspace\springAlura)
+2026-08-28 14:44:57.491 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-08-28 14:44:57.491 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-08-28 14:44:57.760 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-28 14:44:57.791 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 29 ms. Found 5 JPA repository interfaces.
+2026-08-28 14:44:57.903 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-08-28 14:44:57.903 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-08-28 14:44:57.903 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-08-28 14:44:57.932 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-08-28 14:44:57.932 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 439 ms
+2026-08-28 14:44:57.964 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-28 14:44:57.970 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-08-28 14:44:57.979 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-28 14:44:57.981 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Starting...
+2026-08-28 14:44:58.031 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@61db9557
+2026-08-28 14:44:58.031 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Start completed.
+2026-08-28 14:44:58.037 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-28 14:44:58.153 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-28 14:44:58.220 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:44:58.290 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -
+                Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'serieController': Unsatisfied dependency expressed through field 'serieService': Error creating bean with name 'serieService' defined in file [C:\Users\19032388709\eclipse-workspace\springAlura\target\classes\com\springAlura\springAlura\domain\service\SerieService.class]: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+2026-08-28 14:44:58.290 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:44:58.291 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Shutdown initiated...
+2026-08-28 14:44:58.304 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Shutdown completed.
+2026-08-28 14:44:58.304 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Stopping service [Tomcat]
+2026-08-28 14:44:58.310 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger -
+                
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-08-28 14:44:58.334 [restartedMain] ERROR o.s.boot.SpringApplication -
+                Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'serieController': Unsatisfied dependency expressed through field 'serieService': Error creating bean with name 'serieService' defined in file [C:\Users\19032388709\eclipse-workspace\springAlura\target\classes\com\springAlura\springAlura\domain\service\SerieService.class]: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.springAlura.springAlura.SpringAluraApplication.main(SpringAluraApplication.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serieService' defined in file [C:\Users\19032388709\eclipse-workspace\springAlura\target\classes\com\springAlura\springAlura\domain\service\SerieService.class]: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:221)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:94)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1331)
+	... 36 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	The method orElseThrow(Supplier<? extends X>) in the type Optional<Serie> is not applicable for the arguments (() -> {})
+	Type mismatch: cannot convert from new SerieNaoEncontradaException(){} to X
+	Syntax error on token ")", { expected
+	Type mismatch: cannot convert from Serie to X
+	Syntax error, insert "}" to complete Block
+	Syntax error, insert ")" to complete Expression
+	Syntax error, insert ";" to complete LocalVariableDeclarationStatement
+
+	at com.springAlura.springAlura.domain.service.SerieService.<init>(SerieService.java:1)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:195)
+	... 38 common frames omitted
+2026-08-28 14:45:17.311 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.12 with PID 19932 (C:\Users\19032388709\eclipse-workspace\springAlura\target\classes started by 19032388703 in C:\Users\19032388709\eclipse-workspace\springAlura)
+2026-08-28 14:45:17.311 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-08-28 14:45:17.311 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-08-28 14:45:17.514 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-28 14:45:17.536 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 21 ms. Found 5 JPA repository interfaces.
+2026-08-28 14:45:17.608 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-08-28 14:45:17.610 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-08-28 14:45:17.610 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-08-28 14:45:17.632 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-08-28 14:45:17.633 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 320 ms
+2026-08-28 14:45:17.654 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-28 14:45:17.657 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-08-28 14:45:17.665 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-28 14:45:17.666 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-4 - Starting...
+2026-08-28 14:45:17.711 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@4f6dc6be
+2026-08-28 14:45:17.712 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-4 - Start completed.
+2026-08-28 14:45:17.717 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-28 14:45:17.800 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-28 14:45:17.865 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:45:17.911 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -
+                Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'serieController': Unsatisfied dependency expressed through field 'serieService': Error creating bean with name 'serieService' defined in file [C:\Users\19032388709\eclipse-workspace\springAlura\target\classes\com\springAlura\springAlura\domain\service\SerieService.class]: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+2026-08-28 14:45:17.912 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:45:17.912 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-4 - Shutdown initiated...
+2026-08-28 14:45:17.982 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-4 - Shutdown completed.
+2026-08-28 14:45:17.982 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Stopping service [Tomcat]
+2026-08-28 14:45:17.987 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger -
+                
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-08-28 14:45:17.990 [restartedMain] ERROR o.s.boot.SpringApplication -
+                Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'serieController': Unsatisfied dependency expressed through field 'serieService': Error creating bean with name 'serieService' defined in file [C:\Users\19032388709\eclipse-workspace\springAlura\target\classes\com\springAlura\springAlura\domain\service\SerieService.class]: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.springAlura.springAlura.SpringAluraApplication.main(SpringAluraApplication.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serieService' defined in file [C:\Users\19032388709\eclipse-workspace\springAlura\target\classes\com\springAlura\springAlura\domain\service\SerieService.class]: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.springAlura.springAlura.domain.service.SerieService]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:221)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:94)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1331)
+	... 36 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	The method orElseThrow(Supplier<? extends X>) in the type Optional<Serie> is not applicable for the arguments (() -> {})
+	Type mismatch: cannot convert from new SerieNaoEncontradaException(){} to X
+	Syntax error on token ")", { expected
+	Type mismatch: cannot convert from Serie to X
+	Syntax error, insert "}" to complete Block
+	Syntax error, insert ")" to complete Expression
+	Syntax error, insert ";" to complete LocalVariableDeclarationStatement
+
+	at com.springAlura.springAlura.domain.service.SerieService.<init>(SerieService.java:1)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:195)
+	... 38 common frames omitted
+2026-08-28 14:46:50.247 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.12 with PID 19932 (C:\Users\19032388709\eclipse-workspace\springAlura\target\classes started by 19032388703 in C:\Users\19032388709\eclipse-workspace\springAlura)
+2026-08-28 14:46:50.247 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-08-28 14:46:50.247 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-08-28 14:46:50.499 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-28 14:46:50.519 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 20 ms. Found 5 JPA repository interfaces.
+2026-08-28 14:46:50.592 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-08-28 14:46:50.592 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-08-28 14:46:50.592 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-08-28 14:46:50.624 [restartedMain] INFO  o.a.c.c.C.[Tomcat-2].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-08-28 14:46:50.624 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 375 ms
+2026-08-28 14:46:50.646 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-28 14:46:50.655 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-08-28 14:46:50.664 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-28 14:46:50.664 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-5 - Starting...
+2026-08-28 14:46:50.709 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@58790686
+2026-08-28 14:46:50.709 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-5 - Start completed.
+2026-08-28 14:46:50.709 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-28 14:46:50.807 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-28 14:46:50.862 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:46:50.994 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-28 14:46:51.068 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-08-28 14:46:51.100 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-08-28 14:46:51.100 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 0.887 seconds (process running for 445.093)
+2026-08-28 14:46:51.100 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation unchanged
+2026-08-28 14:46:59.740 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-08-28 14:46:59.917 [Thread-11] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-28 14:46:59.918 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-5 - Shutdown initiated...
+2026-08-28 14:46:59.920 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-5 - Shutdown completed.
+2026-08-28 14:46:59.992 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.12 with PID 19932 (C:\Users\19032388709\eclipse-workspace\springAlura\target\classes started by 19032388703 in C:\Users\19032388709\eclipse-workspace\springAlura)
+2026-08-28 14:46:59.992 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-08-28 14:46:59.993 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"

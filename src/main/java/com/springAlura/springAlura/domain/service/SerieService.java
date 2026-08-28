@@ -75,11 +75,10 @@ public class SerieService {
 	public Serie buscaOuFalha(Long serieId) {
 		log.debug("Iniciando a busca para o ID:{}", serieId);
 
-		Serie serie = repository.findById(serieId).orElseThrow(() -> new SerieNaoEncontradaException(serieId));
-
-		log.info("Série com ID {} encontrada com sucesso!", serieId);
-
-		return serie;
+		return repository.findById(serieId).orElseThrow(() -> {
+			log.warn("Falha na consulta: Série com ID {} não existe no seu sistema", serieId);
+			return new SerieNaoEncontradaException(serieId);
+		});
 	}
 
 	@Autowired

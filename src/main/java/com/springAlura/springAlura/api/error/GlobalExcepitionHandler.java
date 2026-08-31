@@ -34,14 +34,37 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 
+	private static final String DOMINIO = "www.serieApi.com.br";
+
 	@Autowired
 	private MessageSource messageSource;
+
+//	@ExceptionHandler(IllegalArgumentException.class)
+//	public ProblemDetail handlePropertuReferenceException(IllegalArgumentException e) {
+//		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+//
+//		String msgOriginal = e.getMessage() != null ? e.getMessage() : "";
+//		String msg = "O valor enviado para o parâmetro é inválido.";
+//
+//		if (msgOriginal.contains("Page Index") || msgOriginal.contains("Page size")) {
+//			msgOriginal = "O número da página (index) deve ser maior que 0(zero)";
+//
+//		}
+//
+//		problemDetail.setType(URI.create(DOMINIO));
+//		problemDetail.setDetail(msgOriginal);
+//		problemDetail.setTitle(msg);
+//		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+//
+//		return problemDetail;
+//
+//	}
 
 	@ExceptionHandler(EntidadeNulaNoPayloadException.class)
 	public ProblemDetail handleSerieNaoEncontradaException(EntidadeNulaNoPayloadException e) {
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
 
-		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setType(URI.create(DOMINIO));
 		problemDetail.setTitle("No seu recurso contém uma entidade nula.. ");
 		problemDetail
 				.setDetail("No objeto do recurso que você está trabalhando, contém um campo nulo, por favor, confira.");
@@ -52,10 +75,10 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(SerieNaoEncontradaException.class)
 	public ProblemDetail handleSerieNaoEncontradaException(SerieNaoEncontradaException e) {
-		log.warn("Falha na requisição {]", e.getMessage());
+		log.warn("Falha na requisição {}", e.getMessage());
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
 
-		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setType(URI.create(DOMINIO));
 		problemDetail.setTitle("Série não encontrada");
 		problemDetail.setProperty("timestamp", Instant.now());
 
@@ -64,10 +87,10 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(SenhaNaoConcideComAtualException.class)
 	public ProblemDetail handleSerieNaoEncontradaException(SenhaNaoConcideComAtualException e) {
-		log.warn("Falha na requisição {]", e.getMessage());
+		log.warn("Falha na requisição {}", e.getMessage());
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
 
-		problemDetail.setType(URI.create("https://seriaApi.com"));
+		problemDetail.setType(URI.create(DOMINIO));
 		problemDetail.setTitle("Senha não coincide com a atual");
 		problemDetail.setDetail("A senha fornecida não coincide com a senha atual. Por favor, verifique!");
 		problemDetail.setProperty("timestamp", Instant.now());
@@ -80,7 +103,7 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 		log.warn("Falha na requisição {]", e.getMessage());
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
 
-		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setType(URI.create(DOMINIO));
 		problemDetail.setTitle("Recurso não pode ser excluído.");
 		problemDetail.setDetail(
 				"Recurso não pode ser excluído. O recurso está sendo usado por outras relações, exclua essas relações primeiro");
@@ -95,7 +118,7 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 		ProblemDetail detail = ex.getBody();
 
 		detail.setStatus(status.value());
-		detail.setType(URI.create("https://serieApi.com.br"));
+		detail.setType(URI.create(DOMINIO));
 		detail.setTitle("Dados inválidos");
 		detail.setDetail("Um ou mais campos estão incorretos. Faça o preenchimento certo");
 
@@ -121,7 +144,7 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
 
-		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setType(URI.create(DOMINIO));
 		problemDetail.setTitle("O seu formato de data está errado! Por favor, corrija-o");
 		problemDetail.setProperty("timestamp", System.currentTimeMillis());
 		problemDetail
@@ -135,7 +158,7 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 			HttpStatusCode status, WebRequest request) {
 
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
-		problemDetail.setType(URI.create("https://seusite.com"));
+		problemDetail.setType(URI.create(DOMINIO));
 		problemDetail.setTitle("O recurso não foi encontrado, garanta que a URI está escrita corretamente!");
 		problemDetail.setProperty("timestamp", System.currentTimeMillis());
 		problemDetail.setDetail(

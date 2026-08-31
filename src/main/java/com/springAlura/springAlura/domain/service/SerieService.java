@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
@@ -34,6 +36,9 @@ public class SerieService {
 	@Autowired
 	StreamingService streamingService;
 
+	@Autowired
+	SerieRepository repository;
+
 	public void associarStreaming(Long serieId, Long streamingId) {
 		Serie serie = buscaOuFalha(serieId);
 
@@ -42,17 +47,15 @@ public class SerieService {
 		salvar(serie);
 	}
 
-	public List<Serie> buscaComFiltros(String nome, Double notaMax, Integer limite) {
+	public Page<SerieResponseDto> buscaComFiltros(SerieFiltroRequestDto dto, Pageable pageable) {
 
-		Specification<Serie> filtros = Specification.where(SerieEspecification.porNome(nome))
-				.and(SerieEspecification.porNota(notaMax));
+		Specification<Serie> filtros = Specification.where(SerieEspecification.porNome(dto.titulo()))
+				.and(SerieEspecification.porNota(dto.notaMax()));
 
-		int limitePadrao = (limite != null) ? limite : 10;
+		List<Serie> series = repository.findAll(filtros, pageable).getContent();
+		Page<Serie> paginas = repository.findAll(filtros, pageable);
 
-		Pageable limiteRegistros = PageRequest.of(0, limitePadrao);
-
-		return repository.findAll(filtros, limiteRegistros).getContent();
-
+		return paginas.map(s -> toDto(s));
 	}
 
 	@Transactional
@@ -80,9 +83,6 @@ public class SerieService {
 			return new SerieNaoEncontradaException(serieId);
 		});
 	}
-
-	@Autowired
-	SerieRepository repository;
 
 	@Transactional
 	public Serie salvar(Serie serie) {
@@ -121,6 +121,11 @@ public class SerieService {
 	}
 
 	public SerieResponseDto toDto(Serie serie) {
+
+		if (serie == null) {
+			return null;
+		}
+
 		SerieResponseDto dto = new SerieResponseDto();
 
 		Categoria categoria = serie.getCategoria();
@@ -172,6 +177,32 @@ public class SerieService {
 		}).toList();
 
 		return listDto;
+	}
+
+	@Transactional
+	public Page<SerieResponseDto> toDtoListPage(Page<Serie> page) {
+		// forma manual
+//		List<SerieResponseDto> listDto = series.stream().map(s -> new SerieResponseDto(s.getId(), s.getTitle(),
+//				s.getTotalSeasons(), s.getImdbRating(), s.getActors(), s.getPoster(), s.getPlot())).toList();
+
+		List<SerieResponseDto> listDto = page.getContent().stream().map(s -> {
+
+			SerieResponseDto dto = new SerieResponseDto();
+			Categoria categoria = s.getCategoria();
+
+			if (s.getCategoria() != null) {
+				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
+				dto.setCategoriaId(categoriaDto);
+			}
+
+			BeanUtils.copyProperties(s, dto);
+			return dto;
+
+		}).toList();
+
+		Page<SerieResponseDto> pagina = new PageImpl<>(listDto);
+
+		return pagina;
 	}
 
 	public List<Serie> listar() {

@@ -1,15 +1,15 @@
 package com.springAlura.springAlura;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class SpringAluraApplication {
-	
 
 	public static void main(String[] args) {
-		System.out.println("oi");
+
 		SpringApplication.run(SpringAluraApplication.class, args);
 
 	}

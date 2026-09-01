@@ -483,6 +483,7 @@ components:
         - sinopse
         - titulo
         - totalTemporada
+        - categoriaId
       properties:
         titulo:
           type: string

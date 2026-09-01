@@ -3,6 +3,8 @@ package com.springAlura.springAlura.domain.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Audited
 public class Serie {
 
 	@Id
@@ -50,7 +53,7 @@ public class Serie {
 
 	@ManyToOne()
 	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;
+	private Categoria categoria = null;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "series_streamings", joinColumns = @JoinColumn(name = "serie_id"), inverseJoinColumns = @JoinColumn(name = "streaming_id"))

@@ -1,436 +1,1008 @@
 openapi: 3.0.1
 info:
   title: SerieApi
-  version: v0
+  description: >-
+    API REST para gerenciamento de séries, plataformas de streaming e usuários.
+    Permite cadastrar, atualizar, filtrar e associar séries a plataformas de streaming.
+  version: v1.0.0
+  contact:
+    name: Suporte SerieApi
+    email: suporte@serieapi.com.br
+
 servers:
   - url: http://localhost:8080
-    description: Generated server url
+    description: Ambiente de desenvolvimento local
+
 tags:
   - name: Séries
     description: Endpoints para gerenciamento do catálogo de séries
+  - name: Plataformas
+    description: Endpoints para gerenciamento de plataformas de streaming
+  - name: Usuários
+    description: Endpoints para gerenciamento de usuários
+  - name: Streamings
+    description: Endpoints para gerenciamento de assinaturas de streaming
+  - name: Séries x Streamings
+    description: Endpoints para associação entre séries e plataformas de streaming
+
 paths:
-  /series/{serieId}:
-    put:
-      tags:
-        - Séries
-      summary: Atualiza os campos de uma série baseado no ID
-      description: >-
-        Informe o ID na URL e o novo corpo da série no JSON para realizar a
-        atualização completa.
-      operationId: atualizar
-      parameters:
-        - name: serieId
-          in: path
-          description: ID numérico da série a ser atualizada
-          required: true
-          schema:
-            type: integer
-            format: int64
-          example: 1
-      requestBody:
-        description: Novos dados da série
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SerieRequestDto'
-        required: true
-      responses:
-        '200':
-          description: Série updated com sucesso!
-          content:
-            application/json:
-              examples:
-                Sucesso!:
-                  summary: Exemplo de quando o PUT é feito com sucesso
-                  description: Sucesso!
-                  value:
-                    id: 1
-                    titulo: TESTE PUT
-                    totalTemporada: 800
-                    avaliacao: 800
-                    atores: TESTE PUT
-                    poster: TESTE PUT
-                    sinopse: TESTE PUT
-                    dataLancamento: 20/01/2008
-        '400':
-          description: Dados de entrada inválidos! Verifique os campos!
-          content:
-            application/json:
-              examples:
-                Campos Inválidos:
-                  summary: >-
-                    Exemplo de erro quando os dados enviados no JSON falham na
-                    validação
-                  description: Campos Inválidos
-                  value:
-                    type: https://serieApi.com.br
-                    title: Dados inválidos
-                    status: 400
-                    detail: >-
-                      Um ou mais campos estão incorretos. Faça o preenchimento
-                      certo
-                    instance: /series
-                    properties:
-                      fields:
-                        - fieldName: totalTemporada
-                          detail: >-
-                            Total de Temporada da Série deve ser maior ou igual
-                            a zero.
-                        - fieldName: titulo
-                          detail: Titulo da Série é obrigatório.
-                        - fieldName: avaliacao
-                          detail: Avaliação da Série deve ser maior ou igual a zero.
-        '404':
-          description: Série não encontrada com o ID fornecido
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/SerieResponseDto'
-    delete:
-      tags:
-        - Séries
-      summary: Deleta uma série baseada no ID
-      description: Informe o ID da série para apagá-la da base de dados
-      operationId: excluir
-      parameters:
-        - name: serieId
-          in: path
-          description: ID numérico da série a ser excluída
-          required: true
-          schema:
-            type: integer
-            format: int64
-          example: 1
-      responses:
-        '204':
-          description: Série deletada com sucesso
-        '400':
-          description: Erro ao deletar a Série, verifique o ID
-          content:
-            application/json:
-              examples:
-                Falha:
-                  summary: Exemplo quando há um erro no deletar
-                  description: Falha
-                  value:
-                    type: https://seusite.com
-                    title: Séri não encontrada
-                    status: 400
-                    detail: >-
-                      Não existe um cadastro de Serie com código:
-                      SEU_CODIGO_ERRADO
-                    instance: /series/SEU_CODIGO_ERRADO
-                    properties:
-                      timestamp: 1786623273703
-        '404':
-          description: Série não encontrada para exclusão
-  /series/{serieId}/ativar:
-    put:
-      tags:
-        - Séries
-      operationId: ativarSerie
-      parameters:
-        - name: serieId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '204':
-          description: No Content
+
+  # ==========================================
+  # SÉRIES
+  # ==========================================
+
   /series:
     get:
       tags:
         - Séries
       summary: Lista todas as séries
-      description: Lista todas as séries cadastradas no banco de dados de forma irrestrita
-      operationId: listar
+      description: Retorna todas as séries cadastradas no banco de dados de forma irrestrita.
+      operationId: listarSeries
       responses:
         '200':
-          description: Séries encontradas com sucesso!
+          description: Séries encontradas com sucesso
           content:
             application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SerieResponseDto'
               examples:
-                Sucesso!:
-                  summary: Exemplo quando o GET é retornado com sucesso
-                  description: Sucesso!
+                Sucesso:
+                  summary: Lista de séries retornada com sucesso
                   value:
                     - id: 1
                       titulo: Breaking Bad
                       totalTemporada: 5
                       avaliacao: 9.5
                       atores: Bryan Cranston, Aaron Paul
-                      poster: poster001.jpg
-                      sinopse: Um professor de quimica se volta para o crime.
-                      dataLancamento: 20/01/2008
+                      poster: https://link-da-imagem.com/breaking-bad.jpg
+                      sinopse: Um professor de química se volta para o crime.
+                      dataLancamento: 2008-01-20
+                      ativo: true
+                      categoriaId:
+                        id: 1
+                        categoria: Drama
                     - id: 2
                       titulo: Stranger Things
                       totalTemporada: 4
                       avaliacao: 8.7
                       atores: Winona Ryder, David Harbour
-                      poster: poster002.jpg
-                      sinopse: Criancas enfrentam forcas sobrenaturais.
-                      dataLancamento: 15/07/2016
+                      poster: https://link-da-imagem.com/stranger-things.jpg
+                      sinopse: Crianças enfrentam forças sobrenaturais.
+                      dataLancamento: 2016-07-15
+                      ativo: true
+                      categoriaId:
+                        id: 2
+                        categoria: Ficção Científica
         '500':
-          description: Erro interno no servidor ao processar a consulta
+          description: Erro interno no servidor
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
               examples:
-                Erro Interno:
-                  summary: Exemplo de erro inesperado no sistema
-                  description: Erro Interno
+                ErroInterno:
+                  summary: Erro inesperado no servidor
                   value:
-                    type: https://serieApi.com.br
-                    title: >-
-                      O recurso não foi encontrado, garanta que a URI está
-                      escrita corretamente!
-                    status: 404
-                    detail: >-
-                      Endereço não encontrado: Verifique se há erros de
-                      digitação, letras maiúsculas incorretas ou caracteres
-                      extras na URI. Se o erro persistir, limpe o cache com Ctrl
-                      + F5 e tente novamente.
-                    instance: /seriess
-                    properties:
-                      timestamp: 1786619160432
+                    type: https://serieapi.com.br/erro-interno
+                    title: Erro interno no servidor
+                    status: 500
+                    detail: Ocorreu um erro inesperado. Tente novamente mais tarde.
+                    instance: /series
+
     post:
       tags:
         - Séries
       summary: Cria uma nova série
-      description: Informe os dados para salvar uma nova série
-      operationId: salvar
+      description: Cria e persiste uma nova série no banco de dados com os dados informados.
+      operationId: salvarSerie
       requestBody:
         description: Dados necessários para a criação da série
+        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SerieRequestDto'
-        required: true
+            examples:
+              ExemploRequest:
+                summary: Exemplo de criação de série
+                value:
+                  titulo: Breaking Bad
+                  totalTemporada: 5
+                  avaliacao: 9.5
+                  atores: Bryan Cranston, Aaron Paul
+                  poster: https://link-da-imagem.com/breaking-bad.jpg
+                  sinopse: Um professor de química se volta para o crime.
+                  dataLancamento: 2008-01-20
+                  ativo: true
+                  categoriaId:
+                    id: 1
       responses:
         '201':
           description: Série criada com sucesso
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/SerieResponseDto'
               examples:
                 Sucesso:
-                  summary: Exemplo de quando o POST é feito com sucesso
-                  description: Sucesso
+                  summary: Série criada com sucesso
                   value:
                     id: 1
-                    titulo: TESTE POST
-                    totalTemporada: 800
-                    avaliacao: 800
-                    atores: TESTE POST
-                    poster: TESTE POST
-                    sinopse: TESTE POST
-                    dataLancamento: 20/01/2008
+                    titulo: Breaking Bad
+                    totalTemporada: 5
+                    avaliacao: 9.5
+                    atores: Bryan Cranston, Aaron Paul
+                    poster: https://link-da-imagem.com/breaking-bad.jpg
+                    sinopse: Um professor de química se volta para o crime.
+                    dataLancamento: 2008-01-20
+                    ativo: true
+                    categoriaId:
+                      id: 1
+                      categoria: Drama
         '400':
-          description: Dados de entrada inválidos! Verifique os campos!
+          description: Dados de entrada inválidos
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
               examples:
-                Campos Inválidos:
-                  summary: >-
-                    Exemplo de erro quando os dados enviados no JSON falham na
-                    validação
-                  description: Campos Inválidos
+                CamposInvalidos:
+                  summary: Campos obrigatórios não preenchidos ou inválidos
                   value:
-                    type: https://serieApi.com.br
+                    type: https://serieapi.com.br/dados-invalidos
                     title: Dados inválidos
                     status: 400
-                    detail: >-
-                      Um ou mais campos estão incorretos. Faça o preenchimento
-                      certo
+                    detail: Um ou mais campos estão incorretos. Faça o preenchimento correto.
                     instance: /series
-                    properties:
-                      fields:
-                        - fieldName: totalTemporada
-                          detail: >-
-                            Total de Temporada da Série deve ser maior ou igual
-                            a zero.
-                        - fieldName: titulo
-                          detail: Titulo da Série é obrigatório.
-                        - fieldName: avaliacao
-                          detail: Avaliação da Série deve ser maior ou igual a zero.
+                    fields:
+                      - fieldName: titulo
+                        detail: Título da série é obrigatório.
+                      - fieldName: totalTemporada
+                        detail: Total de temporadas deve ser maior ou igual a zero.
+                      - fieldName: avaliacao
+                        detail: Avaliação deve ser maior ou igual a zero.
+
+  /series/{serieId}:
+    get:
+      tags:
+        - Séries
+      summary: Busca uma série pelo ID
+      description: Retorna os dados completos de uma série específica pelo seu ID.
+      operationId: buscarSeriePorId
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+      responses:
+        '200':
+          description: Série encontrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SerieResponseDto'
+              examples:
+                Sucesso:
+                  summary: Série retornada com sucesso
+                  value:
+                    id: 1
+                    titulo: Breaking Bad
+                    totalTemporada: 5
+                    avaliacao: 9.5
+                    atores: Bryan Cranston, Aaron Paul
+                    poster: https://link-da-imagem.com/breaking-bad.jpg
+                    sinopse: Um professor de química se volta para o crime.
+                    dataLancamento: 2008-01-20
+                    ativo: true
+                    categoriaId:
+                      id: 1
+                      categoria: Drama
+        '404':
+          description: Série não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+              examples:
+                NaoEncontrado:
+                  summary: Série não encontrada com o ID informado
+                  value:
+                    type: https://serieapi.com.br/recurso-nao-encontrado
+                    title: Recurso não encontrado
+                    status: 404
+                    detail: Não existe uma série cadastrada com o código 99.
+                    instance: /series/99
+
+    put:
+      tags:
+        - Séries
+      summary: Atualiza uma série pelo ID
+      description: Atualiza completamente os dados de uma série existente com base no ID informado.
+      operationId: atualizarSerie
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+      requestBody:
+        description: Novos dados da série
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SerieRequestDto'
+            examples:
+              ExemploRequest:
+                summary: Exemplo de atualização de série
+                value:
+                  titulo: Breaking Bad — Edição Especial
+                  totalTemporada: 5
+                  avaliacao: 9.8
+                  atores: Bryan Cranston, Aaron Paul
+                  poster: https://link-da-imagem.com/breaking-bad-v2.jpg
+                  sinopse: Um professor de química se volta para o crime.
+                  dataLancamento: 2008-01-20
+                  ativo: true
+                  categoriaId:
+                    id: 1
+      responses:
+        '200':
+          description: Série atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SerieResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+        '404':
+          description: Série não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+    delete:
+      tags:
+        - Séries
+      summary: Remove uma série pelo ID
+      description: Remove permanentemente uma série do banco de dados com base no ID informado.
+      operationId: excluirSerie
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+      responses:
+        '204':
+          description: Série removida com sucesso
+        '404':
+          description: Série não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+        '409':
+          description: Série em uso e não pode ser removida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroConflitoResponse'
+              examples:
+                EmUso:
+                  summary: Série associada a um streaming
+                  value:
+                    type: https://serieapi.com.br/entidade-em-uso
+                    title: Entidade em uso
+                    status: 409
+                    detail: A série de código 1 não pode ser removida pois está em uso.
+                    instance: /series/1
+
+  /series/{serieId}/ativar:
+    put:
+      tags:
+        - Séries
+      summary: Ativa uma série
+      description: Altera o status da série para ativo, indicando que ainda recebe novos episódios.
+      operationId: ativarSerie
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+      responses:
+        '204':
+          description: Série ativada com sucesso
+        '404':
+          description: Série não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+  /series/{serieId}/desativar:
+    delete:
+      tags:
+        - Séries
+      summary: Desativa uma série
+      description: Altera o status da série para inativo, indicando que não recebe mais novos episódios.
+      operationId: desativarSerie
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+      responses:
+        '204':
+          description: Série desativada com sucesso
+        '404':
+          description: Série não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
   /series/filtros:
     get:
       tags:
         - Séries
       summary: Filtra séries dinamicamente
-      description: Busca séries aplicando filtros opcionais combinados no banco de dados
-      operationId: listarComFiltros
+      description: Busca séries aplicando filtros opcionais combinados. Todos os parâmetros são opcionais.
+      operationId: listarSeriesComFiltros
       parameters:
-        - name: filtros
+        - name: titulo
           in: query
-          description: >-
-            Objeto contendo os filtros dinâmicos de busca (Título e Preço
-            Máximo)
-          required: true
+          description: Filtra séries pelo título (busca parcial)
+          required: false
           schema:
-            $ref: '#/components/schemas/SerieFiltroDto'
-      responses:
-        '200':
-          description: Filtro processado com sucesso!
-          content:
-            application/json:
-              examples:
-                Sucesso!:
-                  summary: Exemplo quando o GET filtrado retorna dados
-                  description: Sucesso!
-                  value:
-                    - id: 1
-                      titulo: Breaking Bad
-                      totalTemporada: 5
-                      avaliacao: 9.5
-                      atores: Bryan Cranston, Aaron Paul
-                      poster: poster001.jpg
-                      sinopse: Um professor de quimica se volta para o crime.
-                      dataLancamento: 20/01/2008
-                    - id: 2
-                      titulo: Stranger Things
-                      totalTemporada: 4
-                      avaliacao: 8.7
-                      atores: Winona Ryder, David Harbour
-                      poster: poster002.jpg
-                      sinopse: Criancas enfrentam forcas sobrenaturais.
-                      dataLancamento: 15/07/2016
-        '500':
-          description: Erro interno no servidor ao processar os filtros
-          content:
-            application/json:
-              examples:
-                Erro Interno:
-                  summary: Exemplo de erro inesperado no sistema
-                  description: Erro Interno
-                  value:
-                    type: https://serieApi.com.br
-                    title: >-
-                      O recurso não foi encontrado, garanta que a URI está
-                      escrita corretamente!
-                    status: 404
-                    detail: >-
-                      Endereço não encontrado: Verifique se há erros de
-                      digitação, letras maiúsculas incorretas ou caracteres
-                      extras na URI. Se o erro persistir, limpe o cache com Ctrl
-                      + F5 e tente novamente.
-                    instance: /seriess
-                    properties:
-                      timestamp: 1786619160432
-  /series/{serieId}/desativar:
-    delete:
-      tags:
-        - Séries
-      operationId: desativarSerie
-      parameters:
-        - name: serieId
-          in: path
-          required: true
+            type: string
+          example: Breaking
+        - name: notaMax
+          in: query
+          description: Filtra séries com avaliação até o valor informado
+          required: false
+          schema:
+            type: number
+            format: double
+          example: 9.5
+        - name: limite
+          in: query
+          description: Limita a quantidade de resultados retornados
+          required: false
           schema:
             type: integer
-            format: int64
+            format: int32
+          example: 10
+      responses:
+        '200':
+          description: Filtro processado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SerieResponseDto'
+        '500':
+          description: Erro interno no servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+
+  # ==========================================
+  # SÉRIES x STREAMINGS
+  # ==========================================
+
+  /series/{serieId}/streamings:
+    get:
+      tags:
+        - Séries x Streamings
+      summary: Lista streamings associados a uma série
+      description: Retorna todas as plataformas de streaming em que a série está disponível.
+      operationId: listarStreamingsDaSerie
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+      responses:
+        '200':
+          description: Streamings retornados com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StreamingResponseDto'
+        '404':
+          description: Série não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+  /series/{serieId}/streamings/{streamingId}:
+    put:
+      tags:
+        - Séries x Streamings
+      summary: Associa uma série a uma plataforma de streaming
+      description: Cria o vínculo entre uma série e uma plataforma de streaming pelo ID de ambos.
+      operationId: associarSerieAoStreaming
+      parameters:
+        - $ref: '#/components/parameters/serieId'
+        - $ref: '#/components/parameters/streamingId'
       responses:
         '204':
-          description: No Content
+          description: Associação realizada com sucesso
+        '404':
+          description: Série ou streaming não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+  # ==========================================
+  # PLATAFORMAS
+  # ==========================================
+
+  /plataformas:
+    get:
+      tags:
+        - Plataformas
+      summary: Lista todas as plataformas
+      description: Retorna todas as plataformas de streaming cadastradas.
+      operationId: listarPlataformas
+      responses:
+        '200':
+          description: Plataformas retornadas com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlataformaResponseDto'
+              examples:
+                Sucesso:
+                  summary: Lista de plataformas
+                  value:
+                    - id: 1
+                      nome: Netflix
+                      dominio: netflix.com
+                      totalCatalogo: 5000
+                      mensalidade: 39.90
+                    - id: 2
+                      nome: Prime Video
+                      dominio: primevideo.com
+                      totalCatalogo: 3000
+                      mensalidade: 19.90
+
+    post:
+      tags:
+        - Plataformas
+      summary: Cria uma nova plataforma
+      description: Cria e persiste uma nova plataforma de streaming no banco de dados.
+      operationId: salvarPlataforma
+      requestBody:
+        description: Dados necessários para a criação da plataforma
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlataformaRequestDto'
+            examples:
+              ExemploRequest:
+                summary: Exemplo de criação de plataforma
+                value:
+                  nome: Netflix
+                  dominio: netflix.com
+                  totalCatalogo: 5000
+                  mensalidade: 39.90
+      responses:
+        '201':
+          description: Plataforma criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlataformaResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+
+  /plataformas/{plataformaId}:
+    get:
+      tags:
+        - Plataformas
+      summary: Busca uma plataforma pelo ID
+      description: Retorna os dados de uma plataforma específica pelo seu ID.
+      operationId: buscarPlataformaPorId
+      parameters:
+        - $ref: '#/components/parameters/plataformaId'
+      responses:
+        '200':
+          description: Plataforma encontrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlataformaResponseDto'
+        '404':
+          description: Plataforma não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+    put:
+      tags:
+        - Plataformas
+      summary: Atualiza uma plataforma pelo ID
+      description: Atualiza os dados de uma plataforma existente com base no ID informado.
+      operationId: atualizarPlataforma
+      parameters:
+        - $ref: '#/components/parameters/plataformaId'
+      requestBody:
+        description: Novos dados da plataforma
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlataformaRequestDto'
+      responses:
+        '200':
+          description: Plataforma atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlataformaResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+        '404':
+          description: Plataforma não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+    delete:
+      tags:
+        - Plataformas
+      summary: Remove uma plataforma pelo ID
+      description: Remove permanentemente uma plataforma de streaming do banco de dados.
+      operationId: deletarPlataforma
+      parameters:
+        - $ref: '#/components/parameters/plataformaId'
+      responses:
+        '204':
+          description: Plataforma removida com sucesso
+        '404':
+          description: Plataforma não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+        '409':
+          description: Plataforma em uso e não pode ser removida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroConflitoResponse'
+
+  # ==========================================
+  # USUÁRIOS
+  # ==========================================
+
+  /usuarios:
+    get:
+      tags:
+        - Usuários
+      summary: Lista todos os usuários
+      description: Retorna todos os usuários cadastrados no sistema.
+      operationId: listarUsuarios
+      responses:
+        '200':
+          description: Usuários retornados com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsuarioResponseDto'
+              examples:
+                Sucesso:
+                  summary: Lista de usuários
+                  value:
+                    - id: 1
+                      nome: João Silva
+                      email: joao@marinha.mil.br
+                    - id: 2
+                      nome: Maria Souza
+                      email: maria@email.com
+
+    post:
+      tags:
+        - Usuários
+      summary: Cria um novo usuário
+      description: Cria e persiste um novo usuário no sistema com os dados informados.
+      operationId: criarUsuario
+      requestBody:
+        description: Dados necessários para a criação do usuário
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioCriacaoRequestDto'
+            examples:
+              ExemploRequest:
+                summary: Exemplo de criação de usuário
+                value:
+                  nome: João Silva
+                  email: joao@marinha.mil.br
+                  senha: M@rinha2026
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+
+  /usuarios/{usuarioId}:
+    get:
+      tags:
+        - Usuários
+      summary: Busca um usuário pelo ID
+      description: Retorna os dados de um usuário específico pelo seu ID.
+      operationId: buscarUsuarioPorId
+      parameters:
+        - $ref: '#/components/parameters/usuarioId'
+      responses:
+        '200':
+          description: Usuário encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponseDto'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+    put:
+      tags:
+        - Usuários
+      summary: Atualiza dados do usuário
+      description: Atualiza nome e e-mail de um usuário existente. Para atualizar a senha use o endpoint específico.
+      operationId: atualizarUsuario
+      parameters:
+        - $ref: '#/components/parameters/usuarioId'
+      requestBody:
+        description: Novos dados do usuário
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioAtualizacaoRequestDto'
+            examples:
+              ExemploRequest:
+                summary: Exemplo de atualização de usuário
+                value:
+                  nome: João Silva Atualizado
+                  email: joao.novo@marinha.mil.br
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+  /usuarios/{usuarioId}/senha:
+    put:
+      tags:
+        - Usuários
+      summary: Atualiza a senha do usuário
+      description: Atualiza a senha de um usuário. É necessário informar a senha atual para confirmar a identidade.
+      operationId: atualizarSenhaUsuario
+      parameters:
+        - $ref: '#/components/parameters/usuarioId'
+      requestBody:
+        description: Senhas atual e nova do usuário
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioAtualizarSenhaDto'
+            examples:
+              ExemploRequest:
+                summary: Exemplo de atualização de senha
+                value:
+                  senhaAtual: M@rinha2026
+                  senhaNova: NovaSenha@2027
+      responses:
+        '204':
+          description: Senha atualizada com sucesso
+        '400':
+          description: Senha atual incorreta ou dados inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+              examples:
+                SenhaIncorreta:
+                  summary: Senha atual incorreta
+                  value:
+                    type: https://serieapi.com.br/dados-invalidos
+                    title: Dados inválidos
+                    status: 400
+                    detail: Senha atual incorreta.
+                    instance: /usuarios/1/senha
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+  # ==========================================
+  # STREAMINGS
+  # ==========================================
+
+  /streamings:
+    get:
+      tags:
+        - Streamings
+      summary: Lista todos os streamings
+      description: Retorna todas as assinaturas de streaming cadastradas.
+      operationId: listarStreamings
+      responses:
+        '200':
+          description: Streamings retornados com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StreamingResponseDto'
+
+    post:
+      tags:
+        - Streamings
+      summary: Cria uma nova assinatura de streaming
+      description: Cria o vínculo entre um usuário e uma plataforma de streaming.
+      operationId: salvarStreaming
+      requestBody:
+        description: Dados da assinatura de streaming
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamingRequestDto'
+            examples:
+              ExemploRequest:
+                summary: Exemplo de criação de streaming
+                value:
+                  usuarioAtivo: true
+                  estaNaPlataforma: true
+                  dataNaPlataforma: 2024-01-15
+                  usuarioId:
+                    id: 1
+                  plataformaId:
+                    id: 1
+      responses:
+        '201':
+          description: Streaming criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamingResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+
+  /streamings/{streamingId}:
+    get:
+      tags:
+        - Streamings
+      summary: Busca um streaming pelo ID
+      description: Retorna os dados de uma assinatura de streaming específica pelo seu ID.
+      operationId: buscarStreamingPorId
+      parameters:
+        - $ref: '#/components/parameters/streamingId'
+      responses:
+        '200':
+          description: Streaming encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamingResponseDto'
+        '404':
+          description: Streaming não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+    put:
+      tags:
+        - Streamings
+      summary: Atualiza um streaming pelo ID
+      description: Atualiza os dados de uma assinatura de streaming existente.
+      operationId: atualizarStreaming
+      parameters:
+        - $ref: '#/components/parameters/streamingId'
+      requestBody:
+        description: Novos dados do streaming
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamingRequestDto'
+      responses:
+        '200':
+          description: Streaming atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamingResponseDto'
+        '400':
+          description: Dados de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroDadosInvalidosResponse'
+        '404':
+          description: Streaming não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+    delete:
+      tags:
+        - Streamings
+      summary: Remove um streaming pelo ID
+      description: Remove permanentemente uma assinatura de streaming do banco de dados.
+      operationId: apagarStreaming
+      parameters:
+        - $ref: '#/components/parameters/streamingId'
+      responses:
+        '204':
+          description: Streaming removido com sucesso
+        '404':
+          description: Streaming não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroNaoEncontradoResponse'
+
+# ==========================================
+# COMPONENTS
+# ==========================================
+
 components:
+
+  parameters:
+    serieId:
+      name: serieId
+      in: path
+      description: ID numérico da série
+      required: true
+      schema:
+        type: integer
+        format: int64
+      example: 1
+
+    plataformaId:
+      name: plataformaId
+      in: path
+      description: ID numérico da plataforma
+      required: true
+      schema:
+        type: integer
+        format: int64
+      example: 1
+
+    usuarioId:
+      name: usuarioId
+      in: path
+      description: ID numérico do usuário
+      required: true
+      schema:
+        type: integer
+        format: int64
+      example: 1
+
+    streamingId:
+      name: streamingId
+      in: path
+      description: ID numérico do streaming
+      required: true
+      schema:
+        type: integer
+        format: int64
+      example: 1
+
   schemas:
-    categoriaIdRequestDto:
-      type: object 
+
+    # ---- REQUESTS ----
+
+    SerieRequestDto:
+      type: object
+      description: Dados para criação ou atualização de uma série
       required:
-        - id
+        - titulo
+        - totalTemporada
+        - avaliacao
+        - atores
+        - poster
+        - sinopse
+        - dataLancamento
       properties:
-        id:
+        titulo:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Título oficial da série
+          example: Breaking Bad
+        totalTemporada:
           type: integer
-          description: ID numérico da categoria já cadastrada no banco de dados
-          format: int64
-          minimum: 0  # O plugin gera o @Min(0) ou @PositiveOrZero no Java
-          example: 1
-
-    usuarioCriacaoRequestDto:
-      type: object
-      required:
-        - nome 
-        - email 
-        - senha 
-      properties:
-        nome: 
-          type: string
-          minLength: 1 # O plugin gera o @Size(min=1) e @NotNull no Java
-          example: João Silva
-        email:
-          type: string
-          format: email
-          minLength: 1
-          example: joao@marinha.mil.br
-        senha: 
-          type: string
-          format: password
-          minLength: 6  # O plugin gera o @Size(min=6) automaticamente
-          maxLength: 20 # O plugin gera o @Size(max=20) automaticamente
-          description: Senha de acesso
-          example: "M@rinha2026"
-
-    usuarioAtualizacaoRequestDto:
-      type: object
-      required: 
-        - nome
-        - email
-      properties:
-        nome: 
-          type: string
-          minLength: 1
-          example: João Silva
-        email:
-          type: string
-          format: email
-          minLength: 1
-          example: joao@marinha.mil.br
-
-    usuarioAtualizarSenhaDto:
-      type: object
-      required: 
-        - senhaAtual
-        - senhaNova
-      properties:
-        senhaAtual:
-          type: string
-          format: password
-          minLength: 1
-        senhaNova:
-          type: string
-          format: password
-          minLength: 6
-          maxLength: 20
-          description: Nova senha a ser cadastrada no sistema
-          example: "NovaSenha123"
-
-    usuarioIdRequestDto:
-      type: object
-      required:
-        - id 
-      properties:
-        id:
-          type: integer
-          description: ID numérico do usuário já cadastrado no banco de dados
-          format: int64
+          format: int32
           minimum: 0
-          example: 1
-
-    plataformaIdRequestDto:
-      type: object
-      required:
-        - id 
-      properties:
-        id:
-          type: integer
-          description: ID numérico da plataforma já cadastrada no banco de dados
-          format: int64
+          description: Quantidade total de temporadas lançadas
+          example: 5
+        avaliacao:
+          type: number
+          format: double
           minimum: 0
-          example: 1
+          description: Nota de avaliação da série (0 a 10)
+          example: 9.5
+        atores:
+          type: string
+          minLength: 1
+          description: Nomes dos principais atores do elenco
+          example: Bryan Cranston, Aaron Paul
+        poster:
+          type: string
+          minLength: 1
+          description: URL do poster ou imagem de capa da série
+          example: https://link-da-imagem.com/poster.jpg
+        sinopse:
+          type: string
+          minLength: 1
+          description: Sinopse ou resumo do enredo
+          example: Um professor de química se volta para o crime...
+        dataLancamento:
+          type: string
+          format: date
+          description: Data do lançamento original no formato yyyy-MM-dd
+          example: 2008-01-20
+        ativo:
+          type: boolean
+          description: Indica se a série ainda recebe novos episódios
+          example: true
+        categoriaId:
+          $ref: '#/components/schemas/CategoriaIdRequestDto'
 
-    plataformaRequestDto:
+    PlataformaRequestDto:
       type: object
-      required: 
+      description: Dados para criação ou atualização de uma plataforma
+      required:
         - nome
         - dominio
         - totalCatalogo
@@ -439,218 +1011,372 @@ components:
         nome:
           type: string
           minLength: 1
+          description: Nome da plataforma de streaming
           example: Netflix
         dominio:
           type: string
           minLength: 1
+          description: Domínio da plataforma
           example: netflix.com
         totalCatalogo:
-          type: integer 
+          type: integer
           format: int64
           minimum: 0
+          description: Total de títulos disponíveis no catálogo
           example: 5000
         mensalidade:
-          type: number 
-          format: double 
+          type: number
+          format: double
           minimum: 0
+          description: Valor da mensalidade em reais
           example: 39.90
+
+    UsuarioCriacaoRequestDto:
+      type: object
+      description: Dados para criação de um novo usuário
+      required:
+        - nome
+        - email
+        - senha
+      properties:
+        nome:
+          type: string
+          minLength: 1
+          description: Nome completo do usuário
+          example: João Silva
+        email:
+          type: string
+          format: email
+          minLength: 1
+          description: E-mail válido do usuário
+          example: joao@marinha.mil.br
+        senha:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 20
+          description: Senha de acesso com mínimo de 6 e máximo de 20 caracteres
+          example: M@rinha2026
+
+    UsuarioAtualizacaoRequestDto:
+      type: object
+      description: Dados para atualização de nome e e-mail do usuário
+      required:
+        - nome
+        - email
+      properties:
+        nome:
+          type: string
+          minLength: 1
+          description: Novo nome completo do usuário
+          example: João Silva Atualizado
+        email:
+          type: string
+          format: email
+          minLength: 1
+          description: Novo e-mail do usuário
+          example: joao.novo@marinha.mil.br
+
+    UsuarioAtualizarSenhaDto:
+      type: object
+      description: Dados para atualização de senha do usuário
+      required:
+        - senhaAtual
+        - senhaNova
+      properties:
+        senhaAtual:
+          type: string
+          format: password
+          minLength: 1
+          description: Senha atual do usuário para confirmação de identidade
+          example: M@rinha2026
+        senhaNova:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 20
+          description: Nova senha a ser cadastrada
+          example: NovaSenha@2027
 
     StreamingRequestDto:
       type: object
-      required: 
-        - usuarioId 
+      description: Dados para criação ou atualização de uma assinatura de streaming
+      required:
+        - usuarioId
         - plataformaId
       properties:
         usuarioAtivo:
-          type: boolean 
+          type: boolean
+          description: Indica se o usuário está ativo na plataforma
+          example: true
         estaNaPlataforma:
-          type: boolean 
+          type: boolean
+          description: Indica se o usuário ainda possui assinatura ativa
+          example: true
         dataNaPlataforma:
           type: string
-          format: date # Mantido o date puro. Se o Jackson reclamar do formato no POST, tratamos via @JsonFormat global.
+          format: date
+          description: Data de início da assinatura no formato yyyy-MM-dd
+          example: 2024-01-15
         usuarioId:
-          $ref: '#/components/schemas/usuarioIdRequestDto'
+          $ref: '#/components/schemas/UsuarioIdRequestDto'
         plataformaId:
-          $ref: '#/components/schemas/plataformaIdRequestDto'
+          $ref: '#/components/schemas/PlataformaIdRequestDto'
 
-    SerieRequestDto:
+    CategoriaIdRequestDto:
       type: object
+      description: Referência ao ID de uma categoria já cadastrada
       required:
-        - atores
-        - avaliacao
-        - dataLancamento
-        - poster
-        - sinopse
-        - titulo
-        - totalTemporada
+        - id
       properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: ID numérico da categoria já cadastrada no banco de dados
+          example: 1
+
+    UsuarioIdRequestDto:
+      type: object
+      description: Referência ao ID de um usuário já cadastrado
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: ID numérico do usuário já cadastrado no banco de dados
+          example: 1
+
+    PlataformaIdRequestDto:
+      type: object
+      description: Referência ao ID de uma plataforma já cadastrada
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: ID numérico da plataforma já cadastrada no banco de dados
+          example: 1
+
+    # ---- RESPONSES ----
+
+    SerieResponseDto:
+      type: object
+      description: Dados completos de uma série retornados pela API
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único da série
+          example: 1
         titulo:
           type: string
-          minLength: 1
-          maxLength: 20
           description: Título oficial da série
           example: Breaking Bad
         totalTemporada:
           type: integer
           format: int32
-          minimum: 0
-          description: Quantidade total de temporadas lançadas
+          description: Quantidade total de temporadas
           example: 5
         avaliacao:
           type: number
           format: double
-          minimum: 0
           description: Nota de avaliação da série
           example: 9.5
         atores:
           type: string
-          minLength: 1
-          maxLength: 2147483647
-          description: Nomes dos principais atores do elenco
+          description: Principais atores do elenco
           example: Bryan Cranston, Aaron Paul
         poster:
           type: string
-          minLength: 1
-          description: URL do poster ou imagem de capa da série
-          example: https://link-da-imagem.com
+          description: URL do poster da série
+          example: https://link-da-imagem.com/poster.jpg
         sinopse:
           type: string
-          minLength: 1
-          maxLength: 2147483647
-          description: Sinopse ou resumo do enredo
+          description: Resumo do enredo
           example: Um professor de química se volta para o crime...
         dataLancamento:
           type: string
           format: date
+          description: Data do lançamento original
+          example: 2008-01-20
         ativo:
           type: boolean
-          description: Status da série.
-          example: false
+          description: Indica se a série ainda recebe novos episódios
+          example: true
         categoriaId:
-          $ref: '#/components/schemas/categoriaIdRequestDto'
-      description: Modelo de dados para criar ou atualizar uma série
+          $ref: '#/components/schemas/CategoriaResponseDto'
 
     CategoriaResponseDto:
       type: object
+      description: Dados de uma categoria retornados pela API
       properties:
         id:
           type: integer
           format: int64
+          example: 1
         categoria:
           type: string
-    SerieResponseDto:
-      required:
-        - atores
-        - avaliacao
-        - dataLancamento
-        - id
-        - poster
-        - sinopse
-        - titulo
-        - totalTemporada
-        - categoriaId
+          example: Drama
+
+    PlataformaResponseDto:
       type: object
+      description: Dados de uma plataforma retornados pela API
       properties:
         id:
           type: integer
           format: int64
-        titulo:
-          maxLength: 100
-          minLength: 0
-          type: string
-          description: Título oficial da série
-          example: Breaking Bad
-        totalTemporada:
-          type: integer
-          description: Quantidade total de temporadas lançadas
-          format: int32
-          example: 5
-        avaliacao:
-          minimum: 0
-          exclusiveMinimum: false
-          type: number
-          description: Nota de avaliação da série
-          format: double
-          example: 9.5
-        atores:
-          type: string
-          description: Nomes dos principais atores do elenco
-          example: Bryan Cranston, Aaron Paul
-        poster:
-          type: string
-          description: URL do poster ou imagem de capa da série
-          example: https://link-da-imagem.com
-        sinopse:
-          type: string
-          description: Sinopse ou resumo do enredo
-          example: Um professor de química se volta para o crime...
-        dataLancamento:
-          type: string
-          description: Data do lançamento original
-          format: date
-          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"        
-        ativo:
-          type: boolean
-          description: >-
-            true para dizer que ainda recebe episódios e false para dizer que
-            não recebe mais episodios.
-          example: false
-        categoriaId:
-          $ref: '#/components/schemas/CategoriaResponseDto'
-    SerieFiltroDto:
-      type: object
-      properties:
-        id:
-          type: integer
-        titulo:
-          type: string
-        notaMax:
-          type: number
-          format: double
-        limite:
-          type: integer
-          format: int32
-    UsuarioResponseDto:
-      type: object
-      properties: 
-        id:
-          type: integer
-          format: int64
+          example: 1
         nome:
           type: string
+          example: Netflix
+        dominio:
+          type: string
+          example: netflix.com
+        totalCatalogo:
+          type: integer
+          format: int64
+          example: 5000
+        mensalidade:
+          type: number
+          format: double
+          example: 39.90
+
+    UsuarioResponseDto:
+      type: object
+      description: Dados de um usuário retornados pela API
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        nome:
+          type: string
+          example: João Silva
         email:
           type: string
+          example: joao@marinha.mil.br
+
     StreamingResponseDto:
       type: object
-      properties: 
+      description: Dados de uma assinatura de streaming retornados pela API
+      properties:
         id:
-          type: integer 
+          type: integer
           format: int64
+          example: 1
         usuario:
           $ref: '#/components/schemas/UsuarioResponseDto'
         plataforma:
           $ref: '#/components/schemas/PlataformaResponseDto'
         usuarioAtivo:
           type: boolean
+          example: true
         estaNaPlataforma:
           type: boolean
+          example: true
         dataNaPlataforma:
           type: string
           format: date
-          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"
-    PlataformaResponseDto:
+          example: 2024-01-15
+
+    # ---- ERROS ----
+
+    ErroDadosInvalidosResponse:
       type: object
+      description: Resposta de erro para dados inválidos (400)
       properties:
-        id:
+        type:
+          type: string
+          example: https://serieapi.com.br/dados-invalidos
+        title:
+          type: string
+          example: Dados inválidos
+        status:
           type: integer
-          format: int64
-        nome: 
-          type: string 
-        dominio:
-          type: string 
-        totalCatalogo:
-          type: integer 
-          format: int64 
-        mensalidade:
-          type: number 
-          format: double
+          example: 400
+        detail:
+          type: string
+          example: Um ou mais campos estão incorretos. Faça o preenchimento correto.
+        instance:
+          type: string
+          example: /series
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CampoInvalidoResponse'
+
+    CampoInvalidoResponse:
+      type: object
+      description: Detalhe de um campo inválido
+      properties:
+        fieldName:
+          type: string
+          example: titulo
+        detail:
+          type: string
+          example: Título da série é obrigatório.
+
+    ErroNaoEncontradoResponse:
+      type: object
+      description: Resposta de erro para recurso não encontrado (404)
+      properties:
+        type:
+          type: string
+          example: https://serieapi.com.br/recurso-nao-encontrado
+        title:
+          type: string
+          example: Recurso não encontrado
+        status:
+          type: integer
+          example: 404
+        detail:
+          type: string
+          example: Não existe uma série cadastrada com o código 99.
+        instance:
+          type: string
+          example: /series/99
+
+    ErroConflitoResponse:
+      type: object
+      description: Resposta de erro para conflito de dados (409)
+      properties:
+        type:
+          type: string
+          example: https://serieapi.com.br/entidade-em-uso
+        title:
+          type: string
+          example: Entidade em uso
+        status:
+          type: integer
+          example: 409
+        detail:
+          type: string
+          example: A série de código 1 não pode ser removida pois está em uso.
+        instance:
+          type: string
+          example: /series/1
+
+    ErroInternoResponse:
+      type: object
+      description: Resposta de erro para falha interna no servidor (500)
+      properties:
+        type:
+          type: string
+          example: https://serieapi.com.br/erro-interno
+        title:
+          type: string
+          example: Erro interno no servidor
+        status:
+          type: integer
+          example: 500
+        detail:
+          type: string
+          example: Ocorreu um erro inesperado. Tente novamente mais tarde.
+        instance:
+          type: string
+          example: /series

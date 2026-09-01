@@ -32,4 +32,14 @@ public class SerieEspecification {
 		};
 	}
 
+	public static Specification<Serie> porAtores(String atores) {
+		return (root, query, cb) -> {
+			if (atores == null || atores.trim().isEmpty()) {
+				return null;
+			}
+
+			return cb.like(cb.lower(root.get("atores")), "%" + atores.toLowerCase() + "%");
+		};
+	}
+
 }

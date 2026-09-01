@@ -44,6 +44,7 @@ public class SerieController implements SwaggerSerieController {
 
 	@GetMapping("/filtros")
 	public Page<SerieResponseDto> listarComFiltros(SerieFiltroRequestDto filtros, Pageable pageable) {
+		log.info("Recebida a requisição GET para listar Séries com filtros");
 		return serieService.buscaComFiltros(filtros, pageable);
 	}
 
@@ -86,6 +87,7 @@ public class SerieController implements SwaggerSerieController {
 	@DeleteMapping(PathsApi.ID_SERIE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long serieId) {
+		log.info("Recebida a requsição DELETE para exclusão de uma série");
 		serieService.deletar(serieId);
 	}
 
@@ -93,6 +95,7 @@ public class SerieController implements SwaggerSerieController {
 	@PutMapping(PathsApi.ATIVANDO_SERIE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void ativarSerie(@PathVariable Long serieId) {
+		log.info("Recebida a requsição {} para ativação de uma série", PathsApi.ATIVANDO_SERIE);
 		serieService.ativarSerie(serieId);
 	}
 
@@ -100,6 +103,7 @@ public class SerieController implements SwaggerSerieController {
 	@DeleteMapping(PathsApi.DESATIVANDO_SERIE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desativarSerie(@PathVariable Long serieId) {
+		log.info("Recebida a requsição {} para desativação de uma série", PathsApi.DESATIVANDO_SERIE);
 		serieService.desativarSerie(serieId);
 	}
 }

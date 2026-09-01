@@ -5,16 +5,17 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
-import com.springAlura.springAlura.domain.exception.EntidadeNulaNoPayloadException;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.Categoria;
 import com.springAlura.springAlura.domain.model.Serie;
@@ -34,6 +35,9 @@ public class SerieService {
 	@Autowired
 	StreamingService streamingService;
 
+	@Autowired
+	SerieRepository repository;
+
 	public void associarStreaming(Long serieId, Long streamingId) {
 		Serie serie = buscaOuFalha(serieId);
 
@@ -42,17 +46,15 @@ public class SerieService {
 		salvar(serie);
 	}
 
-	public List<Serie> buscaComFiltros(String nome, Double notaMax, Integer limite) {
+	public Page<SerieResponseDto> buscaComFiltros(SerieFiltroRequestDto dto, Pageable pageable) {
+		log.debug("Iniciando o processo de busca das Séries com filtros");
 
-		Specification<Serie> filtros = Specification.where(SerieEspecification.porNome(nome))
-				.and(SerieEspecification.porNota(notaMax));
+		Specification<Serie> filtros = Specification.where(SerieEspecification.porNome(dto.titulo()))
+				.and(SerieEspecification.porNota(dto.notaMax()).and(SerieEspecification.porAtores(dto.atores())));
 
-		int limitePadrao = (limite != null) ? limite : 10;
-
-		Pageable limiteRegistros = PageRequest.of(0, limitePadrao);
-
-		return repository.findAll(filtros, limiteRegistros).getContent();
-
+		Page<Serie> paginas = repository.findAll(filtros, pageable);
+		log.info("Retornando {} valores da busca", paginas.getContent().size());
+		return paginas.map(s -> toDto(s));
 	}
 
 	@Transactional
@@ -60,7 +62,7 @@ public class SerieService {
 		log.debug("Iniciando o processo de ativação da Série de ID: {}", serieId);
 		Serie serie = buscaOuFalha(serieId);
 		serie.setAtivo(true);
-		salvar(serie);
+		atualizar(serieId, serie);
 	}
 
 	@Transactional
@@ -68,7 +70,7 @@ public class SerieService {
 		log.debug("Iniciando o processo de desativação da Série de ID: {}", serieId);
 		Serie serie = buscaOuFalha(serieId);
 		serie.setAtivo(false);
-		salvar(serie);
+		atualizar(serieId, serie);
 	}
 
 	@Transactional
@@ -81,14 +83,14 @@ public class SerieService {
 		});
 	}
 
-	@Autowired
-	SerieRepository repository;
-
 	@Transactional
 	public Serie salvar(Serie serie) {
 		log.debug("Iniciando processo para salvar a serie: '{}'", serie.getTitulo());
-		Long categoriaId = Optional.ofNullable(serie).map(Serie::getCategoria).map(Categoria::getId)
-				.orElseThrow(() -> new EntidadeNulaNoPayloadException(serie.getId()));
+		Long categoriaId = Optional.ofNullable(serie).map(Serie::getCategoria).map(Categoria::getId).orElse(null);
+
+		if (categoriaId == null) {
+			return null;
+		}
 
 		log.debug("Validando a existência da categoria com ID: {}", categoriaId);
 		Categoria categoria = categoriaService.buscaOuFalha(categoriaId);
@@ -102,9 +104,11 @@ public class SerieService {
 
 	@Transactional
 	public void deletar(Long serieId) {
+		log.debug("Iniciando o processo de exclusão para a Série de ID: {}", serieId);
 		Serie serie = repository.findById(serieId).orElseThrow(() -> new SerieNaoEncontradaException(serieId));
 
 		repository.deleteById(serie.getId());
+		log.info("Série deletada com sucesso!");
 	}
 
 	@Transactional
@@ -121,6 +125,7 @@ public class SerieService {
 	}
 
 	public SerieResponseDto toDto(Serie serie) {
+
 		SerieResponseDto dto = new SerieResponseDto();
 
 		Categoria categoria = serie.getCategoria();
@@ -174,42 +179,37 @@ public class SerieService {
 		return listDto;
 	}
 
+	@Transactional
+	public Page<SerieResponseDto> toDtoListPage(Page<Serie> page) {
+		// forma manual
+//		List<SerieResponseDto> listDto = series.stream().map(s -> new SerieResponseDto(s.getId(), s.getTitle(),
+//				s.getTotalSeasons(), s.getImdbRating(), s.getActors(), s.getPoster(), s.getPlot())).toList();
+
+		List<SerieResponseDto> listDto = page.getContent().stream().map(s -> {
+
+			SerieResponseDto dto = new SerieResponseDto();
+			Categoria categoria = s.getCategoria();
+
+			if (s.getCategoria() != null) {
+				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
+				dto.setCategoriaId(categoriaDto);
+			}
+
+			BeanUtils.copyProperties(s, dto);
+			return dto;
+
+		}).toList();
+
+		Page<SerieResponseDto> pagina = new PageImpl<>(listDto);
+
+		return pagina;
+	}
+
 	public List<Serie> listar() {
 		log.debug("Acessando o repositório para buscar as séries ordenadas por ID.");
 		List<Serie> series = repository.findAllByOrderByIdAsc();
 		log.info("Busca de séries finalizada. Total de registros encontrados: {}", series.size());
 		return series;
-	}
-
-	public List<Serie> listarTop5() {
-		return repository.findTop5ByOrderByAvaliacaoDesc();
-	}
-
-	public List<Serie> listarLancamentos() {
-		return repository.findTop5ByOrderByDataLancamentoDesc();
-	}
-
-	public void imprimirListaSerie(List<Serie> series) {
-		for (Serie s : series) {
-			System.out.println("\n------------------------------------------------");
-			System.out.println("🎬 SÉRIE: " + s.getTitulo() + " | ⭐ NOTA: " + s.getAvaliacao());
-			System.out.println("👥 ATORES: " + s.getAtores());
-			System.out.println("🖼️ POSTER: " + s.getPoster());
-			System.out.println("📖 SINOPSE: " + s.getSinopse());
-			System.out.println("📖 ID: " + s.getId());
-			System.out.println("------------------------------------------------");
-		}
-	}
-
-	public void imprimirSerie(Serie serie) {
-		System.out.println("\n------------------------------------------------");
-		System.out.println("🎬 SÉRIE: " + serie.getTitulo() + " | ⭐ NOTA: " + serie.getAvaliacao());
-		System.out.println("👥 ATORES: " + serie.getAtores());
-		System.out.println("🖼️ POSTER: " + serie.getPoster());
-		System.out.println("📖 SINOPSE: " + serie.getSinopse());
-		System.out.println("📖 ID: " + serie.getId());
-		System.out.println("------------------------------------------------");
-
 	}
 
 }

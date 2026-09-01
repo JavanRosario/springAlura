@@ -1167,6 +1167,15 @@ components:
     SerieResponseDto:
       type: object
       description: Dados completos de uma série retornados pela API
+      required:
+        - atores
+        - avaliacao
+        - dataLancamento
+        - poster
+        - sinopse
+        - titulo
+        - totalTemporada
+        - categoriaId
       properties:
         id:
           type: integer

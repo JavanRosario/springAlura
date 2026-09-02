@@ -37,22 +37,6 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario")
 	private List<Streaming> streamings = new ArrayList<>();
 
-	@CreatedDate
-	@Column(name = "created_date", updatable = false)
-	private LocalDateTime createdDate;
 
-	@LastModifiedDate
-	@Column(name = "last_modified_date", updatable = false)
-	private LocalDateTime lastModifieldDate;
-
-//	@CreatedBy
-//	@Column(updatable = false)
-//	private String createdBy;
-//
-//	@LastModifiedBy
-//	@Column(updatable = false)
-//	private LocalDateTime lastModifieldBy;
-
-	// https://sunitc.dev/2020/01/21/spring-boot-how-to-add-jpa-hibernate-envers-auditing/
 
 }

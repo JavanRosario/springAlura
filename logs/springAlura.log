@@ -15068,3 +15068,1195 @@ Caused by: org.hibernate.envers.boot.EnversMappingException: An audited relation
                 Running with Spring Boot v3.3.3, Spring v6.1.12
 2026-09-01 14:56:38.276 [restartedMain] INFO  c.s.s.SpringAluraApplication -
                 No active profile set, falling back to 1 default profile: "default"
+2026-09-01 18:47:09.976 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 18248 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 18:47:09.977 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 18:47:09.978 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 18:47:10.022 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 18:47:10.023 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 18:47:10.769 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 18:47:10.828 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 52 ms. Found 5 JPA repository interfaces.
+2026-09-01 18:47:11.416 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 18:47:11.429 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 18:47:11.429 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 18:47:11.482 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 18:47:11.483 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1460 ms
+2026-09-01 18:47:11.621 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 18:47:11.697 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 18:47:11.740 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 18:47:11.823 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 18:47:12.023 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 18:47:12.051 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 18:47:12.711 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@31fde91f
+2026-09-01 18:47:12.713 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 18:47:12.764 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 18:47:13.020 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 18:47:13.022 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 18:47:13.022 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 18:47:13.023 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 18:47:13.023 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 18:47:13.849 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 18:47:13.854 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 18:47:14.023 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 18:47:14.331 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 18:47:14.669 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 18:47:14.974 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 18:47:15.004 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 18:47:15.012 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 5.508 seconds (process running for 6.056)
+2026-09-01 18:47:22.210 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 18:47:22.211 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 18:47:22.214 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 2 ms
+2026-09-01 18:47:22.913 [http-nio-8080-exec-9] INFO  o.s.api.AbstractOpenApiResource -
+                Init duration for springdoc-openapi is: 437 ms
+2026-09-01 18:47:41.467 [http-nio-8080-exec-10] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição PUT para atualizar uma série
+2026-09-01 18:47:41.468 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] -
+                Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.springAlura.springAlura.api.dto2.CategoriaIdRequestDto.getId()" because the return value of "com.springAlura.springAlura.api.dto2.SerieRequestDto.getCategoriaId()" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.springAlura.springAlura.api.dto2.CategoriaIdRequestDto.getId()" because the return value of "com.springAlura.springAlura.api.dto2.SerieRequestDto.getCategoriaId()" is null
+	at com.springAlura.springAlura.domain.service.SerieService.toDomain(SerieService.java:146)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at com.springAlura.springAlura.domain.service.SerieService$$SpringCGLIB$$0.toDomain(<generated>)
+	at com.springAlura.springAlura.api.controller.SerieController.atualizar(SerieController.java:80)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-09-01 18:49:17.830 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 18:49:17.833 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown initiated...
+2026-09-01 18:49:17.836 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown completed.
+2026-09-01 18:49:20.025 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 16424 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 18:49:20.026 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 18:49:20.028 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 18:49:20.064 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 18:49:20.064 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 18:49:20.782 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 18:49:20.840 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 53 ms. Found 5 JPA repository interfaces.
+2026-09-01 18:49:21.376 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 18:49:21.387 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 18:49:21.387 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 18:49:21.437 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 18:49:21.437 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1373 ms
+2026-09-01 18:49:21.548 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 18:49:21.600 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 18:49:21.636 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 18:49:21.711 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 18:49:21.895 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 18:49:21.915 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 18:49:22.093 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@703dbf84
+2026-09-01 18:49:22.095 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 18:49:22.123 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 18:49:22.350 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 18:49:22.353 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 18:49:22.353 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 18:49:22.353 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 18:49:22.354 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 18:49:23.140 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 18:49:23.147 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 18:49:23.291 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 18:49:23.598 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 18:49:23.938 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 18:49:24.250 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 18:49:24.281 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 18:49:24.290 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 4.711 seconds (process running for 5.295)
+2026-09-01 18:49:34.712 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 18:49:34.713 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 18:49:34.714 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 1 ms
+2026-09-01 18:49:35.359 [http-nio-8080-exec-5] INFO  o.s.api.AbstractOpenApiResource -
+                Init duration for springdoc-openapi is: 451 ms
+2026-09-01 18:49:43.970 [http-nio-8080-exec-6] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição PUT para atualizar uma série
+2026-09-01 18:49:43.972 [http-nio-8080-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] -
+                Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.springAlura.springAlura.api.dto2.CategoriaIdRequestDto.getId()" because the return value of "com.springAlura.springAlura.api.dto2.SerieRequestDto.getCategoriaId()" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.springAlura.springAlura.api.dto2.CategoriaIdRequestDto.getId()" because the return value of "com.springAlura.springAlura.api.dto2.SerieRequestDto.getCategoriaId()" is null
+	at com.springAlura.springAlura.domain.service.SerieService.toDomain(SerieService.java:146)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at com.springAlura.springAlura.domain.service.SerieService$$SpringCGLIB$$0.toDomain(<generated>)
+	at com.springAlura.springAlura.api.controller.SerieController.atualizar(SerieController.java:80)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-09-01 18:50:57.648 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 18:50:57.650 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown initiated...
+2026-09-01 18:50:57.652 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown completed.
+2026-09-01 18:51:04.360 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 17584 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 18:51:04.361 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 18:51:04.362 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 18:51:04.399 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 18:51:04.399 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 18:51:05.056 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 18:51:05.113 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 52 ms. Found 5 JPA repository interfaces.
+2026-09-01 18:51:05.633 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 18:51:05.645 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 18:51:05.645 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 18:51:05.700 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 18:51:05.700 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1300 ms
+2026-09-01 18:51:05.822 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 18:51:05.876 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 18:51:05.915 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 18:51:05.984 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 18:51:06.147 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 18:51:06.170 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 18:51:06.349 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@47fe3b51
+2026-09-01 18:51:06.350 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 18:51:06.379 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 18:51:06.604 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 18:51:06.607 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 18:51:06.607 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 18:51:06.607 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 18:51:06.608 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 18:51:07.376 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 18:51:07.382 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 18:51:07.528 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 18:51:07.809 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 18:51:08.124 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 18:51:08.436 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 18:51:08.464 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 18:51:08.472 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 4.516 seconds (process running for 4.929)
+2026-09-01 18:51:23.518 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 18:51:23.518 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 18:51:23.520 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 1 ms
+2026-09-01 18:51:23.673 [http-nio-8080-exec-1] WARN  c.s.s.a.e.GlobalExcepitionHandler -
+                Falha de validação na requisição. Campos incorretos: [categoriaId]
+2026-09-01 18:51:23.708 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver -
+                Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.springAlura.springAlura.api.dto2.SerieResponseDto> com.springAlura.springAlura.api.controller.SerieController.atualizar(java.lang.Long,com.springAlura.springAlura.api.dto2.SerieRequestDto): [Field error in object 'serieRequestDto' on field 'categoriaId': rejected value [null]; codes [NotNull.serieRequestDto.categoriaId,NotNull.categoriaId,NotNull.com.springAlura.springAlura.api.dto2.CategoriaIdRequestDto,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [serieRequestDto.categoriaId,categoriaId]; arguments []; default message [categoriaId]]; default message [não deve ser nulo]] ]
+2026-09-01 19:00:27.827 [http-nio-8080-exec-2] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição /{serieId}/ativar para ativação de uma série
+2026-09-01 19:00:27.840 [http-nio-8080-exec-2] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando o processo de ativação da Série de ID: 23
+2026-09-01 19:00:27.840 [http-nio-8080-exec-2] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:23
+2026-09-01 19:00:27.905 [http-nio-8080-exec-2] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para atualização do recurso da Série 'Black Mirror' de ID: 23
+2026-09-01 19:00:27.905 [http-nio-8080-exec-2] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:23
+2026-09-01 19:00:27.907 [http-nio-8080-exec-2] INFO  c.s.s.domain.service.SerieService -
+                Série 'Black Mirror' atualizada com sucesso!
+2026-09-01 19:00:27.907 [http-nio-8080-exec-2] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Black Mirror'
+2026-09-01 19:06:09.320 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 65 class path changes (0 additions, 64 deletions, 1 modification)
+2026-09-01 19:06:09.400 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:06:09.403 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown initiated...
+2026-09-01 19:06:09.407 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown completed.
+2026-09-01 19:06:09.489 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 17584 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:06:09.490 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:06:09.490 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:06:09.647 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:06:09.648 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2026-09-01 19:06:09.727 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:06:09.727 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:06:09.728 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:06:09.747 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:06:09.747 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 255 ms
+2026-09-01 19:06:09.770 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:06:09.776 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:06:09.781 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:06:09.788 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:06:09.789 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Starting...
+2026-09-01 19:06:09.907 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1fcf3d72
+2026-09-01 19:06:09.907 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Start completed.
+2026-09-01 19:06:09.920 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:06:09.939 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:06:09.940 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:06:09.976 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:06:10.083 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:06:10.091 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:06:10.095 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 0.634 seconds (process running for 906.552)
+2026-09-01 19:06:10.101 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration#jacksonObjectMapper matched:
+      - @ConditionalOnMissingBean (types: com.fasterxml.jackson.databind.ObjectMapper; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2026-09-01 19:06:15.401 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 64 class path changes (64 additions, 0 deletions, 0 modifications)
+2026-09-01 19:06:15.469 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:06:15.470 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Shutdown initiated...
+2026-09-01 19:06:15.472 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Shutdown completed.
+2026-09-01 19:06:15.536 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 17584 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:06:15.536 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:06:15.537 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:06:15.694 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:06:15.709 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 14 ms. Found 5 JPA repository interfaces.
+2026-09-01 19:06:15.782 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:06:15.783 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:06:15.783 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:06:15.800 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:06:15.800 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 261 ms
+2026-09-01 19:06:15.822 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:06:15.828 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:06:15.832 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:06:15.838 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:06:15.839 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Starting...
+2026-09-01 19:06:15.888 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@3f6b3cfc
+2026-09-01 19:06:15.888 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Start completed.
+2026-09-01 19:06:15.894 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:06:15.915 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 19:06:15.915 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 19:06:15.915 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 19:06:15.915 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 19:06:15.915 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 19:06:16.033 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 19:06:16.037 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:06:16.210 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:06:16.342 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:06:16.432 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:06:16.448 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:06:16.452 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 0.94 seconds (process running for 912.909)
+2026-09-01 19:06:16.454 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+    None
+
+
+Negative matches:
+-----------------
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration#jacksonObjectMapper:
+      Did not match:
+         - @ConditionalOnMissingBean (types: com.fasterxml.jackson.databind.ObjectMapper; SearchStrategy: all) found beans of type 'com.fasterxml.jackson.databind.ObjectMapper' objectMapper (OnBeanCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2026-09-01 19:06:21.568 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:06:21.569 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Shutdown initiated...
+2026-09-01 19:06:21.573 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Shutdown completed.
+2026-09-01 19:06:23.671 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 21012 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:06:23.672 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:06:23.673 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:06:23.719 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 19:06:23.719 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 19:06:24.410 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:06:24.461 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 46 ms. Found 5 JPA repository interfaces.
+2026-09-01 19:06:25.023 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:06:25.035 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:06:25.035 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:06:25.086 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:06:25.086 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1367 ms
+2026-09-01 19:06:25.204 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:06:25.274 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 19:06:25.315 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:06:25.392 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:06:25.592 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:06:25.626 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 19:06:25.821 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@613ec7ad
+2026-09-01 19:06:25.823 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 19:06:25.858 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:06:26.149 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 19:06:26.152 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 19:06:26.153 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 19:06:26.153 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 19:06:26.154 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 19:06:27.295 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 19:06:27.300 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:06:27.478 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:06:27.783 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 19:06:28.133 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:06:28.426 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:06:28.453 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:06:28.462 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 5.246 seconds (process running for 5.765)
+2026-09-01 19:11:21.188 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 19:11:21.188 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 19:11:21.190 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 2 ms
+2026-09-01 19:11:21.797 [http-nio-8080-exec-4] INFO  o.s.api.AbstractOpenApiResource -
+                Init duration for springdoc-openapi is: 443 ms
+2026-09-01 19:11:38.728 [http-nio-8080-exec-5] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição /{serieId}/ativar para ativação de uma série
+2026-09-01 19:11:38.739 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando o processo de ativação da Série de ID: 1
+2026-09-01 19:11:38.740 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:1
+2026-09-01 19:11:38.787 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para atualização do recurso da Série 'Breaking Bad' de ID: 1
+2026-09-01 19:11:38.787 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:1
+2026-09-01 19:11:38.789 [http-nio-8080-exec-5] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking Bad' atualizada com sucesso!
+2026-09-01 19:11:38.789 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Breaking Bad'
+2026-09-01 19:11:38.789 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Validando a existência da categoria com ID: 1
+2026-09-01 19:11:38.795 [http-nio-8080-exec-5] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking Bad' salva com sucesso! ID gerado no banco: 1
+2026-09-01 19:16:27.053 [http-nio-8080-exec-7] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição /{serieId}/ativar para ativação de uma série
+2026-09-01 19:16:27.054 [http-nio-8080-exec-7] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando o processo de ativação da Série de ID: 23
+2026-09-01 19:16:27.054 [http-nio-8080-exec-7] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:23
+2026-09-01 19:16:27.056 [http-nio-8080-exec-7] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para atualização do recurso da Série 'Black Mirror' de ID: 23
+2026-09-01 19:16:27.056 [http-nio-8080-exec-7] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:23
+2026-09-01 19:16:27.056 [http-nio-8080-exec-7] INFO  c.s.s.domain.service.SerieService -
+                Série 'Black Mirror' atualizada com sucesso!
+2026-09-01 19:16:27.056 [http-nio-8080-exec-7] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Black Mirror'
+2026-09-01 19:18:17.135 [http-nio-8080-exec-9] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição PUT para atualizar uma série
+2026-09-01 19:18:17.138 [http-nio-8080-exec-9] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para atualização do recurso da Série 'Breaking asd' de ID: 1
+2026-09-01 19:18:17.138 [http-nio-8080-exec-9] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:1
+2026-09-01 19:18:17.139 [http-nio-8080-exec-9] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking asd' atualizada com sucesso!
+2026-09-01 19:18:17.140 [http-nio-8080-exec-9] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Breaking asd'
+2026-09-01 19:18:17.140 [http-nio-8080-exec-9] DEBUG c.s.s.domain.service.SerieService -
+                Validando a existência da categoria com ID: 1
+2026-09-01 19:18:17.140 [http-nio-8080-exec-9] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking asd' salva com sucesso! ID gerado no banco: 1
+2026-09-01 19:40:39.515 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 65 class path changes (0 additions, 64 deletions, 1 modification)
+2026-09-01 19:40:39.596 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:40:39.600 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown initiated...
+2026-09-01 19:40:39.603 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown completed.
+2026-09-01 19:40:39.718 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 21012 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:40:39.718 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:40:39.718 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:40:39.938 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:40:39.939 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2026-09-01 19:40:40.099 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:40:40.100 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:40:40.100 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:40:40.131 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:40:40.131 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 411 ms
+2026-09-01 19:40:40.174 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:40:40.181 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:40:40.185 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:40:40.195 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:40:40.196 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Starting...
+2026-09-01 19:40:40.253 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1db5bf97
+2026-09-01 19:40:40.254 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Start completed.
+2026-09-01 19:40:40.262 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:40:40.287 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:40:40.288 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:40:40.343 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:40:40.515 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:40:40.528 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:40:40.533 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 0.864 seconds (process running for 2057.836)
+2026-09-01 19:40:40.537 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration#jacksonObjectMapper matched:
+      - @ConditionalOnMissingBean (types: com.fasterxml.jackson.databind.ObjectMapper; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2026-09-01 19:40:43.805 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+                Restarting due to 64 class path changes (64 additions, 0 deletions, 0 modifications)
+2026-09-01 19:40:43.888 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:40:43.889 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Shutdown initiated...
+2026-09-01 19:40:43.891 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-2 - Shutdown completed.
+2026-09-01 19:40:43.972 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 21012 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:40:43.972 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:40:43.973 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:40:44.210 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:40:44.232 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 21 ms. Found 5 JPA repository interfaces.
+2026-09-01 19:40:44.332 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:40:44.333 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:40:44.333 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:40:44.361 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:40:44.361 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 387 ms
+2026-09-01 19:40:44.396 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:40:44.406 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:40:44.410 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:40:44.418 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:40:44.419 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Starting...
+2026-09-01 19:40:44.482 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@7ae5aa1e
+2026-09-01 19:40:44.483 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Start completed.
+2026-09-01 19:40:44.489 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:40:44.520 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 19:40:44.521 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 19:40:44.521 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 19:40:44.521 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 19:40:44.522 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 19:40:44.644 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 19:40:44.648 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:40:44.776 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:40:44.945 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:40:45.049 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:40:45.057 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:40:45.061 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 1.117 seconds (process running for 2062.364)
+2026-09-01 19:40:45.062 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+                Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+    None
+
+
+Negative matches:
+-----------------
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration#jacksonObjectMapper:
+      Did not match:
+         - @ConditionalOnMissingBean (types: com.fasterxml.jackson.databind.ObjectMapper; SearchStrategy: all) found beans of type 'com.fasterxml.jackson.databind.ObjectMapper' objectMapper (OnBeanCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2026-09-01 19:41:06.523 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 19:41:06.523 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 19:41:06.524 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 0 ms
+2026-09-01 19:41:06.823 [http-nio-8080-exec-4] INFO  o.s.api.AbstractOpenApiResource -
+                Init duration for springdoc-openapi is: 185 ms
+2026-09-01 19:41:13.071 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:41:13.071 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Shutdown initiated...
+2026-09-01 19:41:13.073 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-3 - Shutdown completed.
+2026-09-01 19:41:14.810 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 7784 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:41:14.811 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:41:14.811 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:41:14.846 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 19:41:14.847 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 19:41:15.473 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:41:15.524 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 46 ms. Found 5 JPA repository interfaces.
+2026-09-01 19:41:16.007 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:41:16.018 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:41:16.019 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:41:16.071 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:41:16.071 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1224 ms
+2026-09-01 19:41:16.177 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:41:16.245 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 19:41:16.279 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:41:16.353 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:41:16.539 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:41:16.578 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 19:41:16.727 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4491312e
+2026-09-01 19:41:16.728 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 19:41:16.761 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:41:17.031 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 19:41:17.034 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 19:41:17.035 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 19:41:17.035 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 19:41:17.035 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 19:41:17.874 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 19:41:17.880 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:41:18.028 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:41:18.320 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 19:41:18.633 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:41:18.921 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:41:18.957 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:41:18.968 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 4.576 seconds (process running for 5.017)
+2026-09-01 19:41:19.130 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 19:41:19.130 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 19:41:19.131 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 0 ms
+2026-09-01 19:41:19.694 [http-nio-8080-exec-4] INFO  o.s.api.AbstractOpenApiResource -
+                Init duration for springdoc-openapi is: 416 ms
+2026-09-01 19:41:30.353 [http-nio-8080-exec-5] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição PUT para atualizar uma série
+2026-09-01 19:41:30.416 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para atualização do recurso da Série 'Breaking dasdasdas' de ID: 1
+2026-09-01 19:41:30.417 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:1
+2026-09-01 19:41:30.421 [http-nio-8080-exec-5] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking dasdasdas' atualizada com sucesso!
+2026-09-01 19:41:30.421 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Breaking dasdasdas'
+2026-09-01 19:41:30.421 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Validando a existência da categoria com ID: 1
+2026-09-01 19:41:30.424 [http-nio-8080-exec-5] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking dasdasdas' salva com sucesso! ID gerado no banco: 1
+2026-09-01 19:47:42.028 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 18384 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 19:47:42.029 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 19:47:42.030 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 19:47:42.064 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 19:47:42.064 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 19:47:42.657 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 19:47:42.713 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 51 ms. Found 5 JPA repository interfaces.
+2026-09-01 19:47:43.182 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 19:47:43.192 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 19:47:43.192 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 19:47:43.238 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 19:47:43.239 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1174 ms
+2026-09-01 19:47:43.339 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 19:47:43.384 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 19:47:43.406 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 19:47:43.483 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 19:47:43.631 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 19:47:43.652 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 19:47:43.786 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@436742dc
+2026-09-01 19:47:43.787 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 19:47:43.814 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 19:47:44.018 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 19:47:44.018 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 19:47:44.034 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 19:47:44.034 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 19:47:44.034 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 19:47:44.777 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 19:47:44.782 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 19:47:44.925 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 19:47:45.202 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 19:47:45.506 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 19:47:45.795 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 19:47:45.822 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 19:47:45.831 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 4.206 seconds (process running for 4.603)
+2026-09-01 19:49:50.631 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 19:49:50.631 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 19:49:50.632 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 1 ms
+2026-09-01 19:49:51.201 [http-nio-8080-exec-4] INFO  o.s.api.AbstractOpenApiResource -
+                Init duration for springdoc-openapi is: 426 ms
+2026-09-01 19:49:57.466 [http-nio-8080-exec-5] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição POST para cadastrar uma série
+2026-09-01 19:49:57.523 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Breaking Bad'
+2026-09-01 19:49:57.524 [http-nio-8080-exec-5] DEBUG c.s.s.domain.service.SerieService -
+                Validando a existência da categoria com ID: 1
+2026-09-01 19:49:57.573 [http-nio-8080-exec-5] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking Bad' salva com sucesso! ID gerado no banco: 38
+2026-09-01 20:16:20.159 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 20:16:20.200 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown initiated...
+2026-09-01 20:16:20.210 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Shutdown completed.
+2026-09-01 20:16:24.604 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Starting SpringAluraApplication using Java 17.0.20 with PID 1716 (D:\Projetos\springAlura\target\classes started by Javan in D:\Projetos\springAlura)
+2026-09-01 20:16:24.605 [restartedMain] DEBUG c.s.s.SpringAluraApplication -
+                Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-09-01 20:16:24.607 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                No active profile set, falling back to 1 default profile: "default"
+2026-09-01 20:16:24.646 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-01 20:16:24.646 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+                For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-01 20:16:25.743 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01 20:16:25.802 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+                Finished Spring Data repository scanning in 53 ms. Found 5 JPA repository interfaces.
+2026-09-01 20:16:26.372 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat initialized with port 8080 (http)
+2026-09-01 20:16:26.387 [restartedMain] INFO  o.a.catalina.core.StandardService -
+                Starting service [Tomcat]
+2026-09-01 20:16:26.388 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+                Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-09-01 20:16:26.440 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring embedded WebApplicationContext
+2026-09-01 20:16:26.440 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+                Root WebApplicationContext: initialization completed in 1793 ms
+2026-09-01 20:16:26.562 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+                HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-01 20:16:26.638 [restartedMain] INFO  org.hibernate.Version -
+                HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-09-01 20:16:26.680 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+                HHH000026: Second-level cache disabled
+2026-09-01 20:16:26.766 [restartedMain] INFO  o.h.e.b.internal.EnversServiceImpl -
+                Envers integration enabled? : true
+2026-09-01 20:16:26.959 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+                No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01 20:16:26.988 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Starting...
+2026-09-01 20:16:27.150 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+                HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3c062233
+2026-09-01 20:16:27.151 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+                HikariPool-1 - Start completed.
+2026-09-01 20:16:27.190 [restartedMain] WARN  org.hibernate.orm.deprecation -
+                HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-01 20:16:27.450 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Plataforma
+2026-09-01 20:16:27.452 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Categoria
+2026-09-01 20:16:27.453 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Usuario
+2026-09-01 20:16:27.453 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Serie
+2026-09-01 20:16:27.453 [restartedMain] INFO  o.h.e.c.i.m.AuditMetadataGenerator -
+                Adding properties for entity: com.springAlura.springAlura.domain.model.Streaming
+2026-09-01 20:16:28.272 [restartedMain] ERROR o.h.m.internal.MetadataContext -
+                HHH015007: Illegal argument on static metamodel field injection : org.hibernate.envers.DefaultRevisionEntity_#class_; expected type :  org.hibernate.metamodel.model.domain.internal.EntityTypeImpl; encountered type : jakarta.persistence.metamodel.MappedSuperclassType
+2026-09-01 20:16:28.278 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+                HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01 20:16:28.440 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+                Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01 20:16:28.753 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+                Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-01 20:16:29.094 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+                spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01 20:16:29.397 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+                LiveReload server is running on port 35729
+2026-09-01 20:16:29.427 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+                Tomcat started on port 8080 (http) with context path '/'
+2026-09-01 20:16:29.435 [restartedMain] INFO  c.s.s.SpringAluraApplication -
+                Started SpringAluraApplication in 5.321 seconds (process running for 5.788)
+2026-09-01 20:16:57.350 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+                Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-01 20:16:57.351 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Initializing Servlet 'dispatcherServlet'
+2026-09-01 20:16:57.351 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet -
+                Completed initialization in 0 ms
+2026-09-01 20:16:57.500 [http-nio-8080-exec-1] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição POST para cadastrar uma série
+2026-09-01 20:16:57.580 [http-nio-8080-exec-1] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Breaking Bad'
+2026-09-01 20:16:57.581 [http-nio-8080-exec-1] DEBUG c.s.s.domain.service.SerieService -
+                Validando a existência da categoria com ID: 1
+2026-09-01 20:16:57.648 [http-nio-8080-exec-1] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking Bad' salva com sucesso! ID gerado no banco: 39
+2026-09-01 20:17:42.948 [http-nio-8080-exec-3] INFO  c.s.s.api.controller.SerieController -
+                Recebida a requsição PUT para atualizar uma série
+2026-09-01 20:17:42.951 [http-nio-8080-exec-3] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para atualização do recurso da Série 'Breaking dasdas' de ID: 39
+2026-09-01 20:17:42.951 [http-nio-8080-exec-3] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando a busca para o ID:39
+2026-09-01 20:17:42.955 [http-nio-8080-exec-3] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking dasdas' atualizada com sucesso!
+2026-09-01 20:17:42.955 [http-nio-8080-exec-3] DEBUG c.s.s.domain.service.SerieService -
+                Iniciando processo para salvar a serie: 'Breaking dasdas'
+2026-09-01 20:17:42.955 [http-nio-8080-exec-3] DEBUG c.s.s.domain.service.SerieService -
+                Validando a existência da categoria com ID: 1
+2026-09-01 20:17:42.957 [http-nio-8080-exec-3] INFO  c.s.s.domain.service.SerieService -
+                Série 'Breaking dasdas' salva com sucesso! ID gerado no banco: 39

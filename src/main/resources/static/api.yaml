@@ -941,7 +941,7 @@ components:
   schemas:
 
     # ---- REQUESTS ----
-
+    
     SerieRequestDto:
       type: object
       description: Dados para criação ou atualização de uma série
@@ -1164,7 +1164,7 @@ components:
           example: 1
 
     # ---- RESPONSES ----
-
+  
     SerieResponseDto:
       type: object
       description: Dados completos de uma série retornados pela API
@@ -1213,7 +1213,7 @@ components:
           type: string
           format: date
           description: Data do lançamento original
-          example: 2008-01-20
+          x-field-extra-annotation: "@com.fasterxml.jackson.annotation.JsonFormat(pattern = \"yyyy-MM-dd\")"  
         ativo:
           type: boolean
           description: Indica se a série ainda recebe novos episódios
@@ -1293,6 +1293,40 @@ components:
           type: string
           format: date
           example: 2024-01-15
+    SerieAuditoriaDto:
+      required: 
+        - id
+        - titulo
+        - revisionId 
+        - usuario
+        - operacao
+        - camposAlterados
+        - dataCriacao
+        - dataRevisao
+      type: object
+      description: Dados para buscar logs da API 
+      properties:
+        id:
+          type: integer
+          format: int64
+        titulo:
+          type: string 
+        revisionId:
+          type: integer 
+        usuario:
+          type: string
+        operacao:
+          type: string 
+        dataRevisao:
+          type: string
+          x-field-extra-annotation: '@com.fasterxml.jackson.annotation.JsonFormat(pattern="yyyy-MM-dd''T''HH:mm:ss")'
+        dataCriacao:
+          type: string
+          x-field-extra-annotation: '@com.fasterxml.jackson.annotation.JsonFormat(pattern="yyyy-MM-dd''T''HH:mm:ss")'
+        camposAlterados:
+          type: array 
+          items: 
+            type: string
 
     # ---- ERROS ----
 

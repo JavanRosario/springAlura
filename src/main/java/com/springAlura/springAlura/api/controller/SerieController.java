@@ -41,6 +41,11 @@ public class SerieController implements SwaggerSerieController {
 
 	@Autowired
 	SerieRepository repository;
+//
+//	@GetMapping("/{serieId}/historicos")
+//	public List<SerieAuditoriaDto> listarHistorico(@PathVariable Long serieId) {
+//		return serieService.listarHistoricoSerie(serieId);
+//	}
 
 	@GetMapping("/filtros")
 	public Page<SerieResponseDto> listarComFiltros(SerieFiltroRequestDto filtros, Pageable pageable) {

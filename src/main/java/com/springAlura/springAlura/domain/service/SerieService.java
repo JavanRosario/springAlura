@@ -3,6 +3,7 @@ package com.springAlura.springAlura.domain.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.envers.AuditReader;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import com.springAlura.springAlura.domain.model.Serie;
 import com.springAlura.springAlura.domain.model.Streaming;
 import com.springAlura.springAlura.domain.repositories.SerieRepository;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +39,46 @@ public class SerieService {
 
 	@Autowired
 	SerieRepository repository;
+
+	@Autowired
+	AuditReader auditReader;
+
+	@Autowired
+	EntityManager entityManager;
+
+//	public List<SerieAuditoriaDto> listarHistoricoSerie(Long serieId) {
+//
+//		LocalDateTime dataCriacaoOriginal = null;
+//
+//		AuditReader auditReader = AuditReaderFactory.get(entityManager);
+//
+//		@SuppressWarnings("unchecked")
+//		List<Object[]> rawResults = auditReader.createQuery().forRevisionsOfEntityWithChanges(Serie.class, true)
+//				.add(AuditEntity.id().eq(serieId)).getResultList();
+//
+//		return rawResults.stream().map(r -> {
+//
+//			Serie serie = (Serie) r[0];
+//			AuditRevisionEntity revision = (AuditRevisionEntity) r[1];
+//			RevisionType type = (RevisionType) r[2];
+//
+//			LocalDateTime dataDestaRevisao = revision.getRevisionDate().toInstant().atZone(ZoneId.systemDefault())
+//					.toLocalDateTime();
+//
+//			if (dataCriacaoOriginal == null || type == RevisionType.ADD) {
+//				dataCriacaoOriginal = dataDestaRevisao;
+//			}
+//
+//			@SuppressWarnings("unchecked")
+//			Set<String> propertiesChanged = (Set<String>) r[3];
+//
+//			String usuarioAuditado = (revision.getUser() != null) ? revision.getUser() : "Sistema_Sem_Login";
+//
+//			return new SerieAuditoriaDto(serie.getId(), serie.getTitulo(), revision.getId(), usuarioAuditado,
+//					type.name(), dataDestaRevisao, dataCriacaoOriginal, propertiesChanged.stream().toList());
+//
+//		}).toList();
+//	}
 
 	public void associarStreaming(Long serieId, Long streamingId) {
 		Serie serie = buscaOuFalha(serieId);

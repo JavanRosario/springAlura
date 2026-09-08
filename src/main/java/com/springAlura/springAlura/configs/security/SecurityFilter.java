@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.configs;
+package com.springAlura.springAlura.configs.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -33,8 +33,6 @@ public class SecurityFilter extends OncePerRequestFilter {
                 JWTUserData jwtUserData = optionalUser.get();
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(jwtUserData, null, null);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
-
             }
             filterChain.doFilter(request, response);
         } else {

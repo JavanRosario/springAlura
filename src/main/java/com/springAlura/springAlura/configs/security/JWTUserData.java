@@ -1,4 +1,4 @@
-package com.springAlura.springAlura.configs;
+package com.springAlura.springAlura.configs.security;
 
 import lombok.Builder;
 

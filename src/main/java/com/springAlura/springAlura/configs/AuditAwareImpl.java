@@ -5,6 +5,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.springAlura.springAlura.configs.security.JWTUserData;
+
 import java.util.Optional;
 
 public class AuditAwareImpl implements AuditorAware<String> {

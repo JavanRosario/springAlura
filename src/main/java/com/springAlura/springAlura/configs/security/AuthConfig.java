@@ -1,4 +1,4 @@
-    package com.springAlura.springAlura.configs;
+    package com.springAlura.springAlura.configs.security;
 
     import com.springAlura.springAlura.domain.repositories.UsuarioRepository;
     import org.springframework.beans.factory.annotation.Autowired;

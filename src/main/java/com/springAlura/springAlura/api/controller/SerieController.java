@@ -2,7 +2,6 @@ package com.springAlura.springAlura.api.controller;
 
 import java.util.List;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,10 +23,11 @@ import com.springAlura.springAlura.api.dto.SerieAuditoriaResponseDto;
 import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
+import com.springAlura.springAlura.api.mapper.serie.SerieResponseMapper;
 import com.springAlura.springAlura.domain.model.Serie;
-import com.springAlura.springAlura.domain.repositories.SerieRepository;
 import com.springAlura.springAlura.domain.service.SerieService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ public class SerieController implements SwaggerSerieController {
 	SerieService serieService;
 
 	@Autowired
-	SerieRepository repository;
+	private SerieResponseMapper responseMapper;
 
 	@GetMapping("/{serieId}/historicos")
 	public List<SerieAuditoriaResponseDto> listarHistorico(@PathVariable Long serieId) {
@@ -60,14 +60,14 @@ public class SerieController implements SwaggerSerieController {
 	@Override
 	public List<SerieResponseDto> listar() {
 		log.info("Recebida a requisição GET para listar Séries");
-		return serieService.toDtoList(serieService.listar());
+		return responseMapper.toDtoList(serieService.listar());
 	}
 
 	@Override
 	@GetMapping(PathsApi.ID_SERIE)
 	public SerieResponseDto listarPorId(@PathVariable Long serieId) {
 		log.info("Recebida a requsição GET para mostrar uma série");
-		return serieService.toDto(serieService.buscaOuFalha(serieId));
+		return responseMapper.toDto(serieService.buscaOuFalha(serieId));
 	}
 
 	@Override

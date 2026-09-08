@@ -1,9 +1,15 @@
 package com.springAlura.springAlura.domain.service;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.RevisionType;
+import org.hibernate.envers.query.AuditEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,12 +18,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.springAlura.springAlura.api.dto.SerieAuditoriaResponseDto;
 import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
+import com.springAlura.springAlura.domain.model.AuditRevisionEntity;
 import com.springAlura.springAlura.domain.model.Categoria;
 import com.springAlura.springAlura.domain.model.Serie;
 import com.springAlura.springAlura.domain.model.Streaming;
@@ -46,39 +54,40 @@ public class SerieService {
 	@Autowired
 	EntityManager entityManager;
 
-//	public List<SerieAuditoriaDto> listarHistoricoSerie(Long serieId) {
-//
-//		LocalDateTime dataCriacaoOriginal = null;
-//
-//		AuditReader auditReader = AuditReaderFactory.get(entityManager);
-//
-//		@SuppressWarnings("unchecked")
-//		List<Object[]> rawResults = auditReader.createQuery().forRevisionsOfEntityWithChanges(Serie.class, true)
-//				.add(AuditEntity.id().eq(serieId)).getResultList();
-//
-//		return rawResults.stream().map(r -> {
-//
-//			Serie serie = (Serie) r[0];
-//			AuditRevisionEntity revision = (AuditRevisionEntity) r[1];
-//			RevisionType type = (RevisionType) r[2];
-//
-//			LocalDateTime dataDestaRevisao = revision.getRevisionDate().toInstant().atZone(ZoneId.systemDefault())
-//					.toLocalDateTime();
-//
-//			if (dataCriacaoOriginal == null || type == RevisionType.ADD) {
-//				dataCriacaoOriginal = dataDestaRevisao;
-//			}
-//
-//			@SuppressWarnings("unchecked")
-//			Set<String> propertiesChanged = (Set<String>) r[3];
-//
-//			String usuarioAuditado = (revision.getUser() != null) ? revision.getUser() : "Sistema_Sem_Login";
-//
-//			return new SerieAuditoriaDto(serie.getId(), serie.getTitulo(), revision.getId(), usuarioAuditado,
-//					type.name(), dataDestaRevisao, dataCriacaoOriginal, propertiesChanged.stream().toList());
-//
-//		}).toList();
-//	}
+	public List<SerieAuditoriaResponseDto> listarHistoricoSerie(Long serieId) {
+
+		AuditReader auditReader = AuditReaderFactory.get(entityManager);
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> rawResults = auditReader.createQuery().forRevisionsOfEntityWithChanges(Serie.class, true)
+				.add(AuditEntity.id().eq(serieId)).addOrder(AuditEntity.revisionNumber().asc()).getResultList();
+
+		OffsetDateTime dataCriacaoOriginal = rawResults.stream().filter(resultado -> resultado[2] == RevisionType.ADD)
+				.map(resultado -> (AuditRevisionEntity) resultado[1]).map(this::converterDataRevisao).findFirst()
+				.orElseGet(() -> rawResults.isEmpty() ? null
+						: converterDataRevisao((AuditRevisionEntity) rawResults.get(0)[1]));
+
+		return rawResults.stream().map(resultado -> {
+			Serie serie = (Serie) resultado[0];
+			AuditRevisionEntity revision = (AuditRevisionEntity) resultado[1];
+			RevisionType tipoRevisao = (RevisionType) resultado[2];
+
+			@SuppressWarnings("unchecked")
+			Set<String> propriedadesAlteradas = (Set<String>) resultado[3];
+
+			OffsetDateTime dataRevisao = converterDataRevisao(revision);
+
+			String usuarioAuditado = revision.getUser() != null ? revision.getUser() : "Sistema_Sem_Login";
+
+			return new SerieAuditoriaResponseDto(serie.getId(), serie.getTitulo(), revision.getId(), usuarioAuditado,
+					tipoRevisao.name(), dataRevisao, dataCriacaoOriginal, propriedadesAlteradas.stream().toList());
+		}).toList();
+	}
+
+	private OffsetDateTime converterDataRevisao(AuditRevisionEntity revision) {
+
+		return revision.getRevisionDate().toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime();
+	}
 
 	public void associarStreaming(Long serieId, Long streamingId) {
 		Serie serie = buscaOuFalha(serieId);

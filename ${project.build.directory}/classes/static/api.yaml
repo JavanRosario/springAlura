@@ -1032,34 +1032,13 @@ components:
           description: Valor da mensalidade em reais
           example: 39.90
 
-    UsuarioLoginRequest:
-      type: object
-      description: Dados para criação de um novo usuário
-      required:
-        - email
-        - password
-      properties:
-        email:
-          type: string
-          format: email
-          minLength: 1
-          description: E-mail válido do usuário
-          example: joao@marinha.mil.br
-        password:
-          type: string
-          format: password
-          minLength: 6
-          maxLength: 20
-          description: Senha de acesso com mínimo de 6 e máximo de 20 caracteres
-          example: M@rinha2026
-
     UsuarioCriacaoRequestDto:
       type: object
       description: Dados para criação de um novo usuário
       required:
         - nome
         - email
-        - password
+        - senha
       properties:
         nome:
           type: string
@@ -1072,7 +1051,7 @@ components:
           minLength: 1
           description: E-mail válido do usuário
           example: joao@marinha.mil.br
-        password:
+        senha:
           type: string
           format: password
           minLength: 6
@@ -1103,10 +1082,10 @@ components:
       type: object
       description: Dados para atualização de senha do usuário
       required:
-        - password
+        - senhaAtual
         - senhaNova
       properties:
-        password:
+        senhaAtual:
           type: string
           format: password
           minLength: 1
@@ -1276,6 +1255,7 @@ components:
           type: number
           format: double
           example: 39.90
+
     UsuarioResponseDto:
       type: object
       description: Dados de um usuário retornados pela API
@@ -1290,15 +1270,6 @@ components:
         email:
           type: string
           example: joao@marinha.mil.br
-
-    LoginResponseDto:
-      required:
-        - token
-      type: object
-      description: Dados de uma assinatura de streaming retornados pela API
-      properties:
-        token:
-          type: string
 
     StreamingResponseDto:
       type: object
@@ -1322,7 +1293,6 @@ components:
           type: string
           format: date
           example: 2024-01-15
-
     SerieAuditoriaDto:
       required:
         - id

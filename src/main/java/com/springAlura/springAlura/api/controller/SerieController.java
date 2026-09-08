@@ -2,6 +2,7 @@ package com.springAlura.springAlura.api.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springAlura.springAlura.api.docs.PathsApi;
 import com.springAlura.springAlura.api.docs.SwaggerSerieController;
+import com.springAlura.springAlura.api.dto.SerieAuditoriaResponseDto;
 import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
@@ -34,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @RequestMapping(PathsApi.MAIN_PATH)
 @Slf4j
+@SecurityRequirement(name = "bearerAuth")
 public class SerieController implements SwaggerSerieController {
 
 	@Autowired
@@ -41,11 +44,11 @@ public class SerieController implements SwaggerSerieController {
 
 	@Autowired
 	SerieRepository repository;
-//
-//	@GetMapping("/{serieId}/historicos")
-//	public List<SerieAuditoriaDto> listarHistorico(@PathVariable Long serieId) {
-//		return serieService.listarHistoricoSerie(serieId);
-//	}
+
+	@GetMapping("/{serieId}/historicos")
+	public List<SerieAuditoriaResponseDto> listarHistorico(@PathVariable Long serieId) {
+		return serieService.listarHistoricoSerie(serieId);
+	}
 
 	@GetMapping("/filtros")
 	public Page<SerieResponseDto> listarComFiltros(SerieFiltroRequestDto filtros, Pageable pageable) {

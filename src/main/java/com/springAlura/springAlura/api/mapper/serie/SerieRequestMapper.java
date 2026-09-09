@@ -1,13 +1,19 @@
 package com.springAlura.springAlura.api.mapper.serie;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
-import com.springAlura.springAlura.api.dto2.CategoriaIdRequestDto;
-import com.springAlura.springAlura.domain.model.Categoria;
+import com.springAlura.springAlura.api.dto2.SerieRequestDto;
+import com.springAlura.springAlura.domain.model.Serie;
 
 @Mapper(componentModel = "spring")
 public interface SerieRequestMapper {
-
-	Categoria toDomain(CategoriaIdRequestDto id);
+	
+	
+	Serie toDomain(SerieRequestDto dto);
+	
+	@Mapping(target = "id", ignore = true)
+	void updateEntity(Serie serie, @MappingTarget Serie serieBuscadaNoBanco);
 
 }

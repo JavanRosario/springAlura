@@ -108,7 +108,6 @@ public class UsuarioService {
         Usuario usuario = buscaOuFalha(usuarioId);
         BeanUtils.copyProperties(dto, usuario, "password");
         return usuario = salvar(usuario);
-
     }
 
     public Usuario atualizarSenha(Long usuarioId, UsuarioAtualizarSenhaDto dto) {

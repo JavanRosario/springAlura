@@ -10,20 +10,18 @@ import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.RevisionType;
 import org.hibernate.envers.query.AuditEntity;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.springAlura.springAlura.api.dto.SerieAuditoriaResponseDto;
 import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
-import com.springAlura.springAlura.api.dto2.CategoriaResponseDto;
-import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
 import com.springAlura.springAlura.api.especification.SerieEspecification;
+import com.springAlura.springAlura.api.mapper.serie.SerieRequestMapper;
+import com.springAlura.springAlura.api.mapper.serie.SerieResponseMapper;
 import com.springAlura.springAlura.domain.exception.SerieNaoEncontradaException;
 import com.springAlura.springAlura.domain.model.AuditRevisionEntity;
 import com.springAlura.springAlura.domain.model.Categoria;
@@ -53,6 +51,12 @@ public class SerieService {
 
 	@Autowired
 	EntityManager entityManager;
+
+	@Autowired
+	SerieRequestMapper requestMapper;
+
+	@Autowired
+	SerieResponseMapper responseMapper;
 
 	public List<SerieAuditoriaResponseDto> listarHistoricoSerie(Long serieId) {
 
@@ -85,7 +89,6 @@ public class SerieService {
 	}
 
 	private OffsetDateTime converterDataRevisao(AuditRevisionEntity revision) {
-
 		return revision.getRevisionDate().toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime();
 	}
 
@@ -105,7 +108,7 @@ public class SerieService {
 
 		Page<Serie> paginas = repository.findAll(filtros, pageable);
 		log.info("Retornando {} valores da busca", paginas.getContent().size());
-		return paginas.map(s -> toDto(s));
+		return paginas.map(s -> responseMapper.toDto(s));
 	}
 
 	@Transactional
@@ -167,93 +170,12 @@ public class SerieService {
 		log.debug("Iniciando processo para atualização do recurso da Série '{}' de ID: {}", serie.getTitulo(), serieId);
 		Serie serieAtual = buscaOuFalha(serieId);
 
-		BeanUtils.copyProperties(serie, serieAtual, "id");
+		requestMapper.updateEntity(serie, serieAtual);
 
 		log.info("Série '{}' atualizada com sucesso!", serieAtual.getTitulo());
 
 		serieAtual = salvar(serieAtual);
 		return serieAtual;
-	}
-
-	public SerieResponseDto toDto(Serie serie) {
-
-		SerieResponseDto dto = new SerieResponseDto();
-
-		Categoria categoria = serie.getCategoria();
-		CategoriaResponseDto categoriaResponseDto = categoriaService.toDto(categoria);
-
-		// forma manual
-//		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
-//				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
-//				serieAtual.getPoster(), serieAtual.getPlot());
-
-		BeanUtils.copyProperties(serie, dto, "series");
-		dto.setCategoriaId(categoriaResponseDto);
-		return dto;
-	}
-
-	public Serie toDomain(SerieRequestDto serieRequestDto) {
-		Serie serie = new Serie();
-		Categoria categoria = categoriaService.buscaOuFalha(serieRequestDto.getCategoriaId().getId());
-
-		// forma manual
-//		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
-//				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
-//				serieAtual.getPoster(), serieAtual.getPlot());
-		serie.setCategoria(categoria);
-		BeanUtils.copyProperties(serieRequestDto, serie);
-
-		return serie;
-	}
-
-	@Transactional
-	public List<SerieResponseDto> toDtoList(List<Serie> series) {
-		// forma manual
-//		List<SerieResponseDto> listDto = series.stream().map(s -> new SerieResponseDto(s.getId(), s.getTitle(),
-//				s.getTotalSeasons(), s.getImdbRating(), s.getActors(), s.getPoster(), s.getPlot())).toList();
-
-		List<SerieResponseDto> listDto = series.stream().map(s -> {
-
-			SerieResponseDto dto = new SerieResponseDto();
-			Categoria categoria = s.getCategoria();
-
-			if (s.getCategoria() != null) {
-				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
-				dto.setCategoriaId(categoriaDto);
-			}
-
-			BeanUtils.copyProperties(s, dto);
-			return dto;
-
-		}).toList();
-
-		return listDto;
-	}
-
-	@Transactional
-	public Page<SerieResponseDto> toDtoListPage(Page<Serie> page) {
-		// forma manual
-//		List<SerieResponseDto> listDto = series.stream().map(s -> new SerieResponseDto(s.getId(), s.getTitle(),
-//				s.getTotalSeasons(), s.getImdbRating(), s.getActors(), s.getPoster(), s.getPlot())).toList();
-
-		List<SerieResponseDto> listDto = page.getContent().stream().map(s -> {
-
-			SerieResponseDto dto = new SerieResponseDto();
-			Categoria categoria = s.getCategoria();
-
-			if (s.getCategoria() != null) {
-				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
-				dto.setCategoriaId(categoriaDto);
-			}
-
-			BeanUtils.copyProperties(s, dto);
-			return dto;
-
-		}).toList();
-
-		Page<SerieResponseDto> pagina = new PageImpl<>(listDto);
-
-		return pagina;
 	}
 
 	public List<Serie> listar() {
@@ -262,5 +184,61 @@ public class SerieService {
 		log.info("Busca de séries finalizada. Total de registros encontrados: {}", series.size());
 		return series;
 	}
+
+
+//	public Serie toDomain(SerieRequestDto serieRequestDto) {
+//	Serie serie = new Serie();
+//	Categoria categoria = categoriaService.buscaOuFalha(serieRequestDto.getCategoriaId().getId());
+//
+//	 forma manual
+//	SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
+//			serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
+//			serieAtual.getPoster(), serieAtual.getPlot());
+//	serie.setCategoria(categoria);
+//	BeanUtils.copyProperties(serieRequestDto, serie);
+//
+//	return serie;
+//}
+
+//	@Transactional
+//	public List<SerieResponseDto> toDtoList(List<Serie> series) {
+//		 forma manual
+//		List<SerieResponseDto> listDto = series.stream().map(s -> new SerieResponseDto(s.getId(), s.getTitle(),
+//				s.getTotalSeasons(), s.getImdbRating(), s.getActors(), s.getPoster(), s.getPlot())).toList();
+//
+//		List<SerieResponseDto> listDto = series.stream().map(s -> {
+//
+//			SerieResponseDto dto = new SerieResponseDto();
+//			Categoria categoria = s.getCategoria();
+//
+//			if (s.getCategoria() != null) {
+//				CategoriaResponseDto categoriaDto = categoriaService.toDto(categoria);
+//				dto.setCategoriaId(categoriaDto);
+//			}
+//
+//			BeanUtils.copyProperties(s, dto);
+//			return dto;
+//
+//		}).toList();
+//
+//		return listDto;
+//	}
+
+//	public SerieResponseDto toDto(Serie serie) {
+//
+//		SerieResponseDto dto = new SerieResponseDto();
+//
+//		Categoria categoria = serie.getCategoria();
+//		CategoriaResponseDto categoriaResponseDto = categoriaService.toDto(categoria);
+//
+//		 forma manual
+//		SerieResponseDto dto = new SerieResponseDto(serieAtual.getId(), serieAtual.getTitle(),
+//				serieAtual.getTotalSeasons(), serieAtual.getImdbRating(), serieAtual.getActors(),
+//				serieAtual.getPoster(), serieAtual.getPlot());
+//
+//		BeanUtils.copyProperties(serie, dto, "series");
+//		dto.setCategoriaId(categoriaResponseDto);
+//		return dto;
+//	}
 
 }

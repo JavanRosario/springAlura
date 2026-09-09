@@ -23,6 +23,7 @@ import com.springAlura.springAlura.api.dto.SerieAuditoriaResponseDto;
 import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieResponseDto;
+import com.springAlura.springAlura.api.mapper.serie.SerieRequestMapper;
 import com.springAlura.springAlura.api.mapper.serie.SerieResponseMapper;
 import com.springAlura.springAlura.domain.model.Serie;
 import com.springAlura.springAlura.domain.service.SerieService;
@@ -44,6 +45,9 @@ public class SerieController implements SwaggerSerieController {
 
 	@Autowired
 	private SerieResponseMapper responseMapper;
+
+	@Autowired
+	private SerieRequestMapper requestMapper;
 
 	@GetMapping("/{serieId}/historicos")
 	public List<SerieAuditoriaResponseDto> listarHistorico(@PathVariable Long serieId) {
@@ -75,7 +79,7 @@ public class SerieController implements SwaggerSerieController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public SerieResponseDto salvar(@RequestBody @Valid SerieRequestDto serieRequestDto) {
 		log.info("Recebida a requsição POST para cadastrar uma série");
-		Serie serieAtual = serieService.toDomain(serieRequestDto);
+		Serie serieAtual = requestMapper.toDomain(serieRequestDto);
 		serieAtual = serieService.salvar(serieAtual);
 		return serieService.toDto(serieAtual);
 	}
@@ -85,9 +89,8 @@ public class SerieController implements SwaggerSerieController {
 	public ResponseEntity<SerieResponseDto> atualizar(@PathVariable Long serieId,
 			@RequestBody @Valid SerieRequestDto serieRequestDto) {
 		log.info("Recebida a requsição PUT para atualizar uma série");
-		Serie serieAtual = serieService.toDomain(serieRequestDto);
+		Serie serieAtual = requestMapper.toDomain(serieRequestDto);
 		serieAtual = serieService.atualizar(serieId, serieAtual);
-
 		return ResponseEntity.status(HttpStatus.CREATED).body(serieService.toDto(serieAtual));
 	}
 

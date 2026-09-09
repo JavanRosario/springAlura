@@ -17,5 +17,7 @@ public interface SerieResponseMapper {
 
 	@Mapping(target = "categoriaId", source = "categoria")
 	SerieResponseDto toDto(Serie serie);
-
+	
+	
+	
 }

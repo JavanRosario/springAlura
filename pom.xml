@@ -154,31 +154,29 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>
-                                ${project.basedir}/src/main/resources/static/api.yaml
-                            </inputSpec>
+							<inputSpec>${project.basedir}/src/main/resources/static/api.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<modelPackage>com.springAlura.springAlura.api.dto2</modelPackage>
-							<apiPackage>
-                                com.springAlura.springAlura.api.controller2
-                            </apiPackage>
-							<typeMappings>
-								<date>LocalDate</date>
-								<int64>Long</int64>
-							</typeMappings>
+							<apiPackage>com.springAlura.springAlura.api.controller2</apiPackage>
 							<typeMappings>
 								<typeMapping>date=LocalDate</typeMapping>
+								<typeMapping>int64=Long</typeMapping>
 							</typeMappings>
 							<importMappings>
 								<importMapping>LocalDate=java.time.LocalDate</importMapping>
 							</importMappings>
 							<configOptions>
 								<useSpringBoot3>true</useSpringBoot3>
-								<openApiNullable>false</openApiNullable>
-								<useRecordsForModels>true</useRecordsForModels>
 								<interfaceOnly>true</interfaceOnly>
-								<dateLibrary>java8</dateLibrary>
+								<useJakartaEe>true</useJakartaEe>
+								<openApiNullable>false</openApiNullable>
+								<generatedAnnotation>false</generatedAnnotation>
 							</configOptions>
+							<additionalProperties>
+								<library>spring-boot</library>
+								<generateSupportingFiles>false</generateSupportingFiles>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+							</additionalProperties>
 						</configuration>
 					</execution>
 				</executions>

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springAlura.springAlura.api.controller2.SeriesApi;
 import com.springAlura.springAlura.api.docs.PathsApi;
-import com.springAlura.springAlura.api.docs.SwaggerSerieController;
 import com.springAlura.springAlura.api.dto.SerieAuditoriaResponseDto;
 import com.springAlura.springAlura.api.dto.SerieFiltroRequestDto;
 import com.springAlura.springAlura.api.dto2.SerieRequestDto;
@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(PathsApi.MAIN_PATH)
 @Slf4j
 @SecurityRequirement(name = "bearerAuth")
-public class SerieController implements SwaggerSerieController {
+public class SerieController implements SeriesApi {
 
 	@Autowired
 	SerieService serieService;
@@ -49,72 +49,74 @@ public class SerieController implements SwaggerSerieController {
 	@Autowired
 	private SerieRequestMapper requestMapper;
 
-	@GetMapping("/{serieId}/historicos")
-	public List<SerieAuditoriaResponseDto> listarHistorico(@PathVariable Long serieId) {
-		return serieService.listarHistoricoSerie(serieId);
-	}
-
-	@GetMapping("/filtros")
-	public Page<SerieResponseDto> listarComFiltros(SerieFiltroRequestDto filtros, Pageable pageable) {
-		log.info("Recebida a requisição GET para listar Séries com filtros");
-		return serieService.buscaComFiltros(filtros, pageable);
-	}
-
-	@GetMapping()
-	@Override
-	public List<SerieResponseDto> listar() {
-		log.info("Recebida a requisição GET para listar Séries");
-		return responseMapper.toDtoList(serieService.listar());
-	}
-
-	@Override
-	@GetMapping(PathsApi.ID_SERIE)
-	public SerieResponseDto listarPorId(@PathVariable Long serieId) {
-		log.info("Recebida a requsição GET para mostrar uma série");
-		return responseMapper.toDto(serieService.buscaOuFalha(serieId));
-	}
-
-	@Override
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public SerieResponseDto salvar(@RequestBody @Valid SerieRequestDto serieRequestDto) {
-		log.info("Recebida a requsição POST para cadastrar uma série");
-		Serie serieAtual = requestMapper.toDomain(serieRequestDto);
-		serieAtual = serieService.salvar(serieAtual);
-		return serieService.toDto(serieAtual);
-	}
-
-	@Override
-	@PutMapping("/{serieId}")
-	public ResponseEntity<SerieResponseDto> atualizar(@PathVariable Long serieId,
-			@RequestBody @Valid SerieRequestDto serieRequestDto) {
-		log.info("Recebida a requsição PUT para atualizar uma série");
-		Serie serieAtual = requestMapper.toDomain(serieRequestDto);
-		serieAtual = serieService.atualizar(serieId, serieAtual);
-		return ResponseEntity.status(HttpStatus.CREATED).body(serieService.toDto(serieAtual));
-	}
-
-	@Override
-	@DeleteMapping(PathsApi.ID_SERIE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(@PathVariable Long serieId) {
-		log.info("Recebida a requsição DELETE para exclusão de uma série");
-		serieService.deletar(serieId);
-	}
-
-	@Override
-	@PutMapping(PathsApi.ATIVANDO_SERIE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void ativarSerie(@PathVariable Long serieId) {
-		log.info("Recebida a requsição {} para ativação de uma série", PathsApi.ATIVANDO_SERIE);
-		serieService.ativarSerie(serieId);
-	}
-
-	@Override
-	@DeleteMapping(PathsApi.DESATIVANDO_SERIE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void desativarSerie(@PathVariable Long serieId) {
-		log.info("Recebida a requsição {} para desativação de uma série", PathsApi.DESATIVANDO_SERIE);
-		serieService.desativarSerie(serieId);
-	}
+//	@GetMapping("/{serieId}/historicos")
+//	public List<SerieAuditoriaResponseDto> listarHistorico(@PathVariable Long serieId) {
+//		return serieService.listarHistoricoSerie(serieId);
+//	}
+//
+//	@GetMapping("/filtros")
+//	public Page<SerieResponseDto> listarComFiltros(SerieFiltroRequestDto filtros, Pageable pageable) {
+//		log.info("Recebida a requisição GET para listar Séries com filtros");
+//		return serieService.buscaComFiltros(filtros, pageable);
+//	}
+//
+//	@GetMapping()
+//	@Override
+//	public List<SerieResponseDto> listar() {
+//		log.info("Recebida a requisição GET para listar Séries");
+//		return responseMapper.toDtoList(serieService.listar());
+//	}
+//
+//	@Override
+//	@GetMapping(PathsApi.ID_SERIE)
+//	public SerieResponseDto listarPorId(@PathVariable Long serieId) {
+//		log.info("Recebida a requsição GET para mostrar uma série");
+//		return responseMapper.toDto(serieService.buscaOuFalha(serieId));
+//	}
+//
+//	@Override
+//	@PostMapping
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public SerieResponseDto salvar(@RequestBody @Valid SerieRequestDto serieRequestDto) {
+//		log.info("Recebida a requsição POST para cadastrar uma série");
+//		Serie serieAtual = requestMapper.toDomain(serieRequestDto);
+//		serieAtual = serieService.salvar(serieAtual);
+//		return responseMapper.toDto(serieAtual);
+//	}
+//
+//	@Override
+//	@PutMapping("/{serieId}")
+//	public ResponseEntity<SerieResponseDto> atualizar(@PathVariable Long serieId,
+//			@RequestBody @Valid SerieRequestDto serieRequestDto) {
+//		log.info("Recebida a requsição PUT para atualizar uma série");
+//		Serie serieAtual = requestMapper.toDomain(serieRequestDto);
+//		serieAtual = serieService.atualizar(serieId, serieAtual);
+//		return ResponseEntity.status(HttpStatus.CREATED).body(responseMapper.toDto(serieAtual));
+//	}
+//
+//	@Override
+//	@DeleteMapping(PathsApi.ID_SERIE)
+//	@ResponseStatus(HttpStatus.NO_CONTENT)
+//	public void excluir(@PathVariable Long serieId) {
+//		log.info("Recebida a requsição DELETE para exclusão de uma série");
+//		serieService.deletar(serieId);
+//	}
+//
+//	@Override
+//	@PutMapping(PathsApi.ATIVANDO_SERIE)
+//	@ResponseStatus(HttpStatus.NO_CONTENT)
+//	public void ativarSerie(@PathVariable Long serieId) {
+//		log.info("Recebida a requsição {} para ativação de uma série", PathsApi.ATIVANDO_SERIE);
+//		serieService.ativarSerie(serieId);
+//	}
+//
+//	@Override
+//	@DeleteMapping(PathsApi.DESATIVANDO_SERIE)
+//	@ResponseStatus(HttpStatus.NO_CONTENT)
+//	public void desativarSerie(@PathVariable Long serieId) {
+//		log.info("Recebida a requsição {} para desativação de uma série", PathsApi.DESATIVANDO_SERIE);
+//		serieService.desativarSerie(serieId);
+//	}
+	
+	
 }

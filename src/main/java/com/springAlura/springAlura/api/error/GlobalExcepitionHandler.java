@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -59,6 +61,20 @@ public class GlobalExcepitionHandler extends ResponseEntityExceptionHandler {
 //		return problemDetail;
 //
 //	}
+	
+	
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	public ProblemDetail handleAccessDeniedException(BadCredentialsException e) {
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, e.getMessage());
+
+		problemDetail.setType(URI.create(DOMINIO));
+		problemDetail.setTitle("Erro no login");
+		problemDetail.setDetail("Usuario ou senha inválidos");
+		problemDetail.setProperty("timestamp", System.currentTimeMillis());
+
+		return problemDetail;
+	}
 
 	@ExceptionHandler(EntidadeNulaNoPayloadException.class)
 	public ProblemDetail handleSerieNaoEncontradaException(EntidadeNulaNoPayloadException e) {

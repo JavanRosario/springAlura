@@ -34,7 +34,12 @@ public class StreamingService {
 	public Streaming salvar(Streaming streaming) {
 		Long usuarioId = streaming.getUsuario().getId();
 		Usuario usuario = usuarioService.buscaOuFalha(usuarioId);
+
+		Long plataformaId = streaming.getPlataforma().getId();
+		Plataforma plataforma = plataformaService.buscaOuFalha(usuarioId);
+
 		streaming.setUsuario(usuario);
+		streaming.setPlataforma(plataforma);
 		return repository.save(streaming);
 	}
 

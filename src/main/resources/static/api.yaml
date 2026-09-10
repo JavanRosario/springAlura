@@ -8,7 +8,9 @@ info:
   contact:
     name: Suporte SerieApi
     email: suporte@serieapi.com.br
-
+    
+security:
+  - bearerAuth: []
 servers:
   - url: http://localhost:8080
     description: Ambiente de desenvolvimento local
@@ -896,6 +898,12 @@ paths:
 # ==========================================
 
 components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 
   parameters:
     serieId:

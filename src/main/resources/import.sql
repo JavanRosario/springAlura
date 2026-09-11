@@ -1,8 +1,8 @@
 
-INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('JAVAN','JAVAN@GMAIL.COM',  'D1SA23');
-INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('RODRIGO','RODRIGO@GMAIL.COM',  'D1A2W3');
-INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('LUCAS','LUCAS@GMAIL.COM',  'D1SA23');
-INSERT INTO spring_alura.usuario(nome,email,senha) VALUES('ELIAS','ELIAS@GMAIL.COM',  'WD1Q263');
+INSERT INTO spring_alura.usuario(nome,email,password) VALUES('JAVAN','JAVAN@GMAIL.COM',  'D1SA23');
+INSERT INTO spring_alura.usuario(nome,email,password) VALUES('RODRIGO','RODRIGO@GMAIL.COM',  'D1A2W3');
+INSERT INTO spring_alura.usuario(nome,email,password) VALUES('LUCAS','LUCAS@GMAIL.COM',  'D1SA23');
+INSERT INTO spring_alura.usuario(nome,email,password) VALUES('ELIAS','ELIAS@GMAIL.COM',  'WD1Q263');
 
 INSERT INTO spring_alura.plataforma(nome, dominio, total_catalogo, mensalidade) values ('netflix', 'www.netflix.com',8000, 20.90);
 INSERT INTO spring_alura.plataforma(nome, dominio, total_catalogo, mensalidade) values ('hbo max', 'www.hbo.com',5948, 35.90);

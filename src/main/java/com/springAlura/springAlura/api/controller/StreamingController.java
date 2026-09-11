@@ -36,36 +36,6 @@ public class StreamingController implements StreamingsApi {
 	@Autowired
 	StreamingRequestMapper requestMapper;
 
-//	@GetMapping
-//	public List<StreamingResponseDto> listar() {
-//		return streamingService.toDtoList(streamingService.listar());
-//	}
-//
-//	@GetMapping("{streamingId}")
-//	public StreamingResponseDto buscarPorId(@PathVariable Long streamingId) {
-//		return streamingService.toDto(streamingService.buscaOuFalha(streamingId));
-//	}
-//
-//	@PostMapping
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public StreamingResponseDto salvar(@RequestBody @Valid StreamingRequestDto streamingRequestDto) {
-//		System.out.println(streamingRequestDto);
-//		Streaming streaming = streamingService.toDomain(streamingRequestDto);
-//		return streamingService.toDto(streamingService.salvar(streaming));
-//	}
-//
-//	@PutMapping("{streamingId}")
-//	public StreamingResponseDto atualizar(@PathVariable Long streamingId,
-//			@RequestBody @Valid StreamingRequestDto streamingRequestDto) {
-//		Streaming streaming = streamingService.atualizar(streamingId, streamingRequestDto);
-//		return streamingService.toDto(streaming);
-//	}
-//
-//	@DeleteMapping("{streamingId}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	public void apagar(@PathVariable Long streamingId) {
-//		streamingService.apagar(streamingId);
-//	}
 
 	@Override
 	public ResponseEntity<Void> apagarStreaming(Long streamingId) {
